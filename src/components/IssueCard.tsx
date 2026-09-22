@@ -3,6 +3,8 @@ import type { Issue } from "@/lib/types";
 import { PhotoGrid } from "./PhotoGrid";
 
 export function IssueCard({ issue }: { issue: Issue }) {
+  const responseTag = (issue.responses ?? [])[0];
+
   return (
     <article className="rounded-2xl border border-stone-400 bg-white p-5 transition hover:border-stone-600 hover:shadow-sm">
       <div className="flex flex-wrap items-center gap-2 text-sm text-stone-800">
@@ -14,12 +16,17 @@ export function IssueCard({ issue }: { issue: Issue }) {
             Resolved
           </span>
         )}
-        {(issue.roomArea || issue.roomDetail) && (
-          <span className="text-base font-medium text-stone-900">
-            Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}
+        {responseTag && (
+          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-900">
+            {responseTag}
           </span>
         )}
       </div>
+      {(issue.roomArea || issue.roomDetail) && (
+        <p className="mt-2 text-base font-medium text-stone-900">
+          Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}
+        </p>
+      )}
       <h2 className="mt-3 text-lg font-bold text-stone-900">
         <Link
           href={`/issues/${issue.id}`}
@@ -32,18 +39,6 @@ export function IssueCard({ issue }: { issue: Issue }) {
         {issue.description}
       </p>
       <PhotoGrid photos={issue.photoUrls ?? []} size="card" />
-      {(issue.responses ?? []).length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
-          {(issue.responses ?? []).slice(0, 1).map((r) => (
-            <span
-              key={r}
-              className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-900"
-            >
-              {r}
-            </span>
-          ))}
-        </div>
-      )}
     </article>
   );
 }
