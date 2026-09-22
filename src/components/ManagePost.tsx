@@ -4,7 +4,13 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { manageIssue } from "@/lib/store";
 
-export function ManagePost({ issueId }: { issueId: string }) {
+export function ManagePost({
+  issueId,
+  resolved,
+}: {
+  issueId: string;
+  resolved?: boolean;
+}) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -33,6 +39,8 @@ export function ManagePost({ issueId }: { issueId: string }) {
     if (result.ok && pending === "delete") router.push("/");
     if (result.ok && pending === "resolve") window.location.reload();
   }
+
+  if (resolved) return null;
 
   if (!open) {
     return (
