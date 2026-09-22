@@ -75,8 +75,8 @@ export function ManagePost({
     <div className="mt-10 rounded-xl border border-stone-200 bg-white p-4">
       <h3 className="font-medium text-stone-900">Manage this post</h3>
       <p className="mt-1 text-sm text-stone-600">
-        Enter the secret code shown when you published. You can use it to edit
-        the post, mark it resolved, or delete it.
+        Enter the secret code shown when you published. You need it to edit or
+        delete the post, or mark it as resolved.
       </p>
       <form className="mt-4 space-y-3" onSubmit={onSubmit} noValidate>
         <input
