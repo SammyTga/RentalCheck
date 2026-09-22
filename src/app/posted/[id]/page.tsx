@@ -13,8 +13,8 @@ function PostedInner() {
     <div className="mx-auto max-w-xl">
       <h2 className="text-2xl font-semibold text-stone-900">Post published</h2>
       <p className="mt-3 text-stone-600">
-        Save this private code. You need it to edit the post, mark the issue
-        resolved, or delete the post. We will not show it again.
+        Save this secret code. You need it to edit or delete the post, or mark
+        it as resolved. We will not show it again.
       </p>
       <p className="mt-4 rounded-lg bg-stone-900 px-4 py-3 font-mono text-lg tracking-widest text-white">
         {code || "Check the address bar if this is blank"}
