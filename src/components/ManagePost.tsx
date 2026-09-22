@@ -97,12 +97,12 @@ export function ManagePost({
           className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
         {message && <p className="text-sm text-red-700">{message}</p>}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <button
             type="submit"
             name="action"
             value="edit"
-            className="rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950"
+            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 sm:w-auto"
           >
             Edit post
           </button>
@@ -110,7 +110,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="resolve"
-            className="rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950"
+            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 sm:w-auto"
           >
             Mark resolved
           </button>
@@ -118,7 +118,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="delete"
-            className="rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950"
+            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 sm:w-auto"
           >
             Delete post
           </button>
