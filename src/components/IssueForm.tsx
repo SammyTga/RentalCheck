@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { addIssue, updateIssue } from "@/lib/store";
 import {
   CATEGORIES,
@@ -31,6 +31,67 @@ export function IssueForm({
     existing?.reportedToLandlordOn ?? "",
   );
   const editing = Boolean(existing);
+  const DRAFT_KEY = "rentalcheck-new-issue-draft";
+  const [draftReady, setDraftReady] = useState(editing);
+  const [draft, setDraft] = useState<Record<string, string> | null>(null);
+
+  useEffect(() => {
+    if (editing) return;
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      setDraft(raw ? (JSON.parse(raw) as Record<string, string>) : null);
+    } catch {
+      setDraft(null);
+    }
+    setDraftReady(true);
+  }, [editing]);
+
+  useEffect(() => {
+    if (editing || !draftReady) return;
+    if (draft?.photos) {
+      try {
+        const parsed = JSON.parse(draft.photos) as string[];
+        if (Array.isArray(parsed) && parsed.length) setPhotos(parsed);
+      } catch {
+        /* ignore */
+      }
+    }
+    if (draft?.category) setCategory(draft.category);
+    if (draft?.roomArea) setRoomArea(draft.roomArea);
+    if (draft?.reportedToLandlordOn) setReportedDate(draft.reportedToLandlordOn);
+  }, [draftReady, editing]);
+
+  useEffect(() => {
+    if (editing || !draftReady) return;
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      const data = raw ? (JSON.parse(raw) as Record<string, string>) : {};
+      data.photos = JSON.stringify(photos);
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+    } catch {
+      /* quota */
+    }
+  }, [photos, editing, draftReady]);
+
+  function persistDraft(form: HTMLFormElement) {
+    if (editing) return;
+    const fd = new FormData(form);
+    const data: Record<string, string> = {};
+    for (const [key, value] of fd.entries()) {
+      if (key === "confirmed" || key === "manageCode") continue;
+      if (key === "responses") {
+        data.responses = JSON.stringify(fd.getAll("responses").map(String));
+        continue;
+      }
+      data[key] = String(value);
+    }
+    try {
+      data.photos = JSON.stringify(photos);
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+    } catch {
+      /* quota */
+    }
+  }
 
   function shrinkPhoto(file: File) {
     return new Promise<string>((resolve, reject) => {
@@ -171,6 +232,11 @@ export function IssueForm({
 
     try {
       const issue = await addIssue(fields);
+      try {
+        sessionStorage.removeItem(DRAFT_KEY);
+      } catch {
+        /* ignore */
+      }
       router.push(`/posted/${issue.id}?code=${encodeURIComponent(issue.manageCode)}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not publish.");
@@ -178,11 +244,19 @@ export function IssueForm({
     }
   }
 
+  if (!draftReady) {
+    return <p className="text-sm text-stone-500">Loading…</p>;
+  }
+
   const field =
     "mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-900 outline-none focus:border-stone-500";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form
+        onSubmit={onSubmit}
+        onInput={(e) => persistDraft(e.currentTarget)}
+        className="space-y-5"
+      >
       {error && (
         <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
           {error}
@@ -200,7 +274,7 @@ export function IssueForm({
           required
           maxLength={140}
           className={field}
-          defaultValue={existing?.title}
+          defaultValue={existing?.title ?? draft?.title ?? ""}
         />
       </label>
 
@@ -280,7 +354,7 @@ export function IssueForm({
             name="roomDetail"
             placeholder="e.g. downstairs shower, bedroom 2"
             className={field}
-            defaultValue={existing?.roomDetail}
+            defaultValue={existing?.roomDetail ?? draft?.roomDetail ?? ""}
           />
         </label>
       </div>
@@ -293,7 +367,7 @@ export function IssueForm({
           rows={7}
           placeholder="Facts only: what is wrong, and what happened next."
           className={field}
-          defaultValue={existing?.description}
+          defaultValue={existing?.description ?? draft?.description ?? ""}
         />
       </label>
 
@@ -304,7 +378,7 @@ export function IssueForm({
             name="unit"
             placeholder="e.g. 2"
             className={field}
-            defaultValue={existing?.unit ?? prefill.get("unit") ?? ""}
+            defaultValue={existing?.unit ?? prefill.get("unit") ?? draft?.unit ?? ""}
           />
         </label>
         <label className="block">
@@ -314,7 +388,7 @@ export function IssueForm({
             required
             placeholder="e.g. 44"
             className={field}
-            defaultValue={existing?.streetNumber ?? prefill.get("streetNumber") ?? ""}
+            defaultValue={existing?.streetNumber ?? prefill.get("streetNumber") ?? draft?.streetNumber ?? ""}
           />
         </label>
         <label className="block">
@@ -324,7 +398,7 @@ export function IssueForm({
             required
             placeholder="e.g. Chadwick Road"
             className={field}
-            defaultValue={existing?.streetName ?? prefill.get("streetName") ?? ""}
+            defaultValue={existing?.streetName ?? prefill.get("streetName") ?? draft?.streetName ?? ""}
           />
         </label>
       </div>
@@ -336,7 +410,7 @@ export function IssueForm({
             name="area"
             placeholder="e.g. Greerton"
             className={field}
-            defaultValue={existing?.area ?? prefill.get("area") ?? ""}
+            defaultValue={existing?.area ?? prefill.get("area") ?? draft?.area ?? ""}
           />
         </label>
         <label className="block">
@@ -346,7 +420,7 @@ export function IssueForm({
             required
             placeholder="e.g. Tauranga"
             className={field}
-            defaultValue={existing?.city ?? prefill.get("city") ?? ""}
+            defaultValue={existing?.city ?? prefill.get("city") ?? draft?.city ?? ""}
           />
         </label>
         <label className="block">
@@ -355,7 +429,7 @@ export function IssueForm({
             name="postcode"
             placeholder="e.g. 3112"
             className={field}
-            defaultValue={existing?.postcode ?? prefill.get("postcode") ?? ""}
+            defaultValue={existing?.postcode ?? prefill.get("postcode") ?? draft?.postcode ?? ""}
           />
         </label>
       </div>
@@ -373,7 +447,12 @@ export function IssueForm({
                 name="responses"
                 value={r}
                 className="mt-1"
-                defaultChecked={existing?.responses?.includes(r)}
+                defaultChecked={
+                  existing?.responses?.includes(r) ||
+                  (draft?.responses
+                    ? (JSON.parse(draft.responses) as string[]).includes(r)
+                    : false)
+                }
               />
               <span>{r}</span>
             </label>
@@ -389,7 +468,7 @@ export function IssueForm({
           name="handle"
           maxLength={40}
           className={field}
-          defaultValue={existing?.handle === "Anonymous" ? "" : existing?.handle}
+          defaultValue={existing?.handle === "Anonymous" ? "" : existing?.handle ?? draft?.handle ?? ""}
         />
       </label>
 
