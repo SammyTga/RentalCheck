@@ -80,7 +80,7 @@ export default function IssuePage() {
       </p>
       {issue.status === "resolved" && (
         <p className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-          This issue has been marked resolved
+          This issue has been marked as resolved
           {issue.resolvedAt ? ` on ${formatDate(issue.resolvedAt)}` : ""}.
           {issue.resolvedNote ? ` ${issue.resolvedNote}` : ""}
         </p>
