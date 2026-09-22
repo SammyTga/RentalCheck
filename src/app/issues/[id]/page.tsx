@@ -89,7 +89,7 @@ export default function IssuePage() {
         {issue.description}
       </div>
       <PhotoGrid photos={issue.photoUrls ?? []} size="detail" />
-      <ManagePost issueId={issue.id} />
+      <ManagePost issueId={issue.id} resolved={issue.status === "resolved"} />
     </article>
   );
 }
