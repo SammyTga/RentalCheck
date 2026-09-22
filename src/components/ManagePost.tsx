@@ -39,10 +39,13 @@ export function ManagePost({
   async function runPending() {
     if (!pending) return;
     const result = await manageIssue(issueId, code, pending, resolvedNote);
-    setMessage(result.message);
     setPending(null);
-    if (result.ok && pending === "delete") router.push("/");
-    if (result.ok && pending === "resolve") window.location.reload();
+    if (!result.ok) {
+      setMessage(result.message);
+      return;
+    }
+    if (pending === "delete") router.push("/");
+    if (pending === "resolve") window.location.reload();
   }
 
   if (resolved) return null;
