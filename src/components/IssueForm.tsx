@@ -20,6 +20,7 @@ export function IssueForm({
   const router = useRouter();
   const prefill = useSearchParams();
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [category, setCategory] = useState(existing?.category ?? "");
   const [roomArea, setRoomArea] = useState(existing?.roomArea ?? "");
   const [photos, setPhotos] = useState<string[]>(existing?.photoUrls ?? []);
@@ -79,6 +80,8 @@ export function IssueForm({
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     setError("");
     const form = new FormData(e.currentTarget);
 
@@ -116,18 +119,22 @@ export function IssueForm({
       !reportedToLandlordOn
     ) {
       setError("Please fill in all required fields.");
+      setSubmitting(false);
       return;
     }
     if (!CATEGORIES.includes(category)) {
       setError("Choose a valid category.");
+      setSubmitting(false);
       return;
     }
     if (!confirmed) {
       setError("Please confirm this is a tenancy issue you reported.");
+      setSubmitting(false);
       return;
     }
     if (reportedToLandlordOn > todayNz) {
       setError("The reported date cannot be in the future.");
+      setSubmitting(false);
       return;
     }
 
@@ -155,6 +162,7 @@ export function IssueForm({
       const result = await updateIssue(existing.id, code, fields);
       if (!result.ok) {
         setError(result.message);
+        setSubmitting(false);
         return;
       }
       router.push(`/issues/${existing.id}`);
@@ -166,6 +174,7 @@ export function IssueForm({
       router.push(`/posted/${issue.id}?code=${encodeURIComponent(issue.manageCode)}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not publish.");
+      setSubmitting(false);
     }
   }
 
@@ -438,9 +447,16 @@ export function IssueForm({
 
       <button
         type="submit"
-        className="rounded-full bg-teal-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-950"
+        disabled={submitting}
+        className="rounded-full bg-teal-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-950 disabled:opacity-60"
       >
-        {editing ? "Save changes" : "Publish issue"}
+        {submitting
+          ? editing
+            ? "Saving…"
+            : "Publishing…"
+          : editing
+            ? "Save changes"
+            : "Publish issue"}
       </button>
     </form>
   );
