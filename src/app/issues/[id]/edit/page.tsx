@@ -12,17 +12,18 @@ function EditInner() {
   const search = useSearchParams();
   const code = search.get("code") || "";
   const [issue, setIssue] = useState<Issue | null | undefined>(undefined);
-  const [allowed, setAllowed] = useState(false);
+  const [allowed, setAllowed] = useState<boolean | null>(null);
 
   useEffect(() => {
     void (async () => {
+      setAllowed(null);
       const found = (await getIssue(params.id)) ?? null;
       setIssue(found);
       setAllowed(Boolean(found && code && (await codeLooksValid(params.id, code))));
     })();
   }, [params.id, code]);
 
-  if (issue === undefined) {
+  if (issue === undefined || allowed === null) {
     return <p className="text-sm text-stone-500">Loading…</p>;
   }
 
