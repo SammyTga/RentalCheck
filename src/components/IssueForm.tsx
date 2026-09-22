@@ -320,6 +320,9 @@ export function IssueForm({
                 return;
               }
               setReportedDate(next);
+              setError((prev) =>
+                prev === "The reported date cannot be in the future." ? "" : prev,
+              );
             }}
           />
         </label>

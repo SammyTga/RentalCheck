@@ -1,6 +1,5 @@
 "use client";
 
-import { mockIssues } from "./mock-issues";
 import { newManageCode, propertySlug, type Issue } from "./types";
 
 const KEY = "propertycheck-issues-v3";
@@ -33,22 +32,18 @@ export async function isLive() {
 }
 
 function read(): Issue[] {
-  if (typeof window === "undefined") return mockIssues;
+  if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(KEY);
-    if (!raw) {
-      localStorage.setItem(KEY, JSON.stringify(mockIssues));
-      return mockIssues;
-    }
+    if (!raw) return [];
     const parsed = JSON.parse(raw) as Issue[];
     const byId = new Map<string, Issue>();
-    for (const issue of mockIssues) byId.set(issue.id, issue);
     for (const issue of parsed) byId.set(issue.id, issue);
     return [...byId.values()].sort(
       (a, b) => new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime(),
     );
   } catch {
-    return mockIssues;
+    return [];
   }
 }
 
