@@ -51,6 +51,11 @@ export default function IssuePage() {
         <span className="rounded-full bg-stone-200 px-2 py-0.5 font-medium text-stone-800">
           {issue.category}
         </span>
+        {issue.status === "resolved" && (
+          <span className="rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-emerald-800">
+            Resolved
+          </span>
+        )}
         {(issue.responses ?? []).map((r) => (
           <span
             key={r}
@@ -59,13 +64,8 @@ export default function IssuePage() {
             {r}
           </span>
         ))}
-        {issue.status === "resolved" && (
-          <span className="rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-emerald-800">
-            Resolved
-          </span>
-        )}
-        <span>{formatAddress(issue)}</span>
       </div>
+      <p className="mt-2 text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight text-stone-900">
         {issue.title}
       </h2>
