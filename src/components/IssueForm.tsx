@@ -467,6 +467,7 @@ export function IssueForm({
         <input
           name="handle"
           maxLength={40}
+          placeholder="Anonymous"
           className={field}
           defaultValue={existing?.handle === "Anonymous" ? "" : existing?.handle ?? draft?.handle ?? ""}
         />
