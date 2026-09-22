@@ -23,12 +23,13 @@ export function ManagePost({
     const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
     const action = submitter?.value || "resolve";
 
+    const ok = await codeLooksValid(issueId, code);
+    if (!ok) {
+      setMessage("That code does not match this post.");
+      return;
+    }
+
     if (action === "edit") {
-      const ok = await codeLooksValid(issueId, code);
-      if (!ok) {
-        setMessage("That code does not match this post.");
-        return;
-      }
       router.push(`/issues/${issueId}/edit?code=${encodeURIComponent(code)}`);
       return;
     }
@@ -71,7 +72,10 @@ export function ManagePost({
         <input
           name="code"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={(e) => {
+            setCode(e.target.value);
+            setMessage("");
+          }}
           placeholder="Your private code"
           className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
           required
