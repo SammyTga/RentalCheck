@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { manageIssue } from "@/lib/store";
+import { codeLooksValid, manageIssue } from "@/lib/store";
 
 export function ManagePost({
   issueId,
@@ -18,12 +18,17 @@ export function ManagePost({
   const [code, setCode] = useState("");
   const [resolvedNote, setResolvedNote] = useState("");
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
     const action = submitter?.value || "resolve";
 
     if (action === "edit") {
+      const ok = await codeLooksValid(issueId, code);
+      if (!ok) {
+        setMessage("That code does not match this post.");
+        return;
+      }
       router.push(`/issues/${issueId}/edit?code=${encodeURIComponent(code)}`);
       return;
     }
@@ -75,7 +80,7 @@ export function ManagePost({
           placeholder="Optional note if marking resolved"
           className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
-        {message && <p className="text-sm text-stone-700">{message}</p>}
+        {message && <p className="text-sm text-red-700">{message}</p>}
         <div className="flex flex-wrap gap-2">
           <button
             type="submit"
