@@ -118,7 +118,12 @@ export default function AdminPage() {
         <h3 className="font-medium">Posts</h3>
         <div className="mt-3 space-y-3">
           {issues.map((issue) => (
-            <div key={issue.id} className="rounded-xl border border-stone-200 bg-white p-4 text-base">
+            <div
+              key={issue.id}
+              className={`rounded-xl border border-stone-200 bg-white p-4 text-base ${
+                issue.hidden ? "opacity-50" : ""
+              }`}
+            >
               <p className="font-medium text-stone-900">{issue.title}</p>
               <p className="text-stone-800">{formatAddress(issue)}</p>
               <p className="mt-1 text-sm text-stone-800">
