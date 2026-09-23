@@ -20,10 +20,10 @@ function PostedInner() {
         {code || "Check the address bar if this is blank"}
       </p>
       <p className="mt-6 flex gap-4 text-sm">
-        <Link href={`/issues/${params.id}`} className="underline">
+        <Link href={`/issues/${params.id}`} className="underline active:text-teal-800">
           View post
         </Link>
-        <Link href="/" className="underline">
+        <Link href="/" className="underline active:text-teal-800">
           Back to feed
         </Link>
       </p>

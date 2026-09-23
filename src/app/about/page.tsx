@@ -4,7 +4,7 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-4 text-stone-700 leading-7">
       <p className="text-sm text-stone-500">
-        <Link href="/" className="hover:underline">
+        <Link href="/" className="hover:underline active:text-teal-800">
           ← Feed
         </Link>
       </p>

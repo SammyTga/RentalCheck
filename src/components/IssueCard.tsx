@@ -30,7 +30,7 @@ export function IssueCard({ issue }: { issue: Issue }) {
       <h2 className="mt-3 text-lg font-bold text-stone-900">
         <Link
           href={`/issues/${issue.id}`}
-          className="text-stone-900 underline decoration-stone-400 hover:decoration-stone-800"
+          className="text-stone-900 underline decoration-stone-400 hover:decoration-stone-800 active:text-teal-800"
         >
           {issue.title}
         </Link>

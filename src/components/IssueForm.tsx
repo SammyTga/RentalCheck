@@ -531,7 +531,7 @@ export function IssueForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-full bg-teal-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-950 disabled:opacity-60"
+        className="rounded-full bg-teal-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950 disabled:opacity-60"
       >
         {submitting
           ? editing

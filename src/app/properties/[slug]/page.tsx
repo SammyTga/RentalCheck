@@ -35,7 +35,7 @@ export default function PropertyPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <p className="text-sm text-stone-500">
-        <Link href="/" className="hover:underline">
+        <Link href="/" className="hover:underline active:text-teal-800">
           ← Feed
         </Link>
       </p>
@@ -59,7 +59,7 @@ export default function PropertyPage() {
             city: sample.city,
             postcode: sample.postcode || "",
           }).toString()}`}
-          className="inline-block rounded-full bg-teal-800 px-4 py-2 text-sm font-medium text-white hover:bg-teal-950"
+          className="inline-block rounded-full bg-teal-800 px-4 py-2 text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950"
         >
           Log another issue here
         </Link>

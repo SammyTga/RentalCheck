@@ -102,7 +102,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="edit"
-            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 sm:w-auto"
+            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
           >
             Edit post
           </button>
@@ -110,7 +110,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="resolve"
-            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 sm:w-auto"
+            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
           >
             Mark resolved
           </button>
@@ -118,7 +118,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="delete"
-            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 sm:w-auto"
+            className="w-full rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
           >
             Delete post
           </button>
@@ -148,7 +148,7 @@ export function ManagePost({
               </button>
               <button
                 type="button"
-                className="rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950"
+                className="rounded-full bg-teal-800 px-4 py-2 text-sm text-white hover:bg-teal-950 active:bg-teal-950"
                 onClick={runPending}
               >
                 {pending === "delete" ? "Delete post" : "Mark resolved"}

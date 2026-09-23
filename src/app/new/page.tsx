@@ -6,7 +6,7 @@ export default function NewIssuePage() {
   return (
     <div className="mx-auto max-w-2xl">
       <p className="text-sm text-stone-500">
-        <Link href="/" className="hover:underline">
+        <Link href="/" className="hover:underline active:text-teal-800">
           ← Feed
         </Link>
       </p>
