@@ -259,7 +259,13 @@ export function IssueForm({
   return (
     <form
         onSubmit={onSubmit}
-        onInput={(e) => persistDraft(e.currentTarget)}
+        onInput={(e) => {
+          persistDraft(e.currentTarget);
+          const t = e.target as HTMLElement | null;
+          if (t && t.getAttribute("name") !== "reportedToLandlordOn") {
+            setDateError("");
+          }
+        }}
         className="space-y-5"
       >
       {error && (
