@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full bg-stone-50 font-sans text-stone-900">
+      <body className="flex min-h-dvh flex-col bg-stone-50 font-sans text-stone-900">
         <script
           dangerouslySetInnerHTML={{
             __html:
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Header />
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">{children}</main>
-        <footer className="mx-auto max-w-5xl px-4 py-8 text-xs font-medium text-stone-600">
+        <footer className="mx-auto mt-auto w-full max-w-5xl px-4 py-8 text-xs font-medium text-stone-600">
           RentalCheck.co.nz is an issues-only public record. It is not legal
           advice and does not replace reporting issues to your landlord,
           property manager or Tenancy Services.{" "}
