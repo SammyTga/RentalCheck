@@ -226,7 +226,7 @@ export function IssueForm({
         setSubmitting(false);
         return;
       }
-      router.push(`/issues/${existing.id}`);
+      router.replace(`/issues/${existing.id}`);
       return;
     }
 
