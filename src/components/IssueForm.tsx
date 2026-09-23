@@ -20,6 +20,7 @@ export function IssueForm({
   const router = useRouter();
   const prefill = useSearchParams();
   const [error, setError] = useState("");
+  const [dateError, setDateError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [category, setCategory] = useState(existing?.category ?? "");
   const [roomArea, setRoomArea] = useState(existing?.roomArea ?? "");
@@ -58,7 +59,9 @@ export function IssueForm({
     }
     if (draft?.category) setCategory(draft.category);
     if (draft?.roomArea) setRoomArea(draft.roomArea);
-    if (draft?.reportedToLandlordOn) setReportedDate(draft.reportedToLandlordOn);
+    if (draft?.reportedToLandlordOn && draft.reportedToLandlordOn <= todayNz) {
+      setReportedDate(draft.reportedToLandlordOn);
+    }
   }, [draftReady, editing]);
 
   useEffect(() => {
@@ -79,6 +82,8 @@ export function IssueForm({
     const data: Record<string, string> = {};
     for (const [key, value] of fd.entries()) {
       if (key === "confirmed" || key === "manageCode") continue;
+      if (key === "reportedToLandlordOn" && String(value) > todayNz) continue;
+      if (key === "reportedToLandlordOn" && String(value) > todayNz) continue;
       if (key === "responses") {
         data.responses = JSON.stringify(fd.getAll("responses").map(String));
         continue;
@@ -194,7 +199,7 @@ export function IssueForm({
       return;
     }
     if (reportedToLandlordOn > todayNz) {
-      setError("The reported date cannot be in the future.");
+      setDateError("The reported date cannot be in the future.");
       setSubmitting(false);
       return;
     }
@@ -254,15 +259,7 @@ export function IssueForm({
   return (
     <form
         onSubmit={onSubmit}
-        onInput={(e) => {
-          persistDraft(e.currentTarget);
-          const date = (e.currentTarget.elements.namedItem("reportedToLandlordOn") as HTMLInputElement | null)?.value;
-          if (date && date <= todayNz) {
-            setError((prev) =>
-              prev === "The reported date cannot be in the future." ? "" : prev,
-            );
-          }
-        }}
+        onInput={(e) => persistDraft(e.currentTarget)}
         className="space-y-5"
       >
       {error && (
@@ -323,16 +320,17 @@ export function IssueForm({
             onChange={(e) => {
               const next = e.target.value;
               if (next && next > todayNz) {
-                setReportedDate(todayNz);
-                setError("The reported date cannot be in the future.");
+                setReportedDate("");
+                setDateError("The reported date cannot be in the future.");
                 return;
               }
               setReportedDate(next);
-              setError((prev) =>
-                prev === "The reported date cannot be in the future." ? "" : prev,
-              );
+              setDateError("");
             }}
           />
+          {dateError ? (
+            <p className="mt-1 text-sm text-red-700">{dateError}</p>
+          ) : null}
         </label>
       </div>
 
