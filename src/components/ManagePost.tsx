@@ -39,16 +39,15 @@ export function ManagePost({
       return;
     }
 
-    if (action === "resolve" && !resolvedNote.trim()) {
-      setMessage("Add a brief note about how the issue was resolved.");
-      return;
-    }
-
     setPending(action === "delete" ? "delete" : "resolve");
   }
 
   async function runPending() {
     if (!pending) return;
+    if (pending === "resolve" && !resolvedNote.trim()) {
+      setMessage("Add a brief note about how the issue was resolved.");
+      return;
+    }
     const result = await manageIssue(issueId, code, pending, resolvedNote);
     setPending(null);
     if (!result.ok) {
@@ -87,13 +86,6 @@ export function ManagePost({
             setMessage("");
           }}
           placeholder="Your secret code"
-          className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
-        />
-        <input
-          name="resolvedNote"
-          value={resolvedNote}
-          onChange={(e) => setResolvedNote(e.target.value)}
-          placeholder="Brief note about how the issue was resolved"
           className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
         {message && <p className="text-sm text-red-700">{message}</p>}
@@ -138,11 +130,30 @@ export function ManagePost({
                 ? "It will be removed from the public feed."
                 : "The post stays public with a resolved label."}
             </p>
+            {pending === "resolve" && (
+              <textarea
+                value={resolvedNote}
+                onChange={(e) => {
+                  setResolvedNote(e.target.value);
+                  setMessage("");
+                }}
+                placeholder="Brief note about how the issue was resolved"
+                rows={3}
+                className="mt-3 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
+              />
+            )}
+            {pending === "resolve" && message && (
+              <p className="mt-2 text-sm text-red-700">{message}</p>
+            )}
             <div className="mt-5 flex justify-end gap-2">
               <button
                 type="button"
                 className="rounded-full border border-stone-300 px-4 py-2 text-sm"
-                onClick={() => setPending(null)}
+                onClick={() => {
+                  setPending(null);
+                  setResolvedNote("");
+                  setMessage("");
+                }}
               >
                 Cancel
               </button>
