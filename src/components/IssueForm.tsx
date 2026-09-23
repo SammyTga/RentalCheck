@@ -254,7 +254,15 @@ export function IssueForm({
   return (
     <form
         onSubmit={onSubmit}
-        onInput={(e) => persistDraft(e.currentTarget)}
+        onInput={(e) => {
+          persistDraft(e.currentTarget);
+          const date = (e.currentTarget.elements.namedItem("reportedToLandlordOn") as HTMLInputElement | null)?.value;
+          if (date && date <= todayNz) {
+            setError((prev) =>
+              prev === "The reported date cannot be in the future." ? "" : prev,
+            );
+          }
+        }}
         className="space-y-5"
       >
       {error && (
