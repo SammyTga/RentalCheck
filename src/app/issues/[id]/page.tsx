@@ -79,11 +79,15 @@ export default function IssuePage() {
         {issue.handle || "Anonymous"}
       </p>
       {issue.status === "resolved" && (
-        <p className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-          This issue has been marked as resolved
-          {issue.resolvedAt ? ` on ${formatDate(issue.resolvedAt)}` : ""}.
-          {issue.resolvedNote ? ` ${issue.resolvedNote}` : ""}
-        </p>
+        <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
+          <p>
+            This issue has been marked as resolved
+            {issue.resolvedAt ? ` on ${formatDate(issue.resolvedAt)}` : ""}.
+          </p>
+          {issue.resolvedNote ? (
+            <p className="mt-1">{issue.resolvedNote}</p>
+          ) : null}
+        </div>
       )}
       <div className="mt-6 whitespace-pre-wrap text-base leading-7 text-stone-800">
         {issue.description}
