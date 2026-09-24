@@ -10,10 +10,12 @@ export function Header() {
   return (
     <header className="border-b border-stone-300 bg-white">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:py-4">
-        <Link href="/" className="group min-w-0">
-          <h1 className="text-lg font-bold tracking-tight text-stone-900 group-hover:text-teal-800 group-active:text-teal-800 sm:text-xl">
-            RentalCheck.co.nz
-          </h1>
+        <Link href="/" className="logo-home group min-w-0">
+          <img
+            src="/rentalcheck-logo.png"
+            alt="RentalCheck.co.nz"
+            className="h-8 w-auto max-w-[min(100%,220px)] sm:h-9 sm:max-w-[280px]"
+          />
         </Link>
         <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
           {pathname !== "/about" && (
