@@ -501,7 +501,7 @@ export function IssueForm({
             type="file"
             accept="image/*"
             multiple
-            className={`${field} file:mr-3 file:rounded-full file:border-0 file:bg-teal-800 file:px-3 file:py-1 file:text-xs file:text-white`}
+            className={`${field} file:mr-3 file:rounded-full file:border-0 file:bg-teal-800 file:px-3 file:py-1 file:text-xs file:text-white file:hover:bg-teal-950 file:active:bg-teal-950`}
             onChange={(e) => {
               void onPhotos(e.target.files);
               e.target.value = "";
