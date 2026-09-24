@@ -103,7 +103,7 @@ export default function AdminPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold">Admin</h2>
         <button
-          className="text-sm underline"
+          className="text-sm underline active:text-teal-800"
           onClick={async () => {
             await fetch("/api/admin/logout", { method: "POST" });
             setPassword("");
@@ -120,27 +120,29 @@ export default function AdminPage() {
           {issues.map((issue) => (
             <div
               key={issue.id}
-              className={`rounded-xl border border-stone-200 bg-white p-4 text-base ${
-                issue.hidden ? "opacity-50" : ""
+              className={`rounded-xl border border-stone-200 p-4 text-base ${
+                issue.hidden
+                  ? "bg-stone-200 text-stone-600"
+                  : "bg-white text-stone-900"
               }`}
             >
-              <p className="font-medium text-stone-900">{issue.title}</p>
-              <p className="text-stone-800">{formatAddress(issue)}</p>
-              <p className="mt-1 text-sm text-stone-800">
+              <p className="font-medium">{issue.title}</p>
+              <p>{formatAddress(issue)}</p>
+              <p className="mt-1 text-sm">
                 {issue.status}
                 {issue.hidden ? " · hidden" : ""}
               </p>
               <div className="mt-2 flex gap-2">
                 {issue.hidden ? (
-                  <button className="underline" onClick={() => act(issue.id, "unhide")}>
+                  <button className="underline active:text-teal-800" onClick={() => act(issue.id, "unhide")}>
                     Unhide
                   </button>
                 ) : (
-                  <button className="underline" onClick={() => act(issue.id, "hide")}>
+                  <button className="underline active:text-teal-800" onClick={() => act(issue.id, "hide")}>
                     Hide
                   </button>
                 )}
-                <button className="underline" onClick={() => setPending({ id: issue.id, type: "issue" })}>
+                <button className="underline active:text-teal-800" onClick={() => setPending({ id: issue.id, type: "issue" })}>
                   Delete
                 </button>
               </div>
@@ -168,15 +170,15 @@ export default function AdminPage() {
               </p>
               <div className="mt-2 flex gap-2">
                 {msg.read ? (
-                  <button className="underline" onClick={() => act(msg.id, "unread", "message")}>
+                  <button className="underline active:text-teal-800" onClick={() => act(msg.id, "unread", "message")}>
                     Mark unread
                   </button>
                 ) : (
-                  <button className="underline" onClick={() => act(msg.id, "read", "message")}>
+                  <button className="underline active:text-teal-800" onClick={() => act(msg.id, "read", "message")}>
                     Mark as read
                   </button>
                 )}
-                <button className="underline" onClick={() => setPending({ id: msg.id, type: "message" })}>
+                <button className="underline active:text-teal-800" onClick={() => setPending({ id: msg.id, type: "message" })}>
                   Delete
                 </button>
               </div>
@@ -198,7 +200,7 @@ export default function AdminPage() {
             <div className="mt-5 flex justify-end gap-2">
               <button
                 type="button"
-                className="rounded-full border border-stone-300 px-4 py-2 text-sm"
+                className="rounded-full border border-stone-300 px-4 py-2 text-sm active:bg-stone-200"
                 onClick={() => setPending(null)}
               >
                 Cancel
