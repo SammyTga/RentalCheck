@@ -535,7 +535,7 @@ export function IssueForm({
         <span>
           This is an issue at this exact rental address that has already
           been reported to the relevant individual or service. I will not post
-          occupant, landlord or property manager names or phone numbers. The
+          landlord or property manager names or contact details. The
           address will be public on RentalCheck.co.nz.
         </span>
       </label>
