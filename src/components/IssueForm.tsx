@@ -493,8 +493,8 @@ export function IssueForm({
           Photos (optional, up to 4)
         </p>
         <p className="mt-1 text-xs text-stone-500">
-          Pictures of the issue only. No faces, children, IDs, sensitive documents,
-          or contact details. Photos will be stored in a secure database.
+          Pictures of the issue only. No children or personal documents. Photos
+          are stored securely.
         </p>
         {photos.length < 4 && (
           <input
