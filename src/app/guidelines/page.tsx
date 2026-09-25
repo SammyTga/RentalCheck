@@ -9,17 +9,17 @@ export default function GuidelinesPage() {
         </Link>
       </p>
       <h2 className="text-2xl font-semibold text-stone-900">Guidelines</h2>
-      <p>
-        RentalCheck is a public record of property defects or safety issues
-        affecting tenants at their homes.
-      </p>
       <ul className="list-disc space-y-2 pl-5">
         <li>
-          Make sure to only log an issue on this site if it has first been
-          reported and has gone unresolved.
+          Only log an issue on this site if it has first been reported and gone
+          unresolved.
         </li>
         <li>Use the exact rental address so others can look up that property.</li>
-        <li>Stick to facts: what is wrong, dates, what you asked for.</li>
+        <li>
+          One issue per post. If the same address has two different issues,
+          please post twice.
+        </li>
+        <li>Stick to facts: what is wrong and what you asked for.</li>
         <li>
           Do not post occupant, landlord or property manager names or phone
           numbers, or other personal contact details.
