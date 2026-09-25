@@ -9,15 +9,15 @@ export function Header() {
 
   return (
     <header className="border-b border-stone-300 bg-white">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:py-4">
+      <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
         <Link href="/" className="logo-home group min-w-0">
           <img
             src="/rentalcheck-logo.png"
             alt="RentalCheck.co.nz"
-            className="h-11 w-auto max-w-[min(100%,260px)] sm:h-12 sm:max-w-[340px]"
+            className="h-12 w-auto max-w-[min(100%,300px)] sm:h-14 sm:max-w-[380px]"
           />
         </Link>
-        <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+        <nav className="flex w-full items-center justify-between gap-2 text-sm sm:w-auto sm:justify-start sm:gap-x-3">
           {pathname !== "/about" && (
             <Link href="/about" className="font-medium text-teal-800 hover:text-teal-950 active:text-teal-950">
               About
