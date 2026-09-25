@@ -14,11 +14,9 @@ export default function NewIssuePage() {
         Log an issue
       </h2>
       <p className="mt-2 mb-6 text-stone-600">
-        No account needed. Posts are public and can be anonymous. Make sure to
-        read the guidelines before logging an issue. You will be given a secret
-        code once done so you can edit your post, mark it as resolved, or
-        delete it. Only log one issue per post. If the same address has two
-        different issues, please post twice. Issues will be grouped by address.
+        No account needed. Posts are public and can be anonymous. You will be
+        given a secret code once done. Only one issue per post. If the same
+        address has two different issues, please post twice.
       </p>
       <Suspense>
         <IssueForm />
