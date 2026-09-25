@@ -35,7 +35,12 @@ a:active {
   align-items: center;
 }
 
-.logo-home:hover,
-.logo-home:active {
-  filter: invert(28%) sepia(72%) saturate(650%) hue-rotate(130deg) brightness(0.85);
+.logo-home:hover img,
+.logo-home:active img {
+  opacity: 0.65;
+}
+
+.logo-home:hover img,
+.logo-home:active img {
+  opacity: 0.65;
 }
