@@ -16,9 +16,7 @@ export default function ContactPage() {
       </p>
       <p>
         We can’t give legal advice or order repairs, and we don’t mediate
-        between tenants and landlords. For tenancy law, repairs, or disputes,
-        contact your landlord or property manager, Tenancy Services, or the
-        Tenancy Tribunal.
+        between tenants and landlords.
       </p>
       <ContactForm />
     </div>
