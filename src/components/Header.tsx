@@ -14,10 +14,10 @@ export function Header() {
           <img
             src="/rentalcheck-logo.png"
             alt="RentalCheck.co.nz"
-            className="h-12 w-auto max-w-[min(100%,300px)] sm:h-14 sm:max-w-[380px]"
+            className="h-14 w-auto max-w-[min(100%,340px)] sm:h-16 sm:max-w-[420px]"
           />
         </Link>
-        <nav className="flex w-full items-center justify-between gap-2 text-sm sm:w-auto sm:justify-start sm:gap-x-3">
+        <nav className="flex w-full flex-wrap items-center justify-start gap-x-4 gap-y-2 text-sm sm:w-auto sm:gap-x-3">
           {pathname !== "/about" && (
             <Link href="/about" className="font-medium text-teal-800 hover:text-teal-950 active:text-teal-950">
               About
