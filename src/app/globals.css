@@ -44,7 +44,12 @@ a:active:not(.logo-home) {
   outline: none;
 }
 
-.logo-home:hover img,
+@media (hover: hover) {
+  .logo-home:hover img {
+    opacity: 0.55;
+  }
+}
+
 .logo-home:active img {
   opacity: 0.55;
 }
