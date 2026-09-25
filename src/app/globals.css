@@ -46,5 +46,5 @@ a:active:not(.logo-home) {
 
 .logo-home:hover img,
 .logo-home:active img {
-  opacity: 0.75;
+  opacity: 0.55;
 }
