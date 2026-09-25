@@ -9,12 +9,12 @@ export function Header() {
 
   return (
     <header className="border-b border-stone-300 bg-white">
-      <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:py-4">
+      <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:py-5">
         <Link href="/" className="logo-home group min-w-0">
           <img
             src="/rentalcheck-logo.png"
             alt="RentalCheck.co.nz"
-            className="h-14 w-auto max-w-full sm:h-16 sm:max-w-[640px]"
+            className="h-20 w-auto max-w-[min(100%,520px)] sm:h-28 sm:max-w-[min(70%,820px)]"
           />
         </Link>
         <nav className="flex w-full flex-wrap items-center justify-start gap-x-4 gap-y-2 text-sm sm:w-auto sm:gap-x-3">
