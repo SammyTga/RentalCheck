@@ -25,22 +25,26 @@ button:active:not(:disabled) {
   filter: brightness(0.88);
 }
 
-a:active {
+a:active:not(.logo-home) {
   filter: brightness(0.88);
 }
-
 
 .logo-home {
   display: inline-flex;
   align-items: center;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.logo-home:hover,
+.logo-home:active,
+.logo-home:focus {
+  background: transparent;
+  filter: none;
+  outline: none;
 }
 
 .logo-home:hover img,
 .logo-home:active img {
-  opacity: 0.65;
-}
-
-.logo-home:hover img,
-.logo-home:active img {
-  opacity: 0.65;
+  opacity: 0.75;
 }
