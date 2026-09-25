@@ -10,37 +10,25 @@ export default function AboutPage() {
       </p>
       <h2 className="text-2xl font-semibold text-stone-900">About</h2>
       <p>
-        This site serves as a place to anonymously post any unrepaired, unsafe,
-        non-functional or health-related hazards at your home while creating
-        evidence value and assisting with validation of issues for unresolved
-        complaints.
+        This site is a place for renters to post any unresolved issues or
+        hazards at their rental property. It creates evidence value that
+        assists with validation of issues.
       </p>
       <p>
-        Make sure to only log an issue on this site if you have first informed
-        the landlord or property manager and the issue has gone ignored,
-        unresolved, disputed or you have been harassed and threatened with
-        eviction unfairly.
+        Only log an issue on this site if you have first informed the landlord
+        or property manager and the issue has gone unresolved.
       </p>
       <p>
-        Creating a post gives you a shareable link and public record of your
-        grievance that can be shared with others including tenancy advocates or
-        lawyers for helpful advice, assistance or legal proceedings.
+        Creating a post gives you a shareable link and a public record of your
+        grievance.
       </p>
       <p>
-        This serves to further encourage landlords to keep their tenants'
-        rentals up to standard, safe, functional and compliant with New
-        Zealand's Healthy Homes standards while helping to give kiwis and their
-        families a warm, safe, dry home.
-      </p>
-      <p className="pt-1 text-xs font-medium uppercase tracking-widest text-stone-500">
-        Paying it forward
+        This aims to further encourage landlords to keep their tenants&apos;
+        rentals up to standard and safe.
       </p>
       <p>
-        Future renters and even future buyers can check this public record to
-        help make informed decisions about a property and its suitability for
-        their family before signing any agreements or taking the time to visit
-        the home. This is paying it forward and doing good for others in
-        action.
+        Future renters can check this site to help make informed decisions
+        about a property and its suitability for themselves or their family.
       </p>
       <p>
         This is not a place for abuse or accusations against landlords or
