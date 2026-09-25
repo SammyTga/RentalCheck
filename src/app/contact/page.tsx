@@ -14,10 +14,6 @@ export default function ContactPage() {
         Use this form to report a post, say you lost your secret code, or ask
         about the site.
       </p>
-      <p>
-        We can’t give legal advice or order repairs, and we don’t mediate
-        between tenants and landlords.
-      </p>
       <ContactForm />
     </div>
   );
