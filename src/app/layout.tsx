@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "RentalCheck.co.nz",
   description:
-    "Check a rental address for logged issues. Issues-only public record. rentalcheck.co.nz",
+    "Check a rental property in New Zealand. Search an address for issues tenants have logged.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
