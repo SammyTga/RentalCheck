@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           property manager or Tenancy Services.{" "}
           <a
             href="/contact"
-            className="font-medium text-teal-800 underline active:text-teal-950"
+            className="font-medium text-teal-800 underline hover:text-teal-950 active:text-teal-950"
           >
             Contact
           </a>
