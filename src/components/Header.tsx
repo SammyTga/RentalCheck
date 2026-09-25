@@ -14,7 +14,7 @@ export function Header() {
           <img
             src="/rentalcheck-logo.png"
             alt="RentalCheck.co.nz"
-            className="h-8 w-auto max-w-[min(100%,220px)] sm:h-9 sm:max-w-[280px]"
+            className="h-11 w-auto max-w-[min(100%,260px)] sm:h-12 sm:max-w-[340px]"
           />
         </Link>
         <nav className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
