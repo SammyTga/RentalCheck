@@ -11,16 +11,18 @@ export default function AboutPage() {
       <h2 className="text-2xl font-semibold text-stone-900">About</h2>
       <p>
         RentalCheck is a public record of property defects or safety issues
-        affecting tenants at their homes. It helps create evidence value that
-        assists with validation and resolution of issues.
+        affecting tenants at their homes.
+      </p>
+      <p>
+        It helps create evidence value that assists with validation and
+        resolution of issues.
       </p>
       <p>
         Future renters can check this site to help make informed decisions
         about a property and its suitability for themselves or their family.
       </p>
       <p>
-        Creating a post gives you a shareable link and a public record of your
-        rental&apos;s issues.
+        Creating a post gives you a shareable link of your rental&apos;s issues.
       </p>
       <p>
         This site aims to further encourage landlords to keep their tenants&apos;
