@@ -15,10 +15,10 @@ export default async function Home() {
     <div>
       <section className="mb-5 max-w-5xl">
         <h2 className="text-3xl font-bold tracking-tight text-stone-900">
-          Check a rental property before you sign or buy
+          Check a rental property in New Zealand
         </h2>
         <p className="mt-3 font-medium text-stone-900">
-          Search a street address for issues tenants have logged.
+          Search an address for issues tenants have logged.
         </p>
       </section>
       <Feed initialIssues={initialIssues} />
