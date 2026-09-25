@@ -21,8 +21,7 @@ export default function GuidelinesPage() {
         </li>
         <li>Stick to facts: what is wrong and what you asked for.</li>
         <li>
-          Do not post occupant, landlord or property manager names or phone
-          numbers, or other personal contact details.
+          Do not post landlord or property manager names or contact details.
         </li>
         <li>
           Response tags describe how the issue was handled, not a general
