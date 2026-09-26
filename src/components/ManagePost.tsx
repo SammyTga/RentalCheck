@@ -80,6 +80,7 @@ export function ManagePost({
       <form className="mt-4 space-y-3" onSubmit={onSubmit} noValidate>
         <input
           name="code"
+          maxLength={80}
           value={code}
           onChange={(e) => {
             setCode(e.target.value);
@@ -132,6 +133,7 @@ export function ManagePost({
             </p>
             {pending === "resolve" && (
               <textarea
+                maxLength={500}
                 value={resolvedNote}
                 onChange={(e) => {
                   setResolvedNote(e.target.value);
