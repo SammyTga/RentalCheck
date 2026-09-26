@@ -380,7 +380,7 @@ export function IssueForm({
           name="description"
           required
           rows={7}
-          placeholder="Facts only: what is wrong, and what happened next."
+          placeholder="Facts only: what is wrong and what happened next."
           className={field}
           defaultValue={existing?.description ?? draft?.description ?? ""}
         />
@@ -535,7 +535,7 @@ export function IssueForm({
         <span>
           This is an issue at this exact rental address that has already
           been reported to the relevant individual or service. I will not post
-          landlord or property manager names or contact details. The
+          names or contact details of landlords/property managers. The
           address will be public on RentalCheck.co.nz.
         </span>
       </label>
