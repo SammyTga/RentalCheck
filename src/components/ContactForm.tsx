@@ -75,6 +75,7 @@ export function ContactForm() {
           name="message"
           required
           rows={6}
+          maxLength={2000}
           placeholder="Include the property address or issue link if you can."
           className={field}
         />
@@ -83,7 +84,7 @@ export function ContactForm() {
         <span className="text-sm font-medium text-stone-800">
           Email (optional — so we can reply)
         </span>
-        <input type="email" name="email" className={field} />
+        <input type="email" name="email" maxLength={120} className={field} />
       </label>
       <button
         type="submit"
