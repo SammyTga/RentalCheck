@@ -6,6 +6,7 @@ import {
   toIssue,
   uploadPhotos,
 } from "@/lib/db";
+import { LIMITS, tooLong } from "@/lib/limits";
 import type { Issue } from "@/lib/types";
 
 function codesMatch(stored: string, given: string) {
@@ -59,6 +60,9 @@ export async function PATCH(
   }
 
   if (body.action === "resolve") {
+    if (tooLong(body.resolvedNote, LIMITS.resolvedNote)) {
+      return Response.json({ error: "A field is too long." }, { status: 400 });
+    }
     await dbUpdate(id, {
       status: "resolved",
       resolved_at: new Date().toISOString(),
@@ -67,7 +71,23 @@ export async function PATCH(
     return Response.json({ ok: true, message: "Marked as resolved." });
   }
 
-  const photoUrls = await uploadPhotos(body.fields?.photoUrls || []);
+  const fields = body.fields || {};
+  if (
+    tooLong(fields.title, LIMITS.title) ||
+    tooLong(fields.description, LIMITS.description) ||
+    tooLong(fields.roomDetail, LIMITS.roomDetail) ||
+    tooLong(fields.unit, LIMITS.unit) ||
+    tooLong(fields.streetNumber, LIMITS.streetNumber) ||
+    tooLong(fields.streetName, LIMITS.streetName) ||
+    tooLong(fields.area, LIMITS.area) ||
+    tooLong(fields.city, LIMITS.city) ||
+    tooLong(fields.postcode, LIMITS.postcode) ||
+    tooLong(fields.handle, LIMITS.handle)
+  ) {
+    return Response.json({ error: "A field is too long." }, { status: 400 });
+  }
+
+  const photoUrls = await uploadPhotos(fields.photoUrls || []);
   const updated = await dbUpdate(id, {
     ...fromFields({ ...body.fields, photoUrls }),
   });
