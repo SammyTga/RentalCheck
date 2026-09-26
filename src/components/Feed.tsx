@@ -60,6 +60,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
       <div className="mb-6 flex flex-col gap-3 sm:flex-row">
         <input
           value={q}
+          maxLength={120}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search street address or suburb"
           className="flex-1 rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm outline-none focus:border-stone-500"
