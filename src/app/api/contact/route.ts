@@ -1,4 +1,5 @@
 import { dbAddContact, dbConfigured } from "@/lib/db";
+import { LIMITS, tooLong } from "@/lib/limits";
 
 export async function POST(req: Request) {
   const body = (await req.json()) as {
@@ -8,6 +9,9 @@ export async function POST(req: Request) {
   };
   if (!body.topic || !body.message) {
     return Response.json({ error: "Please include a topic and message." }, { status: 400 });
+  }
+  if (tooLong(body.message, LIMITS.message) || tooLong(body.email, LIMITS.email)) {
+    return Response.json({ error: "A field is too long." }, { status: 400 });
   }
   if (!dbConfigured()) {
     return Response.json({ ok: true, demo: true });
