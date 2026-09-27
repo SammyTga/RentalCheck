@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { validateEmail } from "@/lib/limits";
 
 const TOPICS = [
   "Report a post",
@@ -17,13 +18,19 @@ export function ContactForm() {
     e.preventDefault();
     setError("");
     const form = new FormData(e.currentTarget);
+    const email = String(form.get("email") || "");
+    const emailError = validateEmail(email);
+    if (emailError) {
+      setError(emailError);
+      return;
+    }
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         topic: String(form.get("topic") || ""),
         message: String(form.get("message") || ""),
-        email: String(form.get("email") || ""),
+        email,
       }),
     });
     if (!res.ok) {
