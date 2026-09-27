@@ -120,14 +120,14 @@ export default function AdminPage() {
           {issues.map((issue) => (
             <div
               key={issue.id}
-              className={`rounded-xl border border-stone-200 p-4 text-base ${
+              className={`min-w-0 overflow-hidden rounded-xl border border-stone-200 p-4 text-base ${
                 issue.hidden
                   ? "bg-stone-200 text-stone-600"
                   : "bg-white text-stone-900"
               }`}
             >
-              <p className="font-medium">{issue.title}</p>
-              <p>{formatAddress(issue)}</p>
+              <p className="break-long font-medium">{issue.title}</p>
+              <p className="break-long">{formatAddress(issue)}</p>
               <p className="mt-1 text-sm">
                 {issue.status}
                 {issue.hidden ? " · hidden" : ""}
@@ -158,12 +158,12 @@ export default function AdminPage() {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`rounded-xl border border-stone-200 p-4 text-base ${
+              className={`min-w-0 overflow-hidden rounded-xl border border-stone-200 p-4 text-base ${
                 msg.read ? "bg-stone-200 text-stone-600" : "bg-white text-stone-900"
               }`}
             >
               <p className="font-medium">{msg.topic}</p>
-              <p className="mt-1 whitespace-pre-wrap">{msg.message}</p>
+              <p className="mt-1 break-long whitespace-pre-wrap">{msg.message}</p>
               <p className="mt-2 text-sm text-stone-800">
                 {msg.read ? "Read" : "Unread"} · {msg.email || "No email"} ·{" "}
                 {new Date(msg.created_at).toLocaleString("en-NZ")}
@@ -189,7 +189,8 @@ export default function AdminPage() {
       </section>
 
       {pending && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 p-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/40">
+        <div className="flex min-h-[100dvh] items-center justify-center p-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg">
             <p className="text-base font-medium text-stone-900">
               {pending.type === "issue"
@@ -217,6 +218,7 @@ export default function AdminPage() {
               </button>
             </div>
           </div>
+        </div>
         </div>
       )}
     </div>
