@@ -41,13 +41,14 @@ export default function IssuePage() {
   }
 
   return (
-    <article className="mx-auto min-w-0 max-w-2xl overflow-hidden">
+    <article className="mx-auto min-w-0 max-w-2xl">
       <p className="text-sm text-stone-500">
         <Link href="/" className="hover:underline active:text-teal-800">
           ← Feed
         </Link>
       </p>
-      <div className="mt-4 flex flex-wrap gap-2 text-sm text-stone-800">
+      <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-5 sm:p-6">
+      <div className="flex flex-wrap gap-2 text-sm text-stone-800">
         <span className="rounded-full bg-stone-200 px-2 py-0.5 font-medium text-stone-800">
           {issue.category}
         </span>
@@ -93,6 +94,7 @@ export default function IssuePage() {
         {issue.description}
       </div>
       <PhotoGrid photos={issue.photoUrls ?? []} size="detail" />
+      </div>
       <ManagePost issueId={issue.id} resolved={issue.status === "resolved"} />
     </article>
   );
