@@ -92,12 +92,12 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
           {[...groups.entries()].map(([slug, group]) => (
             <section
               key={slug}
-              className="rounded-2xl border border-stone-400 bg-stone-100/60 p-4"
+              className="min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-stone-100/60 p-4"
             >
               <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
                 <Link
                   href={`/properties/${slug}`}
-                  className="font-semibold text-stone-900 hover:underline active:text-teal-800"
+                  className="break-long font-semibold text-stone-900 hover:underline active:text-teal-800"
                 >
                   {formatAddress(group[0])}
                 </Link>
