@@ -1,5 +1,5 @@
 export const LIMITS = {
-  title: 140,
+  title: 100,
   description: 2000,
   roomDetail: 80,
   unit: 20,
@@ -25,6 +25,7 @@ const UNIT = /^[\dA-Za-z][\dA-Za-z\s./-]*$/;
 const POSTCODE = /^\d{4}$/;
 const HAS_LETTER = /\p{L}/u;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const LABEL = /^[\p{L}\d\s.,'\-\/:&?!]+$/u;
 
 export function validateIssueFields(fields: {
   title?: string;
@@ -47,7 +48,9 @@ export function validateIssueFields(fields: {
   const postcode = String(fields.postcode || "").trim();
   const handle = String(fields.handle || "").trim();
 
-  if (!HAS_LETTER.test(title)) return "Title needs at least one letter.";
+  if (!HAS_LETTER.test(title) || !LABEL.test(title)) {
+    return "Title can only use letters, numbers and basic punctuation.";
+  }
   if (!HAS_LETTER.test(description)) return "Describe the issue in words.";
   if (unit && !UNIT.test(unit)) return "Unit / flat can only use letters, numbers, / or -.";
   if (!STREET_NO.test(streetNumber)) return "Street number should look like 44 or 44A.";
@@ -62,6 +65,9 @@ export function validateIssueFields(fields: {
   }
   if (postcode && !POSTCODE.test(postcode)) {
     return "Postcode should be 4 numbers.";
+  }
+  if (handle && handle !== "Anonymous" && !LABEL.test(handle)) {
+    return "Display name can only use letters, numbers and basic punctuation.";
   }
   if (handle && handle.length > LIMITS.handle) return "Display name is too long.";
   return "";
