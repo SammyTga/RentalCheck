@@ -18,8 +18,8 @@ export function tooLong(value: unknown, max: number) {
   return String(value ?? "").length > max;
 }
 
-const PLACE_NAME = /^[\p{L}][\p{L}\s.'-]*$/u;
-const STREET_NAME = /^[\p{L}\d][\p{L}\d\s.'-]*$/u;
+const PLACE_NAME = /^[\p{L}][\p{L}\s]*$/u;
+const STREET_NAME = /^[\p{L}\d][\p{L}\d\s'-]*$/u;
 const STREET_NO = /^(?=.*\d)[\dA-Za-z][\dA-Za-z\s./-]*$/;
 const UNIT = /^[\dA-Za-z][\dA-Za-z\s./-]*$/;
 const POSTCODE = /^\d{4}$/;
@@ -57,11 +57,11 @@ export function validateIssueFields(fields: {
   if (!STREET_NAME.test(streetName) || !HAS_LETTER.test(streetName)) {
     return "Street name should be a real street name.";
   }
-  if (area && (!PLACE_NAME.test(area) || /\d/.test(area))) {
-    return "Suburb should be words only — no numbers.";
+  if (area && !PLACE_NAME.test(area)) {
+    return "Suburb should be letters and spaces only.";
   }
-  if (!PLACE_NAME.test(city) || /\d/.test(city)) {
-    return "City should be words only — no numbers.";
+  if (!PLACE_NAME.test(city)) {
+    return "City should be letters and spaces only.";
   }
   if (postcode && !POSTCODE.test(postcode)) {
     return "Postcode should be 4 numbers.";
