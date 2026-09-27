@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import { validateIssueFields } from "@/lib/limits";
 import { addIssue, updateIssue } from "@/lib/store";
 import {
   CATEGORIES,
@@ -200,6 +201,22 @@ export function IssueForm({
     }
     if (reportedToLandlordOn > todayNz) {
       setDateError("The reported date cannot be in the future.");
+      setSubmitting(false);
+      return;
+    }
+    const fieldError = validateIssueFields({
+      title,
+      description,
+      unit,
+      streetNumber,
+      streetName,
+      area,
+      city,
+      postcode,
+      handle,
+    });
+    if (fieldError) {
+      setError(fieldError);
       setSubmitting(false);
       return;
     }
@@ -449,7 +466,8 @@ export function IssueForm({
           <span className="text-sm font-medium text-stone-800">Postcode</span>
           <input
             name="postcode"
-            maxLength={10}
+            maxLength={4}
+            inputMode="numeric"
             placeholder="e.g. 3112"
             className={field}
             defaultValue={existing?.postcode ?? prefill.get("postcode") ?? draft?.postcode ?? ""}
