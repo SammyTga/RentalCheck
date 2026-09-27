@@ -19,6 +19,7 @@ export function tooLong(value: unknown, max: number) {
 }
 
 const PLACE_NAME = /^[\p{L}][\p{L}\s.'-]*$/u;
+const STREET_NAME = /^[\p{L}\d][\p{L}\d\s.'-]*$/u;
 const STREET_NO = /^(?=.*\d)[\dA-Za-z][\dA-Za-z\s./-]*$/;
 const UNIT = /^[\dA-Za-z][\dA-Za-z\s./-]*$/;
 const POSTCODE = /^\d{4}$/;
@@ -50,8 +51,8 @@ export function validateIssueFields(fields: {
   if (!HAS_LETTER.test(description)) return "Describe the issue in words.";
   if (unit && !UNIT.test(unit)) return "Unit / flat can only use letters, numbers, / or -.";
   if (!STREET_NO.test(streetNumber)) return "Street number should look like 44 or 44A.";
-  if (!PLACE_NAME.test(streetName) || /\d/.test(streetName)) {
-    return "Street name should be words only — no numbers.";
+  if (!STREET_NAME.test(streetName) || !HAS_LETTER.test(streetName)) {
+    return "Street name should be a real street name.";
   }
   if (area && (!PLACE_NAME.test(area) || /\d/.test(area))) {
     return "Suburb should be words only — no numbers.";
