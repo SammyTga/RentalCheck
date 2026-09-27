@@ -43,12 +43,12 @@ export function PhotoGrid({
           ))}
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:flex sm:flex-wrap">
           {photos.map((src, index) => (
             <button
               key={`${src.slice(0, 20)}-${index}`}
               type="button"
-              className="aspect-[4/3] overflow-hidden rounded-xl bg-stone-100"
+              className="aspect-[4/3] overflow-hidden rounded-xl bg-stone-100 sm:aspect-auto sm:h-44 sm:w-56"
               onClick={() => setActive(index)}
               aria-label={`Open photo ${index + 1}`}
             >
