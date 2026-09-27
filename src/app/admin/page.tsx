@@ -15,7 +15,7 @@ type Message = {
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState<boolean | null>(null);
   const [error, setError] = useState("");
   const [issues, setIssues] = useState<Issue[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -71,6 +71,15 @@ export default function AdminPage() {
       body: JSON.stringify({ id, action, type }),
     });
     await load();
+  }
+
+  if (authed === null) {
+    return (
+      <div className="mx-auto max-w-sm">
+        <h2 className="text-2xl font-semibold">Admin</h2>
+        <p className="mt-2 text-sm text-stone-600">Checking sign-in…</p>
+      </div>
+    );
   }
 
   if (!authed) {
