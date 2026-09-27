@@ -300,7 +300,7 @@ export function IssueForm({
         <input
           name="title"
           required
-          maxLength={140}
+          maxLength={100}
           className={field}
           defaultValue={existing?.title ?? draft?.title ?? ""}
         />
