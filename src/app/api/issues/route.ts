@@ -1,5 +1,5 @@
 import { dbConfigured, dbInsert, dbListPublic, uploadPhotos } from "@/lib/db";
-import { LIMITS, tooLong } from "@/lib/limits";
+import { LIMITS, tooLong, validateIssueFields } from "@/lib/limits";
 import type { Issue } from "@/lib/types";
 
 export async function GET() {
@@ -38,6 +38,10 @@ export async function POST(req: Request) {
     tooLong(body.handle, LIMITS.handle)
   ) {
     return Response.json({ error: "A field is too long." }, { status: 400 });
+  }
+  const fieldError = validateIssueFields(body);
+  if (fieldError) {
+    return Response.json({ error: fieldError }, { status: 400 });
   }
   const photoUrls = await uploadPhotos(body.photoUrls || []);
   const issue = await dbInsert({ ...body, photoUrls });
