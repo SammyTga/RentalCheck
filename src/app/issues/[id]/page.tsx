@@ -41,7 +41,7 @@ export default function IssuePage() {
   }
 
   return (
-    <article className="mx-auto max-w-2xl">
+    <article className="mx-auto min-w-0 max-w-2xl overflow-hidden">
       <p className="text-sm text-stone-500">
         <Link href="/" className="hover:underline active:text-teal-800">
           ← Feed
@@ -65,8 +65,8 @@ export default function IssuePage() {
           </span>
         ))}
       </div>
-      <p className="mt-2 text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-stone-900">
+      <p className="mt-2 break-long text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
+      <h2 className="mt-3 break-long text-3xl font-semibold tracking-tight text-stone-900">
         {issue.title}
       </h2>
       {(issue.roomArea || issue.roomDetail) && (
@@ -89,7 +89,7 @@ export default function IssuePage() {
           ) : null}
         </div>
       )}
-      <div className="mt-6 whitespace-pre-wrap text-base leading-7 text-stone-800">
+      <div className="mt-6 break-long whitespace-pre-wrap text-base leading-7 text-stone-800">
         {issue.description}
       </div>
       <PhotoGrid photos={issue.photoUrls ?? []} size="detail" />
