@@ -63,7 +63,11 @@ export function ManagePost({
   if (!open) {
     return (
       <p className="mt-10 text-sm text-stone-500">
-        <button type="button" className="underline" onClick={() => setOpen(true)}>
+        <button
+          type="button"
+          className="underline hover:text-teal-950 active:text-teal-800"
+          onClick={() => setOpen(true)}
+        >
           I posted this
         </button>
       </p>
