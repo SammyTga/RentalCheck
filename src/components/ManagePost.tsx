@@ -119,7 +119,8 @@ export function ManagePost({
       </form>
 
       {pending && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 p-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/40">
+          <div className="flex min-h-[100dvh] items-center justify-center p-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg">
             <p className="text-base font-medium text-stone-900">
               {pending === "delete"
@@ -167,6 +168,7 @@ export function ManagePost({
                 {pending === "delete" ? "Delete post" : "Mark resolved"}
               </button>
             </div>
+          </div>
           </div>
         </div>
       )}
