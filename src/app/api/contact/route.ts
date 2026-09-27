@@ -1,5 +1,5 @@
 import { dbAddContact, dbConfigured } from "@/lib/db";
-import { LIMITS, tooLong } from "@/lib/limits";
+import { LIMITS, tooLong, validateEmail } from "@/lib/limits";
 
 export async function POST(req: Request) {
   const body = (await req.json()) as {
@@ -12,6 +12,10 @@ export async function POST(req: Request) {
   }
   if (tooLong(body.message, LIMITS.message) || tooLong(body.email, LIMITS.email)) {
     return Response.json({ error: "A field is too long." }, { status: 400 });
+  }
+  const emailError = validateEmail(String(body.email || ""));
+  if (emailError) {
+    return Response.json({ error: emailError }, { status: 400 });
   }
   if (!dbConfigured()) {
     return Response.json({ ok: true, demo: true });
