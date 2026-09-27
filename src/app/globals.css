@@ -53,3 +53,22 @@ a:active:not(.logo-home) {
 .logo-home:active img {
   opacity: 0.55;
 }
+
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+main,
+article,
+section {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.break-long {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
