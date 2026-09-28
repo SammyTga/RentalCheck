@@ -136,7 +136,7 @@ export default function AdminPage() {
               }`}
             >
               <p className="break-long font-medium">{issue.title}</p>
-              <p className="break-long">{formatAddress(issue)}</p>
+              <p>{formatAddress(issue)}</p>
               <p className="mt-1 text-sm">
                 {issue.status}
                 {issue.hidden ? " · hidden" : ""}
