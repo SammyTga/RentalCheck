@@ -401,7 +401,7 @@ export function IssueForm({
           rows={7}
           maxLength={2000}
           placeholder="Facts only: what is wrong and what happened next."
-          className={`${field} break-long`}
+          className={field}
           defaultValue={existing?.description ?? draft?.description ?? ""}
         />
       </label>
