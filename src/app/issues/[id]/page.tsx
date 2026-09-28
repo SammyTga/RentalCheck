@@ -66,7 +66,7 @@ export default function IssuePage() {
           </span>
         ))}
       </div>
-      <p className="mt-2 break-long text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
+      <p className="mt-2 text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
       <h2 className="mt-3 break-long text-3xl font-semibold tracking-tight text-stone-900">
         {issue.title}
       </h2>
