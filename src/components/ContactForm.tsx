@@ -66,7 +66,7 @@ export function ContactForm() {
           name="topic"
           required
           value={topic}
-          className={field}
+          className={`${field} break-long`}
           onChange={(e) =>
             setTopic(e.target.value === "__clear" ? "" : e.target.value)
           }
@@ -90,7 +90,7 @@ export function ContactForm() {
           rows={6}
           maxLength={2000}
           placeholder="Include the property address or issue link if you can."
-          className={field}
+          className={`${field} break-long`}
         />
       </label>
       <label className="block">
