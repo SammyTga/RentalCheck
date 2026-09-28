@@ -138,7 +138,7 @@ export function ManagePost({
             <p className="mt-2 text-sm text-stone-600">
               {pending === "delete"
                 ? "It will be removed from the public feed."
-                : "The post stays public with a resolved label."}
+                : "This post stays public with a resolved label and your note."}
             </p>
             {pending === "resolve" && (
               <textarea
