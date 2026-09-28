@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { validateEmail } from "@/lib/limits";
+import { validateContactMessage, validateEmail } from "@/lib/limits";
 
 const TOPICS = [
   "Report a post",
@@ -19,6 +19,12 @@ export function ContactForm() {
     setError("");
     const form = new FormData(e.currentTarget);
     const email = String(form.get("email") || "");
+    const message = String(form.get("message") || "");
+    const messageError = validateContactMessage(message);
+    if (messageError) {
+      setError(messageError);
+      return;
+    }
     const emailError = validateEmail(email);
     if (emailError) {
       setError(emailError);
@@ -29,7 +35,7 @@ export function ContactForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         topic: String(form.get("topic") || ""),
-        message: String(form.get("message") || ""),
+        message,
         email,
       }),
     });
