@@ -1,5 +1,5 @@
 import { dbAddContact, dbConfigured } from "@/lib/db";
-import { LIMITS, tooLong, validateEmail } from "@/lib/limits";
+import { LIMITS, tooLong, validateContactMessage, validateEmail } from "@/lib/limits";
 
 export async function POST(req: Request) {
   const body = (await req.json()) as {
