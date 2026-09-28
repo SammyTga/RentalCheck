@@ -103,6 +103,7 @@ function expandStreet(name: string) {
   return name
     .toLowerCase()
     .replace(/\./g, "")
+    .replace(/\bmt\b/g, "mount")
     .replace(/\brd\b/g, "road")
     .replace(/\bst\b/g, "street")
     .replace(/\bave\b/g, "avenue")
@@ -110,6 +111,15 @@ function expandStreet(name: string) {
     .replace(/\bcrt\b/g, "court")
     .replace(/\bct\b/g, "court")
     .replace(/\bcres\b/g, "crescent")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function expandPlace(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/\./g, "")
+    .replace(/\bmt\b/g, "mount")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -144,8 +154,8 @@ export function propertySlug(issue: {
     unit ? `unit-${unit}` : null,
     issue.streetNumber,
     expandStreet(issue.streetName),
-    issue.area,
-    issue.city,
+    issue.area ? expandPlace(issue.area) : null,
+    expandPlace(issue.city),
   ]
     .filter(Boolean)
     .join(" ")
