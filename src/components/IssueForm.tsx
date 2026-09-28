@@ -207,6 +207,7 @@ export function IssueForm({
     const fieldError = validateIssueFields({
       title,
       description,
+      roomDetail,
       unit,
       streetNumber,
       streetName,
