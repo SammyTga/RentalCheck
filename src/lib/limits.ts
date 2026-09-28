@@ -79,3 +79,12 @@ export function validateEmail(value: string) {
   if (!EMAIL.test(email)) return "Enter a valid email or leave it blank.";
   return "";
 }
+
+export function validateContactMessage(value: string) {
+  const message = value.trim();
+  if (!message) return "Please include a topic and message.";
+  if (!HAS_LETTER.test(message)) return "Describe the issue in words.";
+  if (tooLong(message, LIMITS.message)) return "A field is too long.";
+  return "";
+}
+
