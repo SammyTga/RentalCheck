@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { validateResolvedNote } from "@/lib/limits";
 import { codeLooksValid, manageIssue } from "@/lib/store";
 
 export function ManagePost({
@@ -44,9 +45,12 @@ export function ManagePost({
 
   async function runPending() {
     if (!pending) return;
-    if (pending === "resolve" && !resolvedNote.trim()) {
-      setMessage("Add a brief note about how the issue was resolved.");
-      return;
+    if (pending === "resolve") {
+      const noteError = validateResolvedNote(resolvedNote);
+      if (noteError) {
+        setMessage(noteError);
+        return;
+      }
     }
     const result = await manageIssue(issueId, code, pending, resolvedNote);
     setPending(null);
