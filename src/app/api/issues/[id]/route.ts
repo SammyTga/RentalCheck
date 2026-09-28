@@ -6,7 +6,7 @@ import {
   toIssue,
   uploadPhotos,
 } from "@/lib/db";
-import { LIMITS, tooLong, validateIssueFields } from "@/lib/limits";
+import { LIMITS, tooLong, validateIssueFields, validateResolvedNote } from "@/lib/limits";
 import type { Issue } from "@/lib/types";
 
 function codesMatch(stored: string, given: string) {
@@ -60,8 +60,9 @@ export async function PATCH(
   }
 
   if (body.action === "resolve") {
-    if (tooLong(body.resolvedNote, LIMITS.resolvedNote)) {
-      return Response.json({ error: "A field is too long." }, { status: 400 });
+    const noteError = validateResolvedNote(String(body.resolvedNote || ""));
+    if (noteError) {
+      return Response.json({ error: noteError }, { status: 400 });
     }
     await dbUpdate(id, {
       status: "resolved",
