@@ -86,7 +86,7 @@ export default function IssuePage() {
             {issue.resolvedAt ? ` on ${formatDate(issue.resolvedAt)}` : ""}.
           </p>
           {issue.resolvedNote ? (
-            <p className="mt-1">{issue.resolvedNote}</p>
+            <p className="mt-1 break-long">{issue.resolvedNote}</p>
           ) : null}
         </div>
       )}
