@@ -25,11 +25,12 @@ const UNIT = /^[\dA-Za-z][\dA-Za-z\s./-]*$/;
 const POSTCODE = /^\d{4}$/;
 const HAS_LETTER = /\p{L}/u;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const LABEL = /^[\p{L}\d\s.,'\-\/:&?!]+$/u;
+const LABEL = /^[\p{L}\d\s.,'\-\/:&?!:";()$%]+$/u;
 
 export function validateIssueFields(fields: {
   title?: string;
   description?: string;
+  roomDetail?: string;
   unit?: string;
   streetNumber?: string;
   streetName?: string;
@@ -40,6 +41,7 @@ export function validateIssueFields(fields: {
 }) {
   const title = String(fields.title || "").trim();
   const description = String(fields.description || "").trim();
+  const roomDetail = String(fields.roomDetail || "").trim();
   const unit = String(fields.unit || "").trim();
   const streetNumber = String(fields.streetNumber || "").trim();
   const streetName = String(fields.streetName || "").trim();
@@ -51,7 +53,12 @@ export function validateIssueFields(fields: {
   if (!HAS_LETTER.test(title) || !LABEL.test(title)) {
     return "Title can only use letters, numbers and basic punctuation.";
   }
-  if (!HAS_LETTER.test(description)) return "Describe the issue in words.";
+  if (!HAS_LETTER.test(description) || !LABEL.test(description)) {
+    return "Description can only use letters, numbers and basic punctuation.";
+  }
+  if (roomDetail && !LABEL.test(roomDetail)) {
+    return "More detail can only use letters, numbers and basic punctuation.";
+  }
   if (unit && !UNIT.test(unit)) return "Unit / flat can only use letters, numbers, / or -.";
   if (!STREET_NO.test(streetNumber)) return "Street number should look like 44 or 44A.";
   if (!STREET_NAME.test(streetName) || !HAS_LETTER.test(streetName)) {
@@ -85,6 +92,16 @@ export function validateContactMessage(value: string) {
   if (!message) return "Please include a topic and message.";
   if (!HAS_LETTER.test(message)) return "Describe the issue in words.";
   if (tooLong(message, LIMITS.message)) return "A field is too long.";
+  return "";
+}
+
+export function validateResolvedNote(value: string) {
+  const note = value.trim();
+  if (!note) return "Add a brief note about how the issue was resolved.";
+  if (!HAS_LETTER.test(note) || !LABEL.test(note)) {
+    return "Note can only use letters, numbers and basic punctuation.";
+  }
+  if (tooLong(note, LIMITS.resolvedNote)) return "A field is too long.";
   return "";
 }
 
