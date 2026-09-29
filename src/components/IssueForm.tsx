@@ -284,7 +284,10 @@ export function IssueForm({
       } catch {
         /* ignore */
       }
-      router.replace(`/issues/${existing.id}`);
+      if (typeof window !== "undefined") {
+        window.history.replaceState(null, "", "/");
+      }
+      router.push(`/issues/${existing.id}`);
       return;
     }
 
