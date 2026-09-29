@@ -85,9 +85,17 @@ export function ManagePost({
         Enter the secret code shown when you published. You need it to edit or
         delete the post, or mark it as resolved.
       </p>
-      <form className="mt-4 space-y-3" onSubmit={onSubmit} noValidate>
+      <form className="mt-4 space-y-3" onSubmit={onSubmit} noValidate autoComplete="off">
         <input
-          name="code"
+          name="manageToken"
+          type="text"
+          inputMode="text"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
+          data-1p-ignore="true"
+          data-lpignore="true"
           maxLength={80}
           value={code}
           onChange={(e) => {
