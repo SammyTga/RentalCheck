@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <div>
       <section className="mb-5 max-w-5xl">
-        <p className="text-xl font-medium text-stone-900">
+        <p className="text-lg font-medium text-stone-900">
           Search an address for issues tenants have logged.
         </p>
       </section>
