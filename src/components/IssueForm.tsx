@@ -22,6 +22,8 @@ export function IssueForm({
   const prefill = useSearchParams();
   const [error, setError] = useState("");
   const [dateError, setDateError] = useState("");
+  const [errorTick, setErrorTick] = useState(0);
+  const [confirmed, setConfirmed] = useState(false);
   const errorRef = useRef<HTMLParagraphElement>(null);
   const [submitting, setSubmitting] = useState(false);
   const [category, setCategory] = useState(existing?.category ?? "");
@@ -41,9 +43,23 @@ export function IssueForm({
   const [draft, setDraft] = useState<Record<string, string> | null>(null);
 
   useEffect(() => {
-    if (!error) return;
-    errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [error]);
+    if (!error || !errorTick) return;
+    requestAnimationFrame(() => {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }, [error, errorTick]);
+
+  useEffect(() => {
+    function clearConfirm() {
+      setConfirmed(false);
+    }
+    window.addEventListener("pageshow", clearConfirm);
+    window.addEventListener("popstate", clearConfirm);
+    return () => {
+      window.removeEventListener("pageshow", clearConfirm);
+      window.removeEventListener("popstate", clearConfirm);
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -133,20 +149,27 @@ export function IssueForm({
     });
   }
 
+  function showError(message: string) {
+    setConfirmed(false);
+    setError(message);
+    setErrorTick((n) => n + 1);
+  }
+
   async function onPhotos(files: FileList | null) {
     if (!files) return;
     setError("");
+    setConfirmed(false);
     const next = [...photos];
     for (const file of Array.from(files)) {
       if (next.length >= 4) break;
       if (!file.type.startsWith("image/")) {
-        setError("Please choose image files only.");
+        showError("Please choose image files only.");
         continue;
       }
       try {
         next.push(await shrinkPhoto(file));
       } catch {
-        setError("Could not read one of the photos. Try another file.");
+        showError("Could not read one of the photos. Try another file.");
       }
     }
     setPhotos(next.slice(0, 4));
@@ -179,7 +202,7 @@ export function IssueForm({
       .filter((r): r is (typeof RESPONSES)[number] =>
         (RESPONSES as readonly string[]).includes(r),
       );
-    const confirmed = form.get("confirmed") === "on";
+    const isConfirmed = confirmed;
 
     if (
       !title ||
@@ -192,17 +215,17 @@ export function IssueForm({
       !city ||
       !reportedToLandlordOn
     ) {
-      setError("Please fill in all required fields.");
+      showError("Please fill in all required fields.");
       setSubmitting(false);
       return;
     }
     if (!CATEGORIES.includes(category)) {
-      setError("Choose a valid category.");
+      showError("Choose a valid category.");
       setSubmitting(false);
       return;
     }
-    if (!confirmed) {
-      setError("Please confirm this is a tenancy issue you reported.");
+    if (!isConfirmed) {
+      showError("Please confirm this is a tenancy issue you reported.");
       setSubmitting(false);
       return;
     }
@@ -224,7 +247,7 @@ export function IssueForm({
       handle,
     });
     if (fieldError) {
-      setError(fieldError);
+      showError(fieldError);
       setSubmitting(false);
       return;
     }
@@ -252,7 +275,7 @@ export function IssueForm({
     if (editing && existing) {
       const result = await updateIssue(existing.id, code, fields);
       if (!result.ok) {
-        setError(result.message);
+        showError(result.message);
         setSubmitting(false);
         return;
       }
@@ -274,7 +297,7 @@ export function IssueForm({
       }
       router.push(`/posted/${issue.id}?code=${encodeURIComponent(issue.manageCode)}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not publish.");
+      showError(err instanceof Error ? err.message : "Could not publish.");
       setSubmitting(false);
     }
   }
@@ -292,8 +315,12 @@ export function IssueForm({
         onInput={(e) => {
           persistDraft(e.currentTarget);
           const t = e.target as HTMLElement | null;
-          if (t && t.getAttribute("name") !== "reportedToLandlordOn") {
+          const name = t?.getAttribute("name");
+          if (name !== "reportedToLandlordOn") {
             setDateError("");
+          }
+          if (name && name !== "confirmed") {
+            setConfirmed(false);
           }
         }}
         className="space-y-5"
@@ -562,7 +589,7 @@ export function IssueForm({
                 <button
                   type="button"
                   className="absolute right-1 top-1 rounded-full bg-white/90 px-2 text-xs"
-                  onClick={() => setPhotos(photos.filter((_, i) => i !== index))}
+                  onClick={() => { setConfirmed(false); setPhotos(photos.filter((_, i) => i !== index)); }}
                 >
                   Remove
                 </button>
@@ -573,7 +600,14 @@ export function IssueForm({
       </div>
 
       <label className="flex items-start gap-2 text-sm text-stone-700">
-        <input type="checkbox" name="confirmed" className="mt-1" required />
+        <input
+          type="checkbox"
+          name="confirmed"
+          className="mt-1"
+          required
+          checked={confirmed}
+          onChange={(e) => setConfirmed(e.target.checked)}
+        />
         <span>
           This is an issue at this exact rental address that has already
           been reported to the relevant individual or service. I will not post
