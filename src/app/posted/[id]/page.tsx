@@ -4,6 +4,23 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
+function keys(id: string) {
+  return {
+    code: `rentalcheck-posted-code-${id}`,
+    seen: `rentalcheck-posted-seen-${id}`,
+  };
+}
+
+function markSeen(id: string) {
+  const k = keys(id);
+  try {
+    sessionStorage.setItem(k.seen, "1");
+    sessionStorage.removeItem(k.code);
+  } catch {
+    /* ignore */
+  }
+}
+
 function PostedInner() {
   const params = useParams<{ id: string }>();
   const search = useSearchParams();
@@ -14,33 +31,35 @@ function PostedInner() {
 
   useEffect(() => {
     if (!id) return;
-    const codeKey = `rentalcheck-posted-code-${id}`;
-    const seenKey = `rentalcheck-posted-seen-${id}`;
+    const k = keys(id);
     const fromUrl = search.get("code");
 
     let alreadySeen = false;
     try {
-      alreadySeen = sessionStorage.getItem(seenKey) === "1";
+      alreadySeen = sessionStorage.getItem(k.seen) === "1";
     } catch {
       alreadySeen = false;
     }
 
-    if (fromUrl && !alreadySeen) {
+    if (alreadySeen) {
+      router.replace("/");
+      return;
+    }
+
+    if (fromUrl) {
       try {
-        sessionStorage.setItem(codeKey, fromUrl);
+        sessionStorage.setItem(k.code, fromUrl);
       } catch {
         /* ignore */
       }
+      router.replace(`/posted/${id}`);
     }
+
     let shown = "";
     try {
-      if (alreadySeen) {
-        shown = "";
-      } else {
-        shown = fromUrl || sessionStorage.getItem(codeKey) || "";
-      }
+      shown = fromUrl || sessionStorage.getItem(k.code) || "";
     } catch {
-      shown = alreadySeen ? "" : fromUrl || "";
+      shown = fromUrl || "";
     }
 
     if (!shown) {
@@ -48,24 +67,29 @@ function PostedInner() {
       return;
     }
 
-    if (fromUrl) {
-      router.replace(`/posted/${id}`);
-    }
-
     setCode(shown);
     setReady(true);
 
-    function consume() {
-      try {
-        sessionStorage.setItem(seenKey, "1");
-        sessionStorage.removeItem(codeKey);
-      } catch {
-        /* ignore */
+    function leave() {
+      markSeen(id);
+    }
+    function onShow(e: PageTransitionEvent) {
+      if (e.persisted) {
+        markSeen(id);
+        setCode("");
+        router.replace("/");
       }
     }
-    window.addEventListener("pagehide", consume);
-    return () => window.removeEventListener("pagehide", consume);
-  }, [id, router, search]);
+    window.addEventListener("pagehide", leave);
+    window.addEventListener("pageshow", onShow);
+    return () => {
+      leave();
+      window.removeEventListener("pagehide", leave);
+      window.removeEventListener("pageshow", onShow);
+    };
+    // search is read once on enter; don't re-run or the code is marked used
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, router]);
 
   if (!ready) {
     return <p className="text-sm text-stone-500">Loading…</p>;
