@@ -14,10 +14,7 @@ export default async function Home() {
   return (
     <div>
       <section className="mb-5 max-w-5xl">
-        <h2 className="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl">
-          Check a rental property in NZ
-        </h2>
-        <p className="mt-3 font-medium text-stone-900">
+        <p className="text-xl font-medium text-stone-900">
           Search an address for issues tenants have logged.
         </p>
       </section>
