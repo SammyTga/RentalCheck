@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ManagePost } from "@/components/ManagePost";
 import { PhotoGrid } from "@/components/PhotoGrid";
@@ -19,25 +19,29 @@ function formatDate(iso: string) {
 
 export default function IssuePage() {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
   const [issue, setIssue] = useState<Issue | null | undefined>(undefined);
 
   useEffect(() => {
-    void getIssue(params.id).then((found) => setIssue(found ?? null));
+    let cancelled = false;
+    async function load() {
+      const found = await getIssue(params.id);
+      if (!cancelled) setIssue(found ?? null);
+    }
+    void load();
+    window.addEventListener("pageshow", load);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("pageshow", load);
+    };
   }, [params.id]);
 
-  if (issue === undefined) {
-    return <p className="text-sm text-stone-500">Loading…</p>;
-  }
+  useEffect(() => {
+    if (issue === null) router.replace("/");
+  }, [issue, router]);
 
   if (!issue) {
-    return (
-      <div>
-        <p>This issue could not be found.</p>
-        <Link href="/" className="mt-4 inline-block text-sm underline">
-          Back to feed
-        </Link>
-      </div>
-    );
+    return <p className="text-sm text-stone-500">Loading…</p>;
   }
 
   return (
