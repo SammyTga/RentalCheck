@@ -18,14 +18,9 @@ export default function AboutPage() {
         </Link>
       </p>
       <h2 className="text-2xl font-semibold text-stone-900">About</h2>
-      <ul className="space-y-3">
+      <ul className="list-disc space-y-2 pl-5">
         {POINTS.map((line) => (
-          <li key={line} className="flex gap-3">
-            <span className="mt-0.5 shrink-0 text-teal-800" aria-hidden>
-              →
-            </span>
-            <span>{line}</span>
-          </li>
+          <li key={line}>{line}</li>
         ))}
       </ul>
     </div>
