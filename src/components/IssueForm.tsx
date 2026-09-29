@@ -617,7 +617,7 @@ export function IssueForm({
           onChange={(e) => setConfirmed(e.target.checked)}
         />
         <span>
-          This is an issue at this exact rental address that has already
+          This is an issue at this rental address that has already
           been reported to the relevant individual or service. I will not post
           names or contact details of landlords/property managers. The
           address will be public on RentalCheck.co.nz.
