@@ -11,8 +11,8 @@ export default function ContactPage() {
       </p>
       <h2 className="text-2xl font-semibold text-stone-900">Contact</h2>
       <p>
-        Use this form to report a post, say you lost your secret code, or ask
-        about the site.
+        Use this form to report a post, say you lost your secret code, or
+        something else.
       </p>
       <ContactForm />
     </div>
