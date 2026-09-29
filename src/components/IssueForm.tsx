@@ -33,12 +33,13 @@ export function IssueForm({
     existing?.reportedToLandlordOn ?? "",
   );
   const editing = Boolean(existing);
-  const DRAFT_KEY = "rentalcheck-new-issue-draft";
-  const [draftReady, setDraftReady] = useState(editing);
+  const DRAFT_KEY = existing
+    ? `rentalcheck-edit-issue-draft-${existing.id}`
+    : "rentalcheck-new-issue-draft";
+  const [draftReady, setDraftReady] = useState(false);
   const [draft, setDraft] = useState<Record<string, string> | null>(null);
 
   useEffect(() => {
-    if (editing) return;
     try {
       const raw = sessionStorage.getItem(DRAFT_KEY);
       setDraft(raw ? (JSON.parse(raw) as Record<string, string>) : null);
@@ -46,27 +47,27 @@ export function IssueForm({
       setDraft(null);
     }
     setDraftReady(true);
-  }, [editing]);
+  }, [DRAFT_KEY]);
 
   useEffect(() => {
-    if (editing || !draftReady) return;
-    if (draft?.photos) {
+    if (!draftReady || !draft) return;
+    if (draft.photos) {
       try {
         const parsed = JSON.parse(draft.photos) as string[];
-        if (Array.isArray(parsed) && parsed.length) setPhotos(parsed);
+        if (Array.isArray(parsed)) setPhotos(parsed);
       } catch {
         /* ignore */
       }
     }
-    if (draft?.category) setCategory(draft.category);
-    if (draft?.roomArea) setRoomArea(draft.roomArea);
-    if (draft?.reportedToLandlordOn && draft.reportedToLandlordOn <= todayNz) {
+    if (draft.category) setCategory(draft.category);
+    if (draft.roomArea) setRoomArea(draft.roomArea);
+    if (draft.reportedToLandlordOn && draft.reportedToLandlordOn <= todayNz) {
       setReportedDate(draft.reportedToLandlordOn);
     }
-  }, [draftReady, editing]);
+  }, [draftReady, draft, todayNz]);
 
   useEffect(() => {
-    if (editing || !draftReady) return;
+    if (!draftReady) return;
     try {
       const raw = sessionStorage.getItem(DRAFT_KEY);
       const data = raw ? (JSON.parse(raw) as Record<string, string>) : {};
@@ -75,10 +76,9 @@ export function IssueForm({
     } catch {
       /* quota */
     }
-  }, [photos, editing, draftReady]);
+  }, [photos, draftReady, DRAFT_KEY]);
 
   function persistDraft(form: HTMLFormElement) {
-    if (editing) return;
     const fd = new FormData(form);
     const data: Record<string, string> = {};
     for (const [key, value] of fd.entries()) {
@@ -249,6 +249,11 @@ export function IssueForm({
         setSubmitting(false);
         return;
       }
+      try {
+        sessionStorage.removeItem(DRAFT_KEY);
+      } catch {
+        /* ignore */
+      }
       router.replace(`/issues/${existing.id}`);
       return;
     }
@@ -303,7 +308,7 @@ export function IssueForm({
           required
           maxLength={100}
           className={field}
-          defaultValue={existing?.title ?? draft?.title ?? ""}
+          defaultValue={draft?.title ?? existing?.title ?? ""}
         />
       </label>
 
@@ -388,7 +393,7 @@ export function IssueForm({
             maxLength={80}
             placeholder="e.g. downstairs shower, bedroom 2"
             className={field}
-            defaultValue={existing?.roomDetail ?? draft?.roomDetail ?? ""}
+            defaultValue={draft?.roomDetail ?? existing?.roomDetail ?? ""}
           />
         </label>
       </div>
@@ -402,7 +407,7 @@ export function IssueForm({
           maxLength={2000}
           placeholder="Facts only: what is wrong and what happened next."
           className={field}
-          defaultValue={existing?.description ?? draft?.description ?? ""}
+          defaultValue={draft?.description ?? existing?.description ?? ""}
         />
       </label>
 
@@ -414,7 +419,7 @@ export function IssueForm({
             maxLength={20}
             placeholder="e.g. 2"
             className={field}
-            defaultValue={existing?.unit ?? prefill.get("unit") ?? draft?.unit ?? ""}
+            defaultValue={draft?.unit ?? existing?.unit ?? prefill.get("unit") ?? ""}
           />
         </label>
         <label className="block">
@@ -425,7 +430,7 @@ export function IssueForm({
             maxLength={20}
             placeholder="e.g. 44"
             className={field}
-            defaultValue={existing?.streetNumber ?? prefill.get("streetNumber") ?? draft?.streetNumber ?? ""}
+            defaultValue={draft?.streetNumber ?? existing?.streetNumber ?? prefill.get("streetNumber") ?? ""}
           />
         </label>
         <label className="block">
@@ -436,7 +441,7 @@ export function IssueForm({
             maxLength={80}
             placeholder="e.g. Chadwick Road"
             className={field}
-            defaultValue={existing?.streetName ?? prefill.get("streetName") ?? draft?.streetName ?? ""}
+            defaultValue={draft?.streetName ?? existing?.streetName ?? prefill.get("streetName") ?? ""}
           />
         </label>
       </div>
@@ -449,7 +454,7 @@ export function IssueForm({
             maxLength={60}
             placeholder="e.g. Greerton"
             className={field}
-            defaultValue={existing?.area ?? prefill.get("area") ?? draft?.area ?? ""}
+            defaultValue={draft?.area ?? existing?.area ?? prefill.get("area") ?? ""}
           />
         </label>
         <label className="block">
@@ -460,7 +465,7 @@ export function IssueForm({
             maxLength={60}
             placeholder="e.g. Tauranga"
             className={field}
-            defaultValue={existing?.city ?? prefill.get("city") ?? draft?.city ?? ""}
+            defaultValue={draft?.city ?? existing?.city ?? prefill.get("city") ?? ""}
           />
         </label>
         <label className="block">
@@ -471,7 +476,7 @@ export function IssueForm({
             inputMode="numeric"
             placeholder="e.g. 3112"
             className={field}
-            defaultValue={existing?.postcode ?? prefill.get("postcode") ?? draft?.postcode ?? ""}
+            defaultValue={draft?.postcode ?? existing?.postcode ?? prefill.get("postcode") ?? ""}
           />
         </label>
       </div>
@@ -490,10 +495,9 @@ export function IssueForm({
                 value={r}
                 className="mt-1"
                 defaultChecked={
-                  existing?.responses?.includes(r) ||
-                  (draft?.responses
+                  draft?.responses
                     ? (JSON.parse(draft.responses) as string[]).includes(r)
-                    : false)
+                    : Boolean(existing?.responses?.includes(r))
                 }
               />
               <span>{r}</span>
@@ -511,7 +515,7 @@ export function IssueForm({
           maxLength={40}
           placeholder="Anonymous"
           className={field}
-          defaultValue={existing?.handle === "Anonymous" ? "" : existing?.handle ?? draft?.handle ?? ""}
+          defaultValue={draft?.handle ?? (existing?.handle === "Anonymous" ? "" : existing?.handle ?? "")}
         />
       </label>
 
