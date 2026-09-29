@@ -15,7 +15,7 @@ export default function NewIssuePage() {
       </h2>
       <p className="mt-2 mb-6 text-stone-600">
         No account needed. Posts are public and can be anonymous. You will be
-        given a secret code once done. Only one issue per post. Two issues =
+        given a secret code once done. One issue per post. Two issues =
         two posts.
       </p>
       <Suspense>
