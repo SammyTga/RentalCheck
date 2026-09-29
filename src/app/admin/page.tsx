@@ -25,7 +25,7 @@ export default function AdminPage() {
   } | null>(null);
 
   async function load() {
-    const res = await fetch("/api/admin/issues");
+    const res = await fetch("/api/admin/issues", { cache: "no-store" });
     if (res.status === 401) {
       setAuthed(false);
       return;
@@ -42,6 +42,20 @@ export default function AdminPage() {
 
   useEffect(() => {
     void load();
+    function refresh() {
+      void load();
+    }
+    function onVisible() {
+      if (document.visibilityState === "visible") refresh();
+    }
+    window.addEventListener("pageshow", refresh);
+    window.addEventListener("popstate", refresh);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      window.removeEventListener("pageshow", refresh);
+      window.removeEventListener("popstate", refresh);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
   async function onLogin(e: FormEvent) {
