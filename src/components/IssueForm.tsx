@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { validateIssueFields } from "@/lib/limits";
 import { addIssue, updateIssue } from "@/lib/store";
 import {
@@ -22,6 +22,7 @@ export function IssueForm({
   const prefill = useSearchParams();
   const [error, setError] = useState("");
   const [dateError, setDateError] = useState("");
+  const errorRef = useRef<HTMLParagraphElement>(null);
   const [submitting, setSubmitting] = useState(false);
   const [category, setCategory] = useState(existing?.category ?? "");
   const [roomArea, setRoomArea] = useState(existing?.roomArea ?? "");
@@ -38,6 +39,12 @@ export function IssueForm({
     : "rentalcheck-new-issue-draft";
   const [draftReady, setDraftReady] = useState(false);
   const [draft, setDraft] = useState<Record<string, string> | null>(null);
+
+  useEffect(() => {
+    if (!error) return;
+    errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [error]);
+
 
   useEffect(() => {
     try {
@@ -292,7 +299,11 @@ export function IssueForm({
         className="space-y-5"
       >
       {error && (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+        <p
+          ref={errorRef}
+          tabIndex={-1}
+          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+        >
           {error}
         </p>
       )}
