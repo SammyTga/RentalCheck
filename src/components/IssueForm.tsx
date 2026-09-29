@@ -295,10 +295,15 @@ export function IssueForm({
       const issue = await addIssue(fields);
       try {
         sessionStorage.removeItem(DRAFT_KEY);
+        sessionStorage.removeItem(`rentalcheck-posted-seen-${issue.id}`);
+        sessionStorage.setItem(
+          `rentalcheck-posted-code-${issue.id}`,
+          issue.manageCode,
+        );
       } catch {
         /* ignore */
       }
-      router.push(`/posted/${issue.id}?code=${encodeURIComponent(issue.manageCode)}`);
+      router.push(`/posted/${issue.id}`);
     } catch (err) {
       showError(err instanceof Error ? err.message : "Could not publish.");
       setSubmitting(false);
