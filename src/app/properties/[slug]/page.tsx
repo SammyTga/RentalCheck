@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IssueCard } from "@/components/IssueCard";
 import { getIssuesByPropertySlug } from "@/lib/store";
@@ -9,25 +9,29 @@ import { formatAddress, type Issue } from "@/lib/types";
 
 export default function PropertyPage() {
   const params = useParams<{ slug: string }>();
+  const router = useRouter();
   const [issues, setIssues] = useState<Issue[] | null>(null);
 
   useEffect(() => {
-    void getIssuesByPropertySlug(params.slug).then(setIssues);
+    let cancelled = false;
+    async function load() {
+      const found = await getIssuesByPropertySlug(params.slug);
+      if (!cancelled) setIssues(found);
+    }
+    void load();
+    window.addEventListener("pageshow", load);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("pageshow", load);
+    };
   }, [params.slug]);
 
-  if (issues === null) {
-    return <p className="text-sm text-stone-500">Loading…</p>;
-  }
+  useEffect(() => {
+    if (issues && issues.length === 0) router.replace("/");
+  }, [issues, router]);
 
-  if (issues.length === 0) {
-    return (
-      <div>
-        <p>No issues are logged for this address yet.</p>
-        <Link href="/" className="mt-4 inline-block text-sm underline">
-          Back to feed
-        </Link>
-      </div>
-    );
+  if (!issues || issues.length === 0) {
+    return <p className="text-sm text-stone-500">Loading…</p>;
   }
 
   const sample = issues[0];
