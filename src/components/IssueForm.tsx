@@ -353,6 +353,7 @@ export function IssueForm({
           name="title"
           required
           maxLength={100}
+          placeholder="e.g. Damp in the sleepout"
           className={field}
           defaultValue={draft?.title ?? existing?.title ?? ""}
         />
