@@ -89,7 +89,7 @@ export function ContactForm() {
           required
           rows={6}
           maxLength={2000}
-          placeholder="Include the property address or issue link if you can."
+          placeholder="Include the property address or issue link, otherwise type away."
           className={field}
         />
       </label>
