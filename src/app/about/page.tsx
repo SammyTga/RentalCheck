@@ -1,5 +1,14 @@
 import Link from "next/link";
 
+const POINTS = [
+  "RentalCheck is a public record of property defects or safety issues affecting tenants at their homes.",
+  "It helps create evidence value that assists with validation and resolution of issues.",
+  "Posting issues here encourages landlords to play by the rules and keep their homes up to standard.",
+  "Creating a post gives you a shareable link of your rental's issues.",
+  "Future renters can check this site to help make informed decisions about a property and its suitability. Posting here helps others.",
+  "This is not a place for abuse or accusations against landlords or property managers.",
+];
+
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-4 text-stone-700 leading-7">
@@ -9,29 +18,16 @@ export default function AboutPage() {
         </Link>
       </p>
       <h2 className="text-2xl font-semibold text-stone-900">About</h2>
-      <p>
-        RentalCheck is a public record of property defects or safety issues
-        affecting tenants at their homes.
-      </p>
-      <p>
-        It helps create evidence value that assists with validation and
-        resolution of issues.
-      </p>
-      <p>
-        Future renters can check this site to help make informed decisions
-        about a property and its suitability for themselves or their family.
-      </p>
-      <p>
-        Creating a post gives you a shareable link of your rental&apos;s issues.
-      </p>
-      <p>
-        This site aims to further encourage landlords to keep their tenants&apos;
-        rentals up to standard and safe.
-      </p>
-      <p>
-        This is not a place for abuse or accusations against landlords or
-        property managers.
-      </p>
+      <ul className="space-y-3">
+        {POINTS.map((line) => (
+          <li key={line} className="flex gap-3">
+            <span className="mt-0.5 shrink-0 text-teal-800" aria-hidden>
+              →
+            </span>
+            <span>{line}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
