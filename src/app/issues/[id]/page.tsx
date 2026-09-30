@@ -51,7 +51,7 @@ export default function IssuePage() {
           ← Feed
         </Link>
       </p>
-      <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-5 sm:p-6">
+      <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-4 sm:p-6">
       <div className="flex flex-wrap gap-2 text-sm text-stone-800">
         <span className="rounded-full bg-stone-200 px-2 py-0.5 font-medium text-stone-800">
           {issue.category}
@@ -71,7 +71,7 @@ export default function IssuePage() {
         ))}
       </div>
       <p className="mt-2 text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
-      <h2 className="mt-3 break-long text-3xl font-semibold tracking-tight text-stone-900">
+      <h2 className="mt-3 break-long text-2xl font-semibold tracking-tight text-stone-900">
         {issue.title}
       </h2>
       {(issue.roomArea || issue.roomDetail) && (
