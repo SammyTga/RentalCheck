@@ -24,6 +24,12 @@ function groupCountLabel(group: Issue[]) {
   return `${open} open issue${open === 1 ? "" : "s"} – ${resolved} resolved issue${resolved === 1 ? "" : "s"}`;
 }
 
+function groupSortTime(group: Issue[]) {
+  const open = group.filter((issue) => issue.status !== "resolved");
+  const source = open.length > 0 ? open : group;
+  return Math.max(...source.map((issue) => new Date(issue.postedAt).getTime()));
+}
+
 function openFirst(group: Issue[]) {
   return [...group].sort(
     (a, b) => Number(a.status === "resolved") - Number(b.status === "resolved"),
@@ -107,7 +113,9 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
         </p>
       ) : (
         <div className="space-y-6">
-          {[...groups.entries()].map(([slug, group]) => {
+          {[...groups.entries()]
+            .sort((a, b) => groupSortTime(b[1]) - groupSortTime(a[1]))
+            .map(([slug, group]) => {
             const ordered = openFirst(group);
             return (
             <section
