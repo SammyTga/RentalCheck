@@ -46,7 +46,7 @@ export default function PropertyPage() {
       <p className="mt-4 text-xs font-medium uppercase tracking-widest text-stone-500">
         Property
       </p>
-      <h2 className="mt-1 text-3xl font-semibold tracking-tight text-stone-900">
+      <h2 className="mt-1 text-2xl font-semibold tracking-tight text-stone-900">
         {formatAddress(sample)}
       </h2>
       <p className="mt-2 text-stone-600">
