@@ -17,7 +17,7 @@ export function IssueCard({ issue }: { issue: Issue }) {
           </span>
         )}
         {responseTag && (
-          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-900">
+          <span className="rounded-full bg-amber-200 px-2 py-0.5 text-xs font-medium text-amber-950">
             {responseTag}
           </span>
         )}
