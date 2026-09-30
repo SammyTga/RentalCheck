@@ -52,12 +52,12 @@ export default function IssuePage() {
         </Link>
       </p>
       <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-4 sm:p-6">
-      <div className="flex flex-wrap gap-2 text-sm text-stone-800">
-        <span className="rounded-full bg-stone-200 px-2 py-0.5 font-medium text-stone-800">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="rounded-full bg-stone-200 px-2 py-0.5 text-sm font-medium text-stone-800">
           {issue.category}
         </span>
         {issue.status === "resolved" && (
-          <span className="rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-emerald-800">
+          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-sm font-medium text-emerald-800">
             Resolved
           </span>
         )}
