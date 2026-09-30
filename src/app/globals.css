@@ -21,6 +21,10 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
 button:active:not(:disabled) {
   filter: brightness(0.88);
 }
