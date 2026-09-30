@@ -117,7 +117,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
               <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-2">
                 <Link
                   href={`/properties/${slug}`}
-                  className="font-semibold text-stone-900 hover:underline active:text-teal-800"
+                  className="font-semibold text-stone-900 underline decoration-stone-400 underline-offset-4 hover:decoration-teal-800 active:text-teal-800"
                 >
                   {formatAddress(group[0])}
                 </Link>
