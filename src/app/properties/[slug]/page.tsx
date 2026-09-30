@@ -69,7 +69,12 @@ export default function PropertyPage() {
         </Link>
       </p>
       <div className="mt-8 space-y-4">
-        {issues.map((issue) => (
+        {[...issues]
+          .sort(
+            (a, b) =>
+              Number(a.status === "resolved") - Number(b.status === "resolved"),
+          )
+          .map((issue) => (
           <IssueCard key={issue.id} issue={issue} />
         ))}
       </div>
