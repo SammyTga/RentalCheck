@@ -35,7 +35,7 @@ export function IssueCard({ issue }: { issue: Issue }) {
           {issue.title}
         </Link>
       </h2>
-      <p className="mt-2 max-w-[50%] line-clamp-1 break-long text-base leading-6 text-stone-800">
+      <p className="mt-2 max-w-full line-clamp-1 break-long text-base leading-6 text-stone-800 sm:max-w-[50%]">
         {issue.description}
       </p>
       <PhotoGrid photos={issue.photoUrls ?? []} size="card" />
