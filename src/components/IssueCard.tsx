@@ -27,15 +27,15 @@ export function IssueCard({ issue }: { issue: Issue }) {
           Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}
         </p>
       )}
-      <h2 className="mt-3 break-long text-lg font-bold text-stone-900">
+      <h2 className="mt-3 break-long text-lg font-semibold text-stone-900">
         <Link
           href={`/issues/${issue.id}`}
-          className="text-stone-900 underline decoration-2 decoration-stone-800 underline-offset-4 hover:decoration-teal-800 active:text-teal-800"
+          className="text-stone-900 underline decoration-stone-400 underline-offset-4 hover:decoration-teal-800 active:text-teal-800"
         >
           {issue.title}
         </Link>
       </h2>
-      <p className="mt-2 line-clamp-1 break-long text-base leading-6 text-stone-800">
+      <p className="mt-2 max-w-[50%] line-clamp-1 break-long text-base leading-6 text-stone-800">
         {issue.description}
       </p>
       <PhotoGrid photos={issue.photoUrls ?? []} size="card" />
