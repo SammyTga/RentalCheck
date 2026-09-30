@@ -12,6 +12,24 @@ import {
   type Issue,
 } from "@/lib/types";
 
+function groupCountLabel(group: Issue[]) {
+  const resolved = group.filter((issue) => issue.status === "resolved").length;
+  const open = group.length - resolved;
+  if (resolved === 0) {
+    return `${group.length} issue${group.length === 1 ? "" : "s"}`;
+  }
+  if (open === 0) {
+    return `${resolved} resolved issue${resolved === 1 ? "" : "s"}`;
+  }
+  return `${open} open issue${open === 1 ? "" : "s"} – ${resolved} resolved issue${resolved === 1 ? "" : "s"}`;
+}
+
+function openFirst(group: Issue[]) {
+  return [...group].sort(
+    (a, b) => Number(a.status === "resolved") - Number(b.status === "resolved"),
+  );
+}
+
 export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
   const [issues, setIssues] = useState<Issue[] | null>(initialIssues ?? null);
   const [loadError, setLoadError] = useState("");
@@ -89,12 +107,14 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
         </p>
       ) : (
         <div className="space-y-6">
-          {[...groups.entries()].map(([slug, group]) => (
+          {[...groups.entries()].map(([slug, group]) => {
+            const ordered = openFirst(group);
+            return (
             <section
               key={slug}
               className="min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-stone-100/60 p-4"
             >
-              <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+              <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-2">
                 <Link
                   href={`/properties/${slug}`}
                   className="font-semibold text-stone-900 hover:underline active:text-teal-800"
@@ -102,16 +122,17 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
                   {formatAddress(group[0])}
                 </Link>
                 <span className="text-xs font-medium text-stone-600">
-                  {group.length} issue{group.length === 1 ? "" : "s"}
+                  {groupCountLabel(group)}
                 </span>
               </div>
               <div className="space-y-3">
-                {group.map((issue) => (
+                {ordered.map((issue) => (
                   <IssueCard key={issue.id} issue={issue} />
                 ))}
               </div>
             </section>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
