@@ -138,12 +138,12 @@ export function ManagePost({
         <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/40">
           <div className="flex min-h-[100dvh] items-center justify-center p-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-lg">
-            <p className="text-base font-medium text-stone-900">
-              {pending === "delete"
-                ? "Are you sure you want to delete this post?"
-                : "Are you sure you want to mark this post as resolved?"}
-            </p>
-            <p className="mt-2 text-sm text-stone-600">
+            {pending === "delete" && (
+              <p className="text-base font-medium text-stone-900">
+                Are you sure you want to delete this post?
+              </p>
+            )}
+            <p className={pending === "delete" ? "mt-2 text-sm text-stone-600" : "text-sm text-stone-600"}>
               {pending === "delete"
                 ? "It will be removed from the public feed."
                 : "This post stays public with a resolved label and your note."}
