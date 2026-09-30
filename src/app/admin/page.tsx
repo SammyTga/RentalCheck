@@ -157,15 +157,15 @@ export default function AdminPage() {
               </p>
               <div className="mt-2 flex gap-2">
                 {issue.hidden ? (
-                  <button className="underline active:text-teal-800" onClick={() => act(issue.id, "unhide")}>
+                  <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(issue.id, "unhide")}>
                     Unhide
                   </button>
                 ) : (
-                  <button className="underline active:text-teal-800" onClick={() => act(issue.id, "hide")}>
+                  <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(issue.id, "hide")}>
                     Hide
                   </button>
                 )}
-                <button className="underline active:text-teal-800" onClick={() => setPending({ id: issue.id, type: "issue" })}>
+                <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => setPending({ id: issue.id, type: "issue" })}>
                   Delete
                 </button>
               </div>
@@ -193,15 +193,15 @@ export default function AdminPage() {
               </p>
               <div className="mt-2 flex gap-2">
                 {msg.read ? (
-                  <button className="underline active:text-teal-800" onClick={() => act(msg.id, "unread", "message")}>
+                  <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(msg.id, "unread", "message")}>
                     Mark unread
                   </button>
                 ) : (
-                  <button className="underline active:text-teal-800" onClick={() => act(msg.id, "read", "message")}>
+                  <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(msg.id, "read", "message")}>
                     Mark as read
                   </button>
                 )}
-                <button className="underline active:text-teal-800" onClick={() => setPending({ id: msg.id, type: "message" })}>
+                <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => setPending({ id: msg.id, type: "message" })}>
                   Delete
                 </button>
               </div>

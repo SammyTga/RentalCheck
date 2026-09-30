@@ -41,7 +41,7 @@ function EditInner() {
   return (
     <div className="mx-auto max-w-2xl">
       <p className="text-sm text-stone-500">
-        <Link href={`/issues/${issue.id}`} className="hover:underline active:text-teal-800">
+        <Link href={`/issues/${issue.id}`} className="hover:underline hover:text-teal-800 active:text-teal-800">
           ← Issue
         </Link>
       </p>

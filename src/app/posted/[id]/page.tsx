@@ -106,10 +106,10 @@ function PostedInner() {
         {code}
       </p>
       <p className="mt-6 flex gap-4 text-sm">
-        <Link href={`/issues/${id}`} className="underline active:text-teal-800">
+        <Link href={`/issues/${id}`} className="underline hover:text-teal-800 active:text-teal-800">
           View post
         </Link>
-        <Link href="/" className="underline active:text-teal-800">
+        <Link href="/" className="underline hover:text-teal-800 active:text-teal-800">
           Back to feed
         </Link>
       </p>
