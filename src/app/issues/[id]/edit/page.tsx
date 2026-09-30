@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { IssueForm } from "@/components/IssueForm";
 import { codeLooksValid, getIssue } from "@/lib/store";
@@ -10,6 +10,7 @@ import type { Issue } from "@/lib/types";
 function EditInner() {
   const params = useParams<{ id: string }>();
   const search = useSearchParams();
+  const router = useRouter();
   const code = search.get("code") || "";
   const [issue, setIssue] = useState<Issue | null | undefined>(undefined);
   const [allowed, setAllowed] = useState<boolean | null>(null);
@@ -28,25 +29,13 @@ function EditInner() {
   }
 
   if (!issue) {
-    return (
-      <div>
-        <p>This issue could not be found.</p>
-        <Link href="/" className="mt-4 inline-block text-sm underline">
-          Back to feed
-        </Link>
-      </div>
-    );
+    router.replace("/");
+    return <p className="text-sm text-stone-500">Loading…</p>;
   }
 
   if (!allowed) {
-    return (
-      <div className="mx-auto max-w-xl">
-        <p>That code does not match this post.</p>
-        <Link href={`/issues/${issue.id}`} className="mt-4 inline-block text-sm underline">
-          Back to issue
-        </Link>
-      </div>
-    );
+    router.replace(`/issues/${issue.id}`);
+    return <p className="text-sm text-stone-500">Loading…</p>;
   }
 
   return (
