@@ -154,7 +154,6 @@ export function propertySlug(issue: {
     unit ? `unit-${unit}` : null,
     issue.streetNumber,
     expandStreet(issue.streetName),
-    issue.area ? expandPlace(issue.area) : null,
     expandPlace(issue.city),
   ]
     .filter(Boolean)
