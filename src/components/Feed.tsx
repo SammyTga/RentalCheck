@@ -101,7 +101,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
                 >
                   {formatAddress(group[0])}
                 </Link>
-                <span className="text-xs text-stone-500">
+                <span className="text-sm text-stone-700">
                   {group.length} issue{group.length === 1 ? "" : "s"}
                 </span>
               </div>
