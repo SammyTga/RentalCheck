@@ -126,7 +126,7 @@ export default function AdminPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold">Admin</h2>
         <button
-          className="text-sm underline active:text-teal-800"
+          className="cursor-pointer text-sm underline hover:text-teal-800 active:text-teal-800"
           onClick={async () => {
             await fetch("/api/admin/logout", { method: "POST" });
             setPassword("");
