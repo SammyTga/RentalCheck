@@ -7,11 +7,15 @@ export const CATEGORIES = [
   "Safety",
   "Structural",
   "Smells / odours",
-  "Insulation / Healthy Homes",
+  "Insulation",
   "Windows / doors",
   "Appliances",
   "Hot water",
 ] as const;
+
+export function displayCategory(category: string) {
+  return category === "Insulation / Healthy Homes" ? "Insulation" : category;
+}
 
 export const RESPONSES = [
   "Dismissive / brushed off",

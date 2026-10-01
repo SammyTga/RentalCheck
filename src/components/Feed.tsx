@@ -7,6 +7,7 @@ import { getIssues } from "@/lib/store";
 import {
   addressSearchText,
   CATEGORIES,
+  displayCategory,
   formatAddress,
   propertySlug,
   type Issue,
@@ -67,7 +68,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
       .split(/\s+/)
       .filter(Boolean);
     const matchesQ = words.length === 0 || words.every((word) => hay.includes(word));
-    const matchesCat = category === "All" || issue.category === category;
+    const matchesCat = category === "All" || displayCategory(issue.category) === category;
     return matchesQ && matchesCat;
   });
 

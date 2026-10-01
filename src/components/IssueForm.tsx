@@ -6,6 +6,7 @@ import { validateIssueFields } from "@/lib/limits";
 import { addIssue, updateIssue } from "@/lib/store";
 import {
   CATEGORIES,
+  displayCategory,
   RESPONSES,
   ROOM_AREAS,
   type Issue,
@@ -26,7 +27,9 @@ export function IssueForm({
   const [confirmed, setConfirmed] = useState(false);
   const errorRef = useRef<HTMLParagraphElement>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [category, setCategory] = useState(existing?.category ?? "");
+  const [category, setCategory] = useState(
+    existing?.category ? displayCategory(existing.category) : "",
+  );
   const [roomArea, setRoomArea] = useState(existing?.roomArea ?? "");
   const [photos, setPhotos] = useState<string[]>(existing?.photoUrls ?? []);
   const todayNz = new Date().toLocaleDateString("en-CA", {
@@ -446,13 +449,13 @@ export function IssueForm({
       </div>
 
       <label className="block">
-        <span className="text-sm font-medium text-stone-800">What is the problem *</span>
+        <span className="text-sm font-medium text-stone-800">What is the issue? *</span>
         <textarea
           name="description"
           required
           rows={7}
           maxLength={2000}
-          placeholder="Facts only: what is wrong and what happened next."
+          placeholder="e.g. Leak under the kitchen sink since March. Reported twice, still dripping."
           className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
@@ -464,7 +467,7 @@ export function IssueForm({
           <input
             name="unit"
             maxLength={20}
-            placeholder="e.g. 2"
+            placeholder="e.g. 2a"
             className={field}
             defaultValue={draft?.unit ?? existing?.unit ?? prefill.get("unit") ?? ""}
           />
@@ -530,8 +533,7 @@ export function IssueForm({
 
       <fieldset>
         <legend className="text-sm font-medium text-stone-800">
-          How did the landlord or property manager respond? (optional — pick any
-          that apply)
+          How was this responded to? (optional — pick any that apply)
         </legend>
         <div className="mt-2 space-y-2">
           {RESPONSES.map((r) => (
@@ -618,7 +620,7 @@ export function IssueForm({
           onChange={(e) => setConfirmed(e.target.checked)}
         />
         <span>
-          This is an issue at this rental address that has already
+          This is an issue at the above rental address that has already
           been reported to the relevant individual or service. I will not post
           names or contact details of landlords/property managers. The
           address will be public on RentalCheck.co.nz.
