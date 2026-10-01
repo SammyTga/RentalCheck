@@ -45,7 +45,7 @@ function EditInner() {
           ← Issue
         </Link>
       </p>
-      <h2 className="mt-3 text-2xl font-semibold text-stone-900">Edit issue</h2>
+      <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-stone-900">Edit issue</h2>
       <p className="mt-2 mb-6 text-stone-600">
         Change the details, then save. The original post date stays the same.
       </p>

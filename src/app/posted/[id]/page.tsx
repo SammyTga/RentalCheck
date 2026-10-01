@@ -97,7 +97,7 @@ function PostedInner() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h2 className="text-2xl font-semibold text-stone-900">Post published</h2>
+      <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Post published</h2>
       <p className="mt-3 text-stone-600">
         Save this secret code. You need it to edit or delete the post, or mark
         it as resolved. We will not show it again.
