@@ -10,7 +10,7 @@ export default function NewIssuePage() {
           ← Feed
         </Link>
       </p>
-      <h2 className="mt-3 text-2xl font-semibold text-stone-900">
+      <h2 className="font-display mt-3 text-2xl font-semibold tracking-tight text-stone-900">
         Log an issue
       </h2>
       <p className="mt-2 mb-6 text-stone-600">

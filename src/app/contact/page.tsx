@@ -9,7 +9,7 @@ export default function ContactPage() {
           ← Feed
         </Link>
       </p>
-      <h2 className="text-2xl font-semibold text-stone-900">Contact</h2>
+      <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Contact</h2>
       <p>
         Use this form to report a post, say you lost your secret code, or
         something else.

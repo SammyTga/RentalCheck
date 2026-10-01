@@ -158,7 +158,7 @@ export function ManagePost({
                 }}
                 placeholder="Brief note about how the issue was resolved"
                 rows={3}
-                className="mt-3 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
+                className="mt-3 max-h-36 w-full resize-y overflow-y-auto rounded-lg border border-stone-300 px-3 py-2 text-sm"
               />
             )}
             {pending === "resolve" && message && (

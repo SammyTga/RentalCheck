@@ -17,7 +17,7 @@ export default function AboutPage() {
           ← Feed
         </Link>
       </p>
-      <h2 className="text-2xl font-semibold text-stone-900">About</h2>
+      <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">About</h2>
       <ul className="list-disc space-y-2 pl-5">
         {POINTS.map((line) => (
           <li key={line}>{line}</li>

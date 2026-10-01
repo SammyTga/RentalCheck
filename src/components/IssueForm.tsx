@@ -453,7 +453,7 @@ export function IssueForm({
           rows={7}
           maxLength={2000}
           placeholder="Facts only: what is wrong and what happened next."
-          className={field}
+          className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
       </label>
