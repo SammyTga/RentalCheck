@@ -36,7 +36,12 @@ export function ManagePost({
     }
 
     if (action === "edit") {
-      router.replace(`/issues/${issueId}/edit?code=${encodeURIComponent(code)}`);
+      try {
+        sessionStorage.setItem(`rentalcheck-edit-code-${issueId}`, code.trim());
+      } catch {
+        /* ignore */
+      }
+      router.replace(`/issues/${issueId}/edit`);
       return;
     }
 
