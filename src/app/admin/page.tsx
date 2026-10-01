@@ -90,7 +90,7 @@ export default function AdminPage() {
   if (authed === null) {
     return (
       <div className="mx-auto max-w-sm">
-        <h2 className="text-2xl font-semibold">Admin</h2>
+        <h2 className="font-display text-2xl font-semibold tracking-tight">Admin</h2>
         <p className="mt-2 text-sm text-stone-600">Checking sign-in…</p>
       </div>
     );
@@ -99,7 +99,7 @@ export default function AdminPage() {
   if (!authed) {
     return (
       <div className="mx-auto max-w-sm">
-        <h2 className="text-2xl font-semibold">Admin</h2>
+        <h2 className="font-display text-2xl font-semibold tracking-tight">Admin</h2>
         <p className="mt-2 text-sm text-stone-600">
           This page is only for the site owner.
         </p>
@@ -124,7 +124,7 @@ export default function AdminPage() {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold">Admin</h2>
+        <h2 className="font-display text-2xl font-semibold tracking-tight">Admin</h2>
         <button
           className="cursor-pointer text-sm underline hover:text-teal-800 active:text-teal-800"
           onClick={async () => {
