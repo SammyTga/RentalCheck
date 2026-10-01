@@ -36,7 +36,7 @@ export function ManagePost({
     }
 
     if (action === "edit") {
-      router.push(`/issues/${issueId}/edit?code=${encodeURIComponent(code)}`);
+      router.replace(`/issues/${issueId}/edit?code=${encodeURIComponent(code)}`);
       return;
     }
 
