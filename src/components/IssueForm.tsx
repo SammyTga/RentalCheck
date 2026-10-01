@@ -287,7 +287,7 @@ export function IssueForm({
       if (typeof window !== "undefined") {
         window.history.replaceState(null, "", "/");
       }
-      router.push(`/issues/${existing.id}`);
+      router.replace(`/issues/${existing.id}`);
       return;
     }
 
