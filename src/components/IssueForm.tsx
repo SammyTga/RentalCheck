@@ -356,7 +356,7 @@ export function IssueForm({
           name="title"
           required
           maxLength={100}
-          placeholder="e.g. Mould on the bedroom walls"
+          placeholder="e.g. Bedroom window will not close"
           className={field}
           defaultValue={draft?.title ?? existing?.title ?? ""}
         />
