@@ -579,7 +579,7 @@ export function IssueForm({
             type="file"
             accept="image/*"
             multiple
-            className={`${field} file:mr-3 file:rounded-full file:border-0 file:bg-teal-800 file:px-3 file:py-1 file:text-xs file:text-white file:hover:bg-teal-950 file:active:bg-teal-950`}
+            className={`${field} file:mr-3 file:rounded-full file:border-0 file:bg-teal-800 file:px-3 file:py-1 file:font-ui file:text-xs file:tracking-wide file:text-white file:hover:bg-teal-950 file:active:bg-teal-950`}
             onChange={(e) => {
               void onPhotos(e.target.files);
               e.target.value = "";
@@ -628,7 +628,7 @@ export function IssueForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-full bg-teal-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950 disabled:opacity-60"
+        className="rounded-full bg-teal-800 px-5 py-2.5 font-ui text-sm font-medium tracking-wide text-white hover:bg-teal-950 active:bg-teal-950 disabled:opacity-60"
       >
         {submitting
           ? editing

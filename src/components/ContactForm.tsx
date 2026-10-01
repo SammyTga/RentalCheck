@@ -101,7 +101,7 @@ export function ContactForm() {
       </label>
       <button
         type="submit"
-        className="rounded-full bg-teal-800 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950"
+        className="rounded-full bg-teal-800 px-5 py-2.5 font-ui text-sm font-medium tracking-wide text-white hover:bg-teal-950 active:bg-teal-950"
       >
         Send message
       </button>
