@@ -1,8 +1,9 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import Link from "next/link";
 import type { Issue } from "@/lib/types";
-import { formatAddress } from "@/lib/types";
+import { formatAddress, propertySlug } from "@/lib/types";
 
 type Message = {
   id: string;
@@ -12,6 +13,35 @@ type Message = {
   created_at: string;
   read?: boolean;
 };
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function formatPosted(iso: string) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+}
+
+function groupIssues(issues: Issue[]) {
+  const groups = new Map<string, Issue[]>();
+  for (const issue of issues) {
+    const key = propertySlug(issue);
+    const list = groups.get(key) ?? [];
+    list.push(issue);
+    groups.set(key, list);
+  }
+  return [...groups.entries()]
+    .map(([slug, list]) => {
+      const sorted = [...list].sort(
+        (a, b) => new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime(),
+      );
+      return { slug, issues: sorted, address: formatAddress(sorted[0]) };
+    })
+    .sort(
+      (a, b) =>
+        new Date(b.issues[0].postedAt).getTime() - new Date(a.issues[0].postedAt).getTime(),
+    );
+}
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
@@ -139,35 +169,50 @@ export default function AdminPage() {
 
       <section>
         <h3 className="font-medium">Posts</h3>
-        <div className="mt-3 space-y-3">
-          {issues.map((issue) => (
-            <div
-              key={issue.id}
-              className={`min-w-0 overflow-hidden rounded-xl border border-stone-200 p-4 text-base ${
-                issue.hidden
-                  ? "bg-stone-200 text-stone-600"
-                  : "bg-white text-stone-900"
-              }`}
-            >
-              <p className="break-long font-medium">{issue.title}</p>
-              <p>{formatAddress(issue)}</p>
-              <p className="mt-1 text-sm">
-                {issue.status}
-                {issue.hidden ? " · hidden" : ""}
+        <div className="mt-3 space-y-4">
+          {groupIssues(issues).map((group) => (
+            <div key={group.slug} className="rounded-2xl border border-stone-300 bg-stone-100/70 p-3">
+              <p className="break-long px-1 font-medium text-stone-900">{group.address}</p>
+              <p className="px-1 text-sm text-stone-600">
+                {group.issues.length} post{group.issues.length === 1 ? "" : "s"}
               </p>
-              <div className="mt-2 flex gap-2">
-                {issue.hidden ? (
-                  <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(issue.id, "unhide")}>
-                    Unhide
-                  </button>
-                ) : (
-                  <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(issue.id, "hide")}>
-                    Hide
-                  </button>
-                )}
-                <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => setPending({ id: issue.id, type: "issue" })}>
-                  Delete
-                </button>
+              <div className="mt-2 space-y-2">
+                {group.issues.map((issue) => (
+                  <div
+                    key={issue.id}
+                    className={`min-w-0 overflow-hidden rounded-xl border border-stone-200 p-4 text-base ${
+                      issue.hidden
+                        ? "bg-stone-200 text-stone-600"
+                        : "bg-white text-stone-900"
+                    }`}
+                  >
+                    <p className="break-long font-medium">{issue.title}</p>
+                    <p className="mt-1 text-sm">
+                      Posted {formatPosted(issue.postedAt)} · {issue.status}
+                      {issue.hidden ? " · hidden" : ""}
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-3">
+                      <Link
+                        href={`/issues/${issue.id}`}
+                        className="underline hover:text-teal-800 active:text-teal-800"
+                      >
+                        View post
+                      </Link>
+                      {issue.hidden ? (
+                        <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(issue.id, "unhide")}>
+                          Unhide
+                        </button>
+                      ) : (
+                        <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => act(issue.id, "hide")}>
+                          Hide
+                        </button>
+                      )}
+                      <button className="cursor-pointer underline hover:text-teal-800 active:text-teal-800" onClick={() => setPending({ id: issue.id, type: "issue" })}>
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}

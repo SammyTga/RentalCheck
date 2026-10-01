@@ -83,6 +83,7 @@ export default function IssuePage() {
         First reported to landlord {formatDate(issue.reportedToLandlordOn)} by{" "}
         {issue.handle || "Anonymous"}
       </p>
+      <p className="mt-1 text-sm text-stone-800">Posted {formatDate(issue.postedAt)}</p>
       {issue.status === "resolved" && (
         <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
           <p>
