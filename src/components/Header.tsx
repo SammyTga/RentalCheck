@@ -17,7 +17,7 @@ export function Header() {
             className="h-14 w-auto max-w-[min(100%,360px)] sm:h-20 sm:max-w-[min(70%,575px)]"
           />
         </Link>
-        <nav className="flex w-full flex-wrap items-center justify-start gap-x-4 gap-y-2 font-ui text-sm tracking-wide sm:w-auto sm:gap-x-3">
+        <nav className="flex w-full flex-wrap items-center justify-start gap-x-4 gap-y-2 font-sans text-sm sm:w-auto sm:gap-x-3">
           {pathname !== "/about" && (
             <Link href="/about" className="font-medium text-teal-800 hover:text-teal-950 active:text-teal-950">
               About

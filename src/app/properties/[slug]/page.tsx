@@ -63,7 +63,7 @@ export default function PropertyPage() {
             city: sample.city,
             postcode: sample.postcode || "",
           }).toString()}`}
-          className="inline-block rounded-full bg-teal-800 px-4 py-2 font-ui text-sm font-medium tracking-wide text-white hover:bg-teal-950 active:bg-teal-950"
+          className="inline-block rounded-full bg-teal-800 px-4 py-2 font-sans text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950"
         >
           Log another issue here
         </Link>

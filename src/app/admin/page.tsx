@@ -113,7 +113,7 @@ export default function AdminPage() {
             className="w-full rounded-lg border border-stone-300 px-3 py-2"
           />
           {error && <p className="text-sm text-red-700">{error}</p>}
-          <button className="rounded-full bg-teal-800 px-4 py-2 font-ui text-sm tracking-wide text-white hover:bg-teal-950 active:bg-teal-950">
+          <button className="rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950">
             Sign in
           </button>
         </form>
@@ -231,7 +231,7 @@ export default function AdminPage() {
               </button>
               <button
                 type="button"
-                className="rounded-full bg-teal-800 px-4 py-2 font-ui text-sm tracking-wide text-white hover:bg-teal-950 active:bg-teal-950"
+                className="rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950"
                 onClick={async () => {
                   await act(pending.id, "delete", pending.type);
                   setPending(null);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Atkinson_Hyperlegible, Fraunces } from "next/font/google";
+import { Fraunces, Source_Sans_3 } from "next/font/google";
 import { Header } from "@/components/Header";
 import "./globals.css";
 
@@ -8,10 +8,10 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
 });
 
-const ui = Atkinson_Hyperlegible({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-atkinson",
+  weight: ["400", "600", "700"],
+  variable: "--font-source",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +22,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${ui.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${sourceSans.variable} h-full antialiased`}
+    >
       <body className="flex min-h-dvh flex-col overflow-x-hidden bg-stone-50 font-sans text-stone-900">
         <script
           dangerouslySetInnerHTML={{
