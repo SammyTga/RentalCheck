@@ -356,7 +356,7 @@ export function IssueForm({
           name="title"
           required
           maxLength={100}
-          placeholder="e.g. Damp in the sleepout"
+          placeholder="e.g. Mould on the bedroom walls"
           className={field}
           defaultValue={draft?.title ?? existing?.title ?? ""}
         />
@@ -455,7 +455,7 @@ export function IssueForm({
           required
           rows={7}
           maxLength={2000}
-          placeholder="e.g. Leak under the kitchen sink since March. Reported twice, still dripping."
+          placeholder="e.g. The latch is broken, so it stays open. Reported in May, still not fixed and the room gets damp."
           className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
@@ -533,7 +533,7 @@ export function IssueForm({
 
       <fieldset>
         <legend className="text-sm font-medium text-stone-800">
-          How was this responded to? (optional — pick any that apply)
+          How was this issue responded to? (optional — pick any that apply)
         </legend>
         <div className="mt-2 space-y-2">
           {RESPONSES.map((r) => (
