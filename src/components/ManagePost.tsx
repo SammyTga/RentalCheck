@@ -22,7 +22,8 @@ export function ManagePost({
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
-    const action = submitter?.value || "resolve";
+    const action = submitter?.value;
+    if (!action) return;
 
     if (!code.trim()) {
       setMessage("Enter your secret code.");
@@ -108,6 +109,9 @@ export function ManagePost({
             setMessage("");
           }}
           placeholder="Your secret code"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") e.preventDefault();
+          }}
           className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm"
         />
         {message && <p className="text-sm text-red-700">{message}</p>}
