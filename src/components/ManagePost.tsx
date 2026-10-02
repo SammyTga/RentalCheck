@@ -89,7 +89,7 @@ export function ManagePost({
       <h3 className="font-medium text-stone-900">Manage this post</h3>
       <p className="mt-1 text-sm text-stone-600">
         Enter the secret code shown when you published. You need it to edit or
-        delete the post, or mark it as resolved.
+        delete the post, or mark it as resolved. The code is case sensitive.
       </p>
       <form className="mt-4 space-y-3" onSubmit={onSubmit} noValidate autoComplete="off">
         <input
