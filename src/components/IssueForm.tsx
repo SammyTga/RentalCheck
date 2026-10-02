@@ -356,7 +356,7 @@ export function IssueForm({
           name="title"
           required
           maxLength={100}
-          placeholder="e.g. Bedroom window will not close"
+          placeholder="e.g. Leaking kitchen ceiling"
           className={field}
           defaultValue={draft?.title ?? existing?.title ?? ""}
         />
@@ -455,7 +455,7 @@ export function IssueForm({
           required
           rows={7}
           maxLength={2000}
-          placeholder="e.g. The latch is broken, so it stays open. Reported in May, still not fixed and the room gets damp."
+          placeholder="e.g. Water comes through the kitchen ceiling when it rains. Reported on 12 May. Still not repaired."
           className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
