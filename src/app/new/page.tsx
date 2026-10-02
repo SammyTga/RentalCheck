@@ -15,9 +15,6 @@ export default function NewIssuePage() {
       </h2>
       <p className="mt-2 mb-6 text-stone-600">
         No account needed. Posts are public and can be anonymous.
-        <br />
-        You will be given a secret code once done. One issue per post. Two
-        issues = two posts. Grouped by address.
       </p>
       <Suspense>
         <IssueForm />
