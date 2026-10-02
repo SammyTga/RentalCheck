@@ -64,7 +64,6 @@ export function IssueForm({
     };
   }, []);
 
-
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(DRAFT_KEY);
@@ -109,7 +108,6 @@ export function IssueForm({
     const data: Record<string, string> = {};
     for (const [key, value] of fd.entries()) {
       if (key === "confirmed" || key === "manageCode") continue;
-      if (key === "reportedToLandlordOn" && String(value) > todayNz) continue;
       if (key === "reportedToLandlordOn" && String(value) > todayNz) continue;
       if (key === "responses") {
         data.responses = JSON.stringify(fd.getAll("responses").map(String));
@@ -163,6 +161,7 @@ export function IssueForm({
     setError("");
     setConfirmed(false);
     const next = [...photos];
+    let skipped = false;
     for (const file of Array.from(files)) {
       if (next.length >= 4) break;
       if (!file.type.startsWith("image/")) {
@@ -170,11 +169,17 @@ export function IssueForm({
         continue;
       }
       try {
-        next.push(await shrinkPhoto(file));
+        const photo = await shrinkPhoto(file);
+        if (next.includes(photo)) {
+          skipped = true;
+          continue;
+        }
+        next.push(photo);
       } catch {
         showError("Could not read one of the photos. Try another file.");
       }
     }
+    if (skipped) showError("That photo is already on this post.");
     setPhotos(next.slice(0, 4));
   }
 
@@ -322,20 +327,20 @@ export function IssueForm({
 
   return (
     <form
-        onSubmit={onSubmit}
-        onInput={(e) => {
-          persistDraft(e.currentTarget);
-          const t = e.target as HTMLElement | null;
-          const name = t?.getAttribute("name");
-          if (name !== "reportedToLandlordOn") {
-            setDateError("");
-          }
-          if (name && name !== "confirmed") {
-            setConfirmed(false);
-          }
-        }}
-        className="space-y-5"
-      >
+      onSubmit={onSubmit}
+      onInput={(e) => {
+        persistDraft(e.currentTarget);
+        const t = e.target as HTMLElement | null;
+        const name = t?.getAttribute("name");
+        if (name !== "reportedToLandlordOn") {
+          setDateError("");
+        }
+        if (name && name !== "confirmed") {
+          setConfirmed(false);
+        }
+      }}
+      className="space-y-5"
+    >
       {error && (
         <p
           ref={errorRef}
@@ -455,7 +460,7 @@ export function IssueForm({
           required
           rows={7}
           maxLength={2000}
-          placeholder="e.g. Water comes through the kitchen ceiling when it rains. Reported on 12 May. Still not repaired. Worried about mold developing or rot setting in, have kids and elderly in the house. Been getting the cold shoulder from the landlord."
+          placeholder="e.g. Water comes through the kitchen ceiling when it rains. Reported in May. Still not repaired. Worried about mold developing or rot setting in. There are kids and elderly in the house. The landlord doesn't want to hear about it."
           className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
