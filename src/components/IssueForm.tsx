@@ -455,7 +455,7 @@ export function IssueForm({
           required
           rows={7}
           maxLength={2000}
-          placeholder="e.g. Water comes through the kitchen ceiling when it rains. Reported on 12 May. Still not repaired."
+          placeholder="e.g. Water comes through the kitchen ceiling when it rains. Reported on 12 May. Still not repaired. Worried about mold developing or rot setting in, have kids and elderly in the house. Been getting the cold shoulder from the landlord."
           className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
