@@ -120,7 +120,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="edit"
-            className="w-full rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
+            className="w-full rounded-full bg-teal-800 px-3 py-1 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
           >
             Edit post
           </button>
@@ -128,7 +128,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="resolve"
-            className="w-full rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
+            className="w-full rounded-full bg-teal-800 px-3 py-1 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
           >
             Mark resolved
           </button>
@@ -136,7 +136,7 @@ export function ManagePost({
             type="submit"
             name="action"
             value="delete"
-            className="w-full rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
+            className="w-full rounded-full bg-teal-800 px-3 py-1 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950 sm:w-auto"
           >
             Delete post
           </button>
@@ -176,7 +176,7 @@ export function ManagePost({
             <div className="mt-5 flex justify-end gap-2">
               <button
                 type="button"
-                className="rounded-full border border-stone-300 px-4 py-2 text-sm"
+                className="rounded-full border border-stone-300 px-3 py-1 text-sm"
                 onClick={() => {
                   setPending(null);
                   setResolvedNote("");
@@ -187,7 +187,7 @@ export function ManagePost({
               </button>
               <button
                 type="button"
-                className="rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950"
+                className="rounded-full bg-teal-800 px-3 py-1 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950"
                 onClick={runPending}
               >
                 {pending === "delete" ? "Delete post" : "Mark resolved"}

@@ -36,14 +36,14 @@ export function Header() {
           {onNew ? (
             <span
               aria-hidden
-              className="invisible rounded-full px-3 py-1.5 font-medium sm:hidden"
+              className="invisible rounded-full px-3 py-1 font-medium sm:hidden"
             >
               Log an issue
             </span>
           ) : (
             <Link
               href="/new"
-              className="rounded-full bg-teal-800 px-3 py-1.5 font-medium text-white hover:bg-teal-950 active:bg-teal-950 sm:px-4 sm:py-2"
+              className="rounded-full bg-teal-800 px-3 py-1 font-medium text-white hover:bg-teal-950 active:bg-teal-950"
             >
               Log an issue
             </Link>

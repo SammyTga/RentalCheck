@@ -143,7 +143,7 @@ export default function AdminPage() {
             className="w-full rounded-lg border border-stone-300 px-3 py-2"
           />
           {error && <p className="text-sm text-red-700">{error}</p>}
-          <button className="rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950">
+          <button className="rounded-full bg-teal-800 px-3 py-1 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950">
             Sign in
           </button>
         </form>
@@ -269,14 +269,14 @@ export default function AdminPage() {
             <div className="mt-5 flex justify-end gap-2">
               <button
                 type="button"
-                className="rounded-full border border-stone-300 px-4 py-2 text-sm active:bg-stone-200"
+                className="rounded-full border border-stone-300 px-3 py-1 text-sm active:bg-stone-200"
                 onClick={() => setPending(null)}
               >
                 Cancel
               </button>
               <button
                 type="button"
-                className="rounded-full bg-teal-800 px-4 py-2 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950"
+                className="rounded-full bg-teal-800 px-3 py-1 font-sans text-sm text-white hover:bg-teal-950 active:bg-teal-950"
                 onClick={async () => {
                   await act(pending.id, "delete", pending.type);
                   setPending(null);

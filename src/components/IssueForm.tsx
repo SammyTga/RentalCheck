@@ -64,6 +64,7 @@ export function IssueForm({
     };
   }, []);
 
+
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(DRAFT_KEY);
@@ -108,6 +109,7 @@ export function IssueForm({
     const data: Record<string, string> = {};
     for (const [key, value] of fd.entries()) {
       if (key === "confirmed" || key === "manageCode") continue;
+      if (key === "reportedToLandlordOn" && String(value) > todayNz) continue;
       if (key === "reportedToLandlordOn" && String(value) > todayNz) continue;
       if (key === "responses") {
         data.responses = JSON.stringify(fd.getAll("responses").map(String));
@@ -327,20 +329,20 @@ export function IssueForm({
 
   return (
     <form
-      onSubmit={onSubmit}
-      onInput={(e) => {
-        persistDraft(e.currentTarget);
-        const t = e.target as HTMLElement | null;
-        const name = t?.getAttribute("name");
-        if (name !== "reportedToLandlordOn") {
-          setDateError("");
-        }
-        if (name && name !== "confirmed") {
-          setConfirmed(false);
-        }
-      }}
-      className="space-y-5"
-    >
+        onSubmit={onSubmit}
+        onInput={(e) => {
+          persistDraft(e.currentTarget);
+          const t = e.target as HTMLElement | null;
+          const name = t?.getAttribute("name");
+          if (name !== "reportedToLandlordOn") {
+            setDateError("");
+          }
+          if (name && name !== "confirmed") {
+            setConfirmed(false);
+          }
+        }}
+        className="space-y-5"
+      >
       {error && (
         <p
           ref={errorRef}
@@ -446,7 +448,7 @@ export function IssueForm({
           <input
             name="roomDetail"
             maxLength={80}
-            placeholder="e.g. downstairs shower, bedroom 2"
+            placeholder="e.g. downstairs shower, back yard fence"
             className={field}
             defaultValue={draft?.roomDetail ?? existing?.roomDetail ?? ""}
           />
@@ -586,7 +588,7 @@ export function IssueForm({
             type="file"
             accept="image/*"
             multiple
-            className={`${field} file:mr-3 file:rounded-full file:border-0 file:bg-teal-800 file:px-3 file:py-1 file:font-sans file:text-xs file:text-white file:hover:bg-teal-950 file:active:bg-teal-950`}
+            className={`${field} file:mr-3 file:rounded-full file:border-0 file:bg-teal-800 file:px-2.5 file:py-0.5 file:font-sans file:text-xs file:text-white file:hover:bg-teal-950 file:active:bg-teal-950`}
             onChange={(e) => {
               void onPhotos(e.target.files);
               e.target.value = "";
@@ -626,7 +628,7 @@ export function IssueForm({
         />
         <span>
           This is an issue at the above rental address that has already
-          been reported to the relevant individual. I will not post
+          been reported to the relevant individual. I will not post the
           names or contact details of landlords/property managers. The
           address will be public on RentalCheck.co.nz.
         </span>
@@ -635,7 +637,7 @@ export function IssueForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-full bg-teal-800 px-5 py-2.5 font-sans text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950 disabled:opacity-60"
+        className="rounded-full bg-teal-800 px-3 py-1 font-sans text-sm font-medium text-white hover:bg-teal-950 active:bg-teal-950 disabled:opacity-60"
       >
         {submitting
           ? editing
