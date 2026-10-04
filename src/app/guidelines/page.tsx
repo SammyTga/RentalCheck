@@ -14,14 +14,14 @@ export default function GuidelinesPage() {
           Only log an issue on this site if it has first been reported and gone
           unresolved.
         </li>
-        <li>Use the exact rental address so others can look up that property.</li>
+        <li>Use the exact rental address so others can look up the property.</li>
         <li>
           One issue per post. If the same address has two different issues,
           please post twice.
         </li>
         <li>Stick to facts: what is wrong and what you asked for.</li>
         <li>
-          Do not post names or contact details of landlords/property managers.
+          Do not post the names or contact details of landlords/property managers.
         </li>
         <li>Response tags describe how the issue was handled.</li>
         <li>
