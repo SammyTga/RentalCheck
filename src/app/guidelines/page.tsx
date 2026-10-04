@@ -23,10 +23,7 @@ export default function GuidelinesPage() {
         <li>
           Do not post names or contact details of landlords/property managers.
         </li>
-        <li>
-          Response tags describe how the issue was handled, not a general
-          rating of a person.
-        </li>
+        <li>Response tags describe how the issue was handled.</li>
         <li>
           You may add up to four photos of the issue. Do not post photos that
           show children or personal documents.
