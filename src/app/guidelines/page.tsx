@@ -19,7 +19,7 @@ export default function GuidelinesPage() {
           One issue per post. If the same address has two different issues,
           please post twice.
         </li>
-        <li>Stick to facts: what is wrong and what you asked for.</li>
+        <li>Stick to the facts: what is wrong and what happened next.</li>
         <li>
           Do not post the names or contact details of landlords/property managers.
         </li>
