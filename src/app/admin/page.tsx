@@ -53,6 +53,7 @@ export default function AdminPage() {
     id: string;
     type: "issue" | "message";
   } | null>(null);
+  const [postQuery, setPostQuery] = useState("");
 
   async function load() {
     const res = await fetch("/api/admin/issues", { cache: "no-store" });
