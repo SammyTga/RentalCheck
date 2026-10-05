@@ -57,7 +57,7 @@ export default function IssuePage() {
           {displayCategory(issue.category)}
         </span>
         {issue.hidden && (
-          <span className="rounded-full bg-red-600 px-2 py-0.5 text-sm font-medium text-white">
+          <span className="rounded-full bg-violet-700 px-2 py-0.5 text-sm font-medium text-white">
             Hidden
           </span>
         )}
