@@ -628,8 +628,7 @@ export function IssueForm({
         />
         <span>
           This is an issue at the above rental address that has already
-          been reported to the relevant individual. I will not post the
-          names or contact details of landlords/property managers. The
+          been reported. I will not post names or contact details. The
           address will be public on RentalCheck.co.nz.
         </span>
       </label>

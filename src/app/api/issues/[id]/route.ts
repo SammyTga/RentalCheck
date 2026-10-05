@@ -10,7 +10,13 @@ import { LIMITS, tooLong, validateIssueFields, validateResolvedNote } from "@/li
 import type { Issue } from "@/lib/types";
 
 function codesMatch(stored: string, given: string) {
-  return stored.trim().toUpperCase() === given.trim().toUpperCase();
+  const a = stored.trim();
+  const b = given.trim();
+  if (a === b) return { ok: true as const };
+  if (a.toUpperCase() === b.toUpperCase()) {
+    return { ok: false as const, message: "The code is case sensitive." };
+  }
+  return { ok: false as const, message: "That code does not match this post." };
 }
 
 export async function GET(
@@ -46,8 +52,9 @@ export async function PATCH(
     fields?: Partial<Issue>;
   };
 
-  if (!codesMatch(row.manage_code, String(body.code || ""))) {
-    return Response.json({ error: "That code does not match this post." }, { status: 403 });
+  const match = codesMatch(row.manage_code, String(body.code || ""));
+  if (!match.ok) {
+    return Response.json({ error: match.message }, { status: 403 });
   }
 
   if (body.action === "check") {

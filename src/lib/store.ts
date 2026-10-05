@@ -6,7 +6,13 @@ const KEY = "propertycheck-issues-v3";
 let live: boolean | null = null;
 
 function codesMatch(stored: string, given: string) {
-  return stored.trim().toUpperCase() === given.trim().toUpperCase();
+  const a = stored.trim();
+  const b = given.trim();
+  if (a === b) return { ok: true as const };
+  if (a.toUpperCase() === b.toUpperCase()) {
+    return { ok: false as const, message: "The code is case sensitive." };
+  }
+  return { ok: false as const, message: "That code does not match this post." };
 }
 
 async function timedFetch(url: string) {
@@ -126,8 +132,9 @@ export async function updateIssue(
   const index = all.findIndex((i) => i.id === id);
   if (index === -1) return { ok: false, message: "Post not found." };
   const current = all[index];
-  if (!codesMatch(current.manageCode, code)) {
-    return { ok: false, message: "That code does not match this post." };
+  const match = codesMatch(current.manageCode, code);
+  if (!match.ok) {
+    return { ok: false, message: match.message };
   }
   const next = { ...current, ...fields };
   all[index] = next;
@@ -154,8 +161,9 @@ export async function manageIssue(
   const index = all.findIndex((i) => i.id === id);
   if (index === -1) return { ok: false, message: "Post not found." };
   const issue = all[index];
-  if (!codesMatch(issue.manageCode, code)) {
-    return { ok: false, message: "That code does not match this post." };
+  const match = codesMatch(issue.manageCode, code);
+  if (!match.ok) {
+    return { ok: false, message: match.message };
   }
   if (action === "delete") {
     all[index] = { ...issue, hidden: true };
@@ -182,5 +190,5 @@ export async function codeLooksValid(id: string, code: string) {
     return res.ok;
   }
   const issue = read().find((i) => i.id === id);
-  return !!issue && codesMatch(issue.manageCode, code);
+  return !!issue && codesMatch(issue.manageCode, code).ok;
 }
