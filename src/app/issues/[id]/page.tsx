@@ -56,6 +56,11 @@ export default function IssuePage() {
         <span className="rounded-full bg-stone-200 px-2 py-0.5 text-sm font-medium text-stone-800">
           {displayCategory(issue.category)}
         </span>
+        {issue.hidden && (
+          <span className="rounded-full bg-stone-300 px-2 py-0.5 text-sm font-medium text-stone-800">
+            Hidden
+          </span>
+        )}
         {issue.status === "resolved" && (
           <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-sm font-medium text-emerald-800">
             Resolved

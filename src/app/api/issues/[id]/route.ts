@@ -1,3 +1,4 @@
+import { isAdmin } from "@/lib/admin";
 import {
   dbConfigured,
   dbDeleteIssue,
@@ -29,7 +30,7 @@ export async function GET(
   }
   const { id } = await params;
   const row = await dbGet(id);
-  if (!row || row.hidden) {
+  if (!row || (row.hidden && !(await isAdmin()))) {
     return Response.json({ error: "Not found" }, { status: 404 });
   }
   return Response.json({ issue: toIssue(row) });
