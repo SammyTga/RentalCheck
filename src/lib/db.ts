@@ -165,7 +165,23 @@ export async function dbUpdate(id: string, patch: Record<string, unknown>) {
 }
 
 export async function dbDeleteIssue(id: string) {
+  const row = await dbGet(id, true);
+  if (row?.photo_urls?.length) await deleteStoredPhotos(row.photo_urls);
   await rest(`issues?id=eq.${id}`, { method: "DELETE", headers: headers({ Prefer: "return=minimal" }) });
+}
+
+async function deleteStoredPhotos(urls: string[]) {
+  for (const src of urls) {
+    const name = src.split("/issue-photos/")[1];
+    if (!name) continue;
+    await fetch(`${url()}/storage/v1/object/issue-photos/${decodeURIComponent(name)}`, {
+      method: "DELETE",
+      headers: {
+        apikey: key(),
+        Authorization: `Bearer ${key()}`,
+      },
+    });
+  }
 }
 
 export async function dbDeleteContact(id: string) {
