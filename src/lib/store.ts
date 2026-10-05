@@ -166,7 +166,7 @@ export async function manageIssue(
     return { ok: false, message: match.message };
   }
   if (action === "delete") {
-    all[index] = { ...issue, hidden: true };
+    all.splice(index, 1);
     write(all);
     return { ok: true, message: "Post deleted." };
   }

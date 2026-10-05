@@ -1,5 +1,6 @@
 import {
   dbConfigured,
+  dbDeleteIssue,
   dbGet,
   dbUpdate,
   fromFields,
@@ -62,7 +63,7 @@ export async function PATCH(
   }
 
   if (body.action === "delete") {
-    await dbUpdate(id, { hidden: true });
+    await dbDeleteIssue(id);
     return Response.json({ ok: true, message: "Post deleted." });
   }
 

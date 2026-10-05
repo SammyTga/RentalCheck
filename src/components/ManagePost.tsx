@@ -154,7 +154,7 @@ export function ManagePost({
             )}
             <p className={pending === "delete" ? "mt-2 text-sm text-stone-600" : "text-sm text-stone-600"}>
               {pending === "delete"
-                ? "It will be removed from the public feed."
+                ? "It will be removed from the site. This cannot be undone."
                 : "This post stays public with a resolved label and your note."}
             </p>
             {pending === "resolve" && (
