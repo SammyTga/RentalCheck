@@ -169,8 +169,35 @@ export default function AdminPage() {
 
       <section>
         <h3 className="font-medium">Posts</h3>
+        <input
+          value={postQuery}
+          onChange={(e) => setPostQuery(e.target.value)}
+          placeholder="Search address or title"
+          className="mt-3 w-full rounded-lg border border-stone-300 px-3 py-2 text-base"
+        />
         <div className="mt-3 space-y-4">
-          {groupIssues(issues).map((group) => (
+          {groupIssues(issues)
+            .filter((group) => {
+              const q = postQuery.trim().toLowerCase();
+              if (!q) return true;
+              const blob = [
+                group.address,
+                ...group.issues.flatMap((issue) => [
+                  issue.title,
+                  issue.streetName,
+                  issue.streetNumber,
+                  issue.city,
+                  issue.area,
+                  issue.unit,
+                  issue.postcode,
+                ]),
+              ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
+              return blob.includes(q);
+            })
+            .map((group) => (
             <div key={group.slug} className="rounded-2xl border border-stone-300 bg-stone-100/70 p-3">
               <p className="break-long px-1 font-medium text-stone-900">{group.address}</p>
               <p className="px-1 text-sm text-stone-600">
@@ -217,6 +244,10 @@ export default function AdminPage() {
             </div>
           ))}
           {issues.length === 0 && <p className="text-stone-500">No posts yet.</p>}
+          {issues.length > 0 && postQuery.trim() && groupIssues(issues).filter((group) => {
+            const q = postQuery.trim().toLowerCase();
+            return [group.address, ...group.issues.flatMap((issue) => [issue.title, issue.streetName, issue.streetNumber, issue.city, issue.area, issue.unit, issue.postcode])].filter(Boolean).join(" ").toLowerCase().includes(q);
+          }).length === 0 && <p className="text-stone-500">No matching posts.</p>}
         </div>
       </section>
 
