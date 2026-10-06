@@ -394,7 +394,7 @@ export function IssueForm({
         </label>
         <label className="block">
           <span className="text-sm font-medium text-stone-800">
-            Date first reported to landlord / property manager *
+            Date first reported to landlord/property manager *
           </span>
           <input
             type="date"
