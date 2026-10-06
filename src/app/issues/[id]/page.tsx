@@ -52,7 +52,10 @@ export default function IssuePage() {
         </Link>
       </p>
       <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-4 sm:p-6">
-      <div className="flex flex-wrap items-center gap-2">
+      <p className="text-sm text-stone-800">
+        Posted {formatDate(issue.postedAt)} by {issue.handle || "Anonymous"}
+      </p>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="rounded-full bg-stone-200 px-2 py-0.5 text-sm font-medium text-stone-800">
           {displayCategory(issue.category)}
         </span>
@@ -85,10 +88,8 @@ export default function IssuePage() {
         </p>
       )}
       <p className="mt-2 text-sm text-stone-800">
-        First reported to landlord/property manager {formatDate(issue.reportedToLandlordOn)} by{" "}
-        {issue.handle || "Anonymous"}
+        First reported to landlord/property manager {formatDate(issue.reportedToLandlordOn)}
       </p>
-      <p className="mt-1 text-sm text-stone-800">Posted {formatDate(issue.postedAt)}</p>
       {issue.status === "resolved" && (
         <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
           <p>
