@@ -85,7 +85,7 @@ export default function IssuePage() {
         </p>
       )}
       <p className="mt-2 text-sm text-stone-800">
-        First reported to landlord {formatDate(issue.reportedToLandlordOn)} by{" "}
+        First reported to landlord / property manager {formatDate(issue.reportedToLandlordOn)} by{" "}
         {issue.handle || "Anonymous"}
       </p>
       <p className="mt-1 text-sm text-stone-800">Posted {formatDate(issue.postedAt)}</p>
