@@ -63,13 +63,13 @@ export function validateIssueFields(fields: {
     return "Unit should look like 2, 12A or A2.";
   }
   if (!STREET_NO.test(streetNumber)) return "Street number should look like 44 or 44A.";
-  if (!STREET_NAME.test(streetName) || letterCount(streetName) < 3) {
+  if (!STREET_NAME.test(streetName) || !HAS_LETTER.test(streetName)) {
     return "Street name should be a real street name.";
   }
-  if (area && (!PLACE_NAME.test(area) || letterCount(area) < 3)) {
+  if (area && !PLACE_NAME.test(area)) {
     return "Suburb should be letters and spaces only.";
   }
-  if (!PLACE_NAME.test(city) || letterCount(city) < 3) {
+  if (!PLACE_NAME.test(city)) {
     return "City should be letters and spaces only.";
   }
   if (postcode && !POSTCODE.test(postcode)) {
