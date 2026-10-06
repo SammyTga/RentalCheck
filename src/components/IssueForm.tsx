@@ -474,7 +474,6 @@ export function IssueForm({
           <input
             name="unit"
             maxLength={5}
-            maxLength={20}
             placeholder="e.g. 2a"
             className={field}
             defaultValue={draft?.unit ?? existing?.unit ?? prefill.get("unit") ?? ""}
@@ -486,7 +485,6 @@ export function IssueForm({
             name="streetNumber"
             required
             maxLength={6}
-            maxLength={20}
             placeholder="e.g. 44"
             className={field}
             defaultValue={draft?.streetNumber ?? existing?.streetNumber ?? prefill.get("streetNumber") ?? ""}
