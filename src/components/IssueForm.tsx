@@ -473,6 +473,7 @@ export function IssueForm({
           <span className="text-sm font-medium text-stone-800">Unit / flat</span>
           <input
             name="unit"
+            maxLength={5}
             maxLength={20}
             placeholder="e.g. 2a"
             className={field}
@@ -484,6 +485,7 @@ export function IssueForm({
           <input
             name="streetNumber"
             required
+            maxLength={6}
             maxLength={20}
             placeholder="e.g. 44"
             className={field}

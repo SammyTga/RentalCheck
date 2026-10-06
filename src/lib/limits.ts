@@ -19,9 +19,9 @@ export function tooLong(value: unknown, max: number) {
 }
 
 const PLACE_NAME = /^[\p{L}][\p{L}\s]*$/u;
-const STREET_NAME = /^[\p{L}\d][\p{L}\d\s'-]*$/u;
-const STREET_NO = /^(?=.*\d)[\dA-Za-z][\dA-Za-z\s./-]*$/;
-const UNIT = /^[\dA-Za-z][\dA-Za-z\s./-]*$/;
+const STREET_NAME = /^[\p{L}][\p{L}\d\s'-]*$/u;
+const STREET_NO = /^\d{1,5}[A-Za-z]?$/;
+const UNIT = /^(?:\d{1,3}[A-Za-z]{0,2}|[A-Za-z]{1,2}\d{0,3})$/;
 const POSTCODE = /^\d{4}$/;
 const HAS_LETTER = /\p{L}/u;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,15 +59,17 @@ export function validateIssueFields(fields: {
   if (roomDetail && !LABEL.test(roomDetail)) {
     return "More detail can only use letters, numbers and basic punctuation.";
   }
-  if (unit && !UNIT.test(unit)) return "Unit / flat can only use letters, numbers, / or -.";
+  if (unit && !UNIT.test(unit)) {
+    return "Unit should look like 2, 12A or A2.";
+  }
   if (!STREET_NO.test(streetNumber)) return "Street number should look like 44 or 44A.";
-  if (!STREET_NAME.test(streetName) || !HAS_LETTER.test(streetName)) {
+  if (!STREET_NAME.test(streetName) || letterCount(streetName) < 3) {
     return "Street name should be a real street name.";
   }
-  if (area && !PLACE_NAME.test(area)) {
+  if (area && (!PLACE_NAME.test(area) || letterCount(area) < 3)) {
     return "Suburb should be letters and spaces only.";
   }
-  if (!PLACE_NAME.test(city)) {
+  if (!PLACE_NAME.test(city) || letterCount(city) < 3) {
     return "City should be letters and spaces only.";
   }
   if (postcode && !POSTCODE.test(postcode)) {
