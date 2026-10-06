@@ -126,11 +126,11 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
               <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-2">
                 <Link
                   href={`/properties/${slug}`}
-                  className="font-semibold text-stone-900 underline decoration-stone-400 underline-offset-4 hover:text-teal-800 hover:decoration-teal-800 active:text-teal-800 active:decoration-teal-800"
+                  className="min-w-0 break-all font-semibold text-stone-900 underline decoration-stone-400 underline-offset-4 hover:text-teal-800 hover:decoration-teal-800 active:text-teal-800 active:decoration-teal-800"
                 >
                   {formatAddress(group[0])}
                 </Link>
-                <span className="text-xs font-medium text-stone-600">
+                <span className="shrink-0 whitespace-nowrap text-xs font-medium text-stone-600">
                   {groupCountLabel(group)}
                 </span>
               </div>

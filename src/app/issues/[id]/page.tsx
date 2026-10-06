@@ -56,7 +56,7 @@ export default function IssuePage() {
         Posted {formatDate(issue.postedAt)} by {issue.handle || "Anonymous"}
       </p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-stone-200 px-2 py-0.5 text-sm font-medium text-stone-800">
+        <span className="rounded-full bg-teal-800 px-2 py-0.5 text-sm font-medium text-white">
           {displayCategory(issue.category)}
         </span>
         {issue.hidden && (
