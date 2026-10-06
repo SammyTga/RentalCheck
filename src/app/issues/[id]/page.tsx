@@ -10,11 +10,26 @@ import { displayCategory, formatAddress, type Issue } from "@/lib/types";
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+function ordinal(day: number) {
+  const teen = day % 100;
+  if (teen >= 11 && teen <= 13) return `${day}th`;
+  switch (day % 10) {
+    case 1:
+      return `${day}st`;
+    case 2:
+      return `${day}nd`;
+    case 3:
+      return `${day}rd`;
+    default:
+      return `${day}th`;
+  }
+}
+
 function formatDate(iso: string) {
   const raw = iso.includes("T") ? iso : `${iso}T00:00:00`;
   const date = new Date(raw);
   if (Number.isNaN(date.getTime())) return iso;
-  return `${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  return `${ordinal(date.getDate())} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
 }
 
 export default function IssuePage() {
@@ -56,7 +71,7 @@ export default function IssuePage() {
         Posted {formatDate(issue.postedAt)} by {issue.handle || "Anonymous"}
       </p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-teal-800 px-2 py-0.5 text-sm font-medium text-white">
+        <span className="rounded-full bg-stone-600 px-2 py-0.5 text-sm font-medium text-white">
           {displayCategory(issue.category)}
         </span>
         {issue.hidden && (
