@@ -214,11 +214,13 @@ export default function AdminPage() {
               return blob.includes(q);
             })
             .map((group) => (
-            <div key={group.slug} className="rounded-2xl border border-stone-300 bg-stone-100/70 p-3">
-              <p className="break-long px-1 font-medium text-stone-900">{group.address}</p>
-              <p className="px-1 text-sm text-stone-600">
-                {group.issues.length} post{group.issues.length === 1 ? "" : "s"}
-              </p>
+            <div key={group.slug} className="min-w-0 overflow-hidden rounded-2xl border border-stone-300 bg-stone-100/70 p-3">
+              <div className="flex items-baseline justify-between gap-3 px-1">
+                <p className="min-w-0 break-all font-medium text-stone-900">{group.address}</p>
+                <p className="shrink-0 whitespace-nowrap text-sm text-stone-600">
+                  {group.issues.length} post{group.issues.length === 1 ? "" : "s"}
+                </p>
+              </div>
               <div className="mt-2 space-y-2">
                 {group.issues.map((issue) => (
                   <div
