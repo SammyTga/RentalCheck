@@ -628,7 +628,7 @@ export function IssueForm({
         />
         <span>
           This is an issue at the above rental address that has already been
-          reported. The address will be public on RentalCheck.co.nz.
+          reported. The address and post will be public on RentalCheck.co.nz.
         </span>
       </label>
 
