@@ -362,7 +362,7 @@ export function IssueForm({
         <input
           name="title"
           required
-          maxLength={100}
+          maxLength={70}
           placeholder="e.g. Leaking kitchen ceiling"
           className={field}
           defaultValue={draft?.title ?? existing?.title ?? ""}
@@ -447,7 +447,7 @@ export function IssueForm({
           <span className="text-sm font-medium text-stone-800">More detail (optional)</span>
           <input
             name="roomDetail"
-            maxLength={80}
+            maxLength={50}
             placeholder="e.g. downstairs shower, back yard fence"
             className={field}
             defaultValue={draft?.roomDetail ?? existing?.roomDetail ?? ""}
@@ -495,7 +495,7 @@ export function IssueForm({
           <input
             name="streetName"
             required
-            maxLength={80}
+            maxLength={40}
             placeholder="e.g. Chadwick Road"
             className={field}
             defaultValue={draft?.streetName ?? existing?.streetName ?? prefill.get("streetName") ?? ""}
@@ -508,7 +508,7 @@ export function IssueForm({
           <span className="text-sm font-medium text-stone-800">Suburb</span>
           <input
             name="area"
-            maxLength={60}
+            maxLength={30}
             placeholder="e.g. Greerton"
             className={field}
             defaultValue={draft?.area ?? existing?.area ?? prefill.get("area") ?? ""}
@@ -519,7 +519,7 @@ export function IssueForm({
           <input
             name="city"
             required
-            maxLength={60}
+            maxLength={30}
             placeholder="e.g. Tauranga"
             className={field}
             defaultValue={draft?.city ?? existing?.city ?? prefill.get("city") ?? ""}
