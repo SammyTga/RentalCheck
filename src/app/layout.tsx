@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Header />
         <main className="mx-auto w-full min-w-0 max-w-5xl flex-1 overflow-x-hidden px-4 py-8">{children}</main>
-        <footer className="mx-auto mt-auto w-full max-w-5xl px-4 py-8 text-left text-xs font-medium text-stone-600 sm:text-center">
+        <footer className="mx-auto mt-auto w-full max-w-5xl px-4 py-8 text-center text-xs font-medium text-stone-600">
           RentalCheck.co.nz{" "}
           <a
             href="/contact"
