@@ -25,6 +25,46 @@ function ordinal(day: number) {
   }
 }
 
+function Timeline({ issue }: { issue: Issue }) {
+  const resolved = issue.status === "resolved";
+  const steps = [
+    { label: "Reported", date: formatDate(issue.reportedToLandlordOn), tone: "done" as const },
+    { label: "Posted", date: formatDate(issue.postedAt), tone: "done" as const },
+    {
+      label: resolved ? "Resolved" : "Unresolved",
+      date: resolved && issue.resolvedAt ? formatDate(issue.resolvedAt) : "",
+      tone: resolved ? "resolved" as const : "open" as const,
+    },
+  ];
+
+  return (
+    <ol className="mt-5 grid grid-cols-3 gap-2">
+      {steps.map((step, index) => (
+        <li key={step.label} className="min-w-0">
+          <div className="flex items-center">
+            <span
+              className={`h-3.5 w-3.5 shrink-0 rounded-full ${
+                step.tone === "resolved"
+                  ? "bg-emerald-500 ring-4 ring-emerald-100"
+                  : step.tone === "open"
+                    ? "bg-red-600 ring-4 ring-red-100"
+                    : "bg-teal-800"
+              }`}
+            />
+            {index < steps.length - 1 && (
+              <span className="ml-2 h-0.5 flex-1 bg-stone-300" />
+            )}
+          </div>
+          <p className="mt-2 text-xs font-semibold text-stone-900">{step.label}</p>
+          {step.date ? (
+            <p className="mt-0.5 text-xs leading-4 text-stone-700">{step.date}</p>
+          ) : null}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function formatDate(iso: string) {
   const raw = iso.includes("T") ? iso : `${iso}T00:00:00`;
   const date = new Date(raw);
@@ -96,20 +136,12 @@ export default function IssuePage() {
           Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}
         </p>
       )}
-      <p className="mt-2 text-sm text-stone-800">
-        First reported to landlord / property manager {formatDate(issue.reportedToLandlordOn)}
-      </p>
-      {issue.status === "resolved" && (
-        <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-          <p>
-            This issue has been marked as resolved
-            {issue.resolvedAt ? ` on ${formatDate(issue.resolvedAt)}` : ""}.
-          </p>
-          {issue.resolvedNote ? (
-            <p className="mt-1 break-long">{issue.resolvedNote}</p>
-          ) : null}
+      <Timeline issue={issue} />
+      {issue.status === "resolved" && issue.resolvedNote ? (
+        <div className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
+          <p className="break-long">{issue.resolvedNote}</p>
         </div>
-      )}
+      ) : null}
       <div className="mt-6 break-long whitespace-pre-wrap text-base leading-7 text-stone-800">
         {issue.description}
       </div>
