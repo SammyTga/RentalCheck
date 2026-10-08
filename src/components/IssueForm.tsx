@@ -462,7 +462,7 @@ export function IssueForm({
           required
           rows={7}
           maxLength={2000}
-          placeholder="e.g. Water comes through the kitchen ceiling when it rains. Reported in May. Still not repaired. Worried about mold developing or rot setting in. There are kids and elderly in the house. The landlord doesn't want to hear about it."
+          placeholder="e.g. Water is leaking through the kitchen ceiling when it rains. Reported in May. Still not repaired."
           className={`${field} max-h-48 resize-y overflow-y-auto`}
           defaultValue={draft?.description ?? existing?.description ?? ""}
         />
