@@ -20,7 +20,7 @@ export default function GuidelinesPage() {
           please post twice.
         </li>
         <li>Stick to the facts: what is wrong and what happened next.</li>
-        <li>Response tags describe how the landlord/property manager responded.</li>
+        <li>Response tags describe how the landlord / property manager responded.</li>
         <li>
           You may add up to four photos of the issue. Do not post photos that
           show children or personal documents.
@@ -30,7 +30,7 @@ export default function GuidelinesPage() {
           it.
         </li>
         <li>
-          Do not post the names or contact details of landlords/property managers.
+          Do not post the names or contact details of landlords / property managers.
         </li>
       </ul>
     </div>

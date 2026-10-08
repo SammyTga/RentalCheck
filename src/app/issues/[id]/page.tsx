@@ -103,7 +103,7 @@ export default function IssuePage() {
         </p>
       )}
       <p className="mt-2 text-sm text-stone-800">
-        First reported to landlord/property manager {formatDate(issue.reportedToLandlordOn)}
+        First reported to landlord / property manager {formatDate(issue.reportedToLandlordOn)}
       </p>
       {issue.status === "resolved" && (
         <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">

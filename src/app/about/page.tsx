@@ -6,7 +6,7 @@ const POINTS = [
   "Posting issues here encourages landlords to play by the rules and keep their properties up to standard.",
   "Creating a post gives you a shareable link of your rental's issues.",
   "Future renters can check this site to help make informed decisions about a property and its suitability. Posting here helps others.",
-  "This is not a place for abuse or accusations against landlords/property managers.",
+  "This is not a place for abuse or accusations against landlords / property managers.",
   "RentalCheck does not replace reporting issues to your landlord, property manager or Tenancy Services.",
 ];
 

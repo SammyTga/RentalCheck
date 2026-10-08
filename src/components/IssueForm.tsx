@@ -394,7 +394,7 @@ export function IssueForm({
         </label>
         <label className="block">
           <span className="text-sm font-medium text-stone-800">
-            Date first reported to landlord/property manager *
+            Date first reported to landlord / property manager *
           </span>
           <input
             type="date"
@@ -470,7 +470,7 @@ export function IssueForm({
 
       <div className="grid gap-4 sm:grid-cols-3">
         <label className="block">
-          <span className="text-sm font-medium text-stone-800">Unit/flat</span>
+          <span className="text-sm font-medium text-stone-800">Unit / flat</span>
           <input
             name="unit"
             maxLength={5}
