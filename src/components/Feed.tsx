@@ -110,7 +110,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
         </p>
       ) : filtered.length === 0 ? (
         <p className="rounded-xl border border-dashed border-stone-300 p-8 text-center text-stone-500">
-          No issues match that search yet.
+          No issues have been reported at this property yet.
         </p>
       ) : (
         <div className="space-y-6">
