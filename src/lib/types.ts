@@ -1,9 +1,11 @@
 export const CATEGORIES = [
   "Mold & damp",
   "Plumbing",
+  "Drainage",
   "Electrical",
   "Pests",
   "Heating & cooling",
+  "Ventilation",
   "Safety",
   "Structural",
   "Smells / odours",
