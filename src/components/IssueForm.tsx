@@ -262,6 +262,13 @@ export function IssueForm({
       return;
     }
 
+    const posterEmail = String(form.get("posterEmail") || "").trim();
+    if (posterEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(posterEmail)) {
+      showError("Enter a valid email, or leave it blank.");
+      setSubmitting(false);
+      return;
+    }
+
     const fields = {
       title,
       description,
@@ -278,6 +285,7 @@ export function IssueForm({
       postcode: postcode || undefined,
       reportedToLandlordOn,
       handle: handle || "Anonymous",
+      posterEmail: String(form.get("posterEmail") || "").trim() || undefined,
       responses,
       photoUrls: photos,
     };
@@ -573,6 +581,26 @@ export function IssueForm({
           className={field}
           defaultValue={draft?.handle ?? (existing?.handle === "Anonymous" ? "" : existing?.handle ?? "")}
         />
+      </label>
+
+      <label className="block">
+        <span className="text-sm font-medium text-stone-800">
+          Email (optional)
+        </span>
+        <input
+          name="posterEmail"
+          type="email"
+          maxLength={120}
+          autoComplete="email"
+          placeholder="you@example.com"
+          className={field}
+          defaultValue={draft?.posterEmail ?? existing?.posterEmail ?? ""}
+        />
+        <p className="mt-1 text-xs text-stone-500">
+          If this post is disputed, we will need to contact you for
+          verification. This makes your post more credible. Your email will
+          not be shared with anyone and remain private.
+        </p>
       </label>
 
       <div>

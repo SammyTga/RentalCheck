@@ -31,7 +31,7 @@ export function ManagePost({
     }
 
     const ok = await codeLooksValid(issueId, code);
-    if (!ok) {
+    if (!ok.ok) {
       setMessage("That code does not match this post.");
       return;
     }

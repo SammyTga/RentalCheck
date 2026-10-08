@@ -39,11 +39,19 @@ export async function POST(req: Request) {
   ) {
     return Response.json({ error: "A field is too long." }, { status: 400 });
   }
+  const email = body.posterEmail?.trim() || "";
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return Response.json({ error: "Enter a valid email, or leave it blank." }, { status: 400 });
+  }
+  if (email.length > 120) {
+    return Response.json({ error: "A field is too long." }, { status: 400 });
+  }
   const fieldError = validateIssueFields(body);
   if (fieldError) {
     return Response.json({ error: fieldError }, { status: 400 });
   }
   const photoUrls = await uploadPhotos(body.photoUrls || []);
-  const issue = await dbInsert({ ...body, photoUrls });
-  return Response.json({ issue });
+  const issue = await dbInsert({ ...body, posterEmail: email || undefined, photoUrls });
+  const { posterEmail: _private, ...publicIssue } = issue;
+  return Response.json({ issue: publicIssue });
 }

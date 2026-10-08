@@ -187,8 +187,12 @@ export async function codeLooksValid(id: string, code: string) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code, action: "check" }),
     });
-    return res.ok;
+    if (!res.ok) return { ok: false as const };
+    const data = (await res.json()) as { posterEmail?: string };
+    return { ok: true as const, posterEmail: data.posterEmail || "" };
   }
   const issue = read().find((i) => i.id === id);
-  return !!issue && codesMatch(issue.manageCode, code).ok;
+  return codesMatch(issue?.manageCode || "", code).ok
+    ? { ok: true as const, posterEmail: issue?.posterEmail || "" }
+    : { ok: false as const };
 }

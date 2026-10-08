@@ -60,6 +60,7 @@ export type DbIssue = {
   postcode: string | null;
   reported_to_landlord_on: string;
   handle: string | null;
+  poster_email: string | null;
   status: string;
   resolved_at: string | null;
   resolved_note: string | null;
@@ -87,6 +88,7 @@ export function toIssue(row: DbIssue, includeCode = false): Issue {
     reportedToLandlordOn: row.reported_to_landlord_on,
     postedAt: row.posted_at,
     handle: row.handle || "Anonymous",
+    posterEmail: includeCode ? row.poster_email || undefined : undefined,
     status: row.status === "resolved" ? "resolved" : "open",
     resolvedAt: row.resolved_at || undefined,
     resolvedNote: row.resolved_note || undefined,
@@ -146,6 +148,7 @@ export async function dbInsert(fields: Partial<Issue>): Promise<Issue> {
     headers: headers({ Prefer: "return=representation" }),
     body: JSON.stringify({
       ...fromFields(fields),
+      poster_email: fields.posterEmail?.trim() || null,
       status: "open",
       hidden: false,
       manage_code: manageCode,

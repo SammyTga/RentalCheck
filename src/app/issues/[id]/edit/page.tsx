@@ -47,8 +47,9 @@ function EditInner() {
     void (async () => {
       setAllowed(null);
       const found = (await getIssue(params.id)) ?? null;
-      setIssue(found);
-      setAllowed(Boolean(found && code && (await codeLooksValid(params.id, code))));
+      const check = found && code ? await codeLooksValid(params.id, code) : { ok: false as const };
+      setIssue(found ? { ...found, posterEmail: check.ok ? check.posterEmail : undefined } : found);
+      setAllowed(Boolean(found && check.ok));
     })();
   }, [params.id, code, codeReady]);
 

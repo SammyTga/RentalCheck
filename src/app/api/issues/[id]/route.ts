@@ -60,7 +60,7 @@ export async function PATCH(
   }
 
   if (body.action === "check") {
-    return Response.json({ ok: true });
+    return Response.json({ ok: true, posterEmail: row.poster_email || "" });
   }
 
   if (body.action === "delete") {
@@ -104,6 +104,7 @@ export async function PATCH(
   const photoUrls = await uploadPhotos(fields.photoUrls || []);
   const updated = await dbUpdate(id, {
     ...fromFields({ ...body.fields, photoUrls }),
+    poster_email: fields.posterEmail?.trim() || null,
   });
   return Response.json({
     ok: true,

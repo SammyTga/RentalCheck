@@ -70,6 +70,7 @@ export type Issue = {
   reportedToLandlordOn: string;
   postedAt: string;
   handle?: string;
+  posterEmail?: string;
   status: IssueStatus;
   resolvedAt?: string;
   resolvedNote?: string;

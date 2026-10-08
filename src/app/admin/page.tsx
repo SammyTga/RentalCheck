@@ -236,6 +236,8 @@ export default function AdminPage() {
                     <p className="mt-1 text-sm">
                       Posted {formatPosted(issue.postedAt)} · {issue.status}
                       {issue.hidden ? " · hidden" : ""}
+                      {" · "}
+                      {issue.posterEmail || "No email"}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-3">
                       <Link
