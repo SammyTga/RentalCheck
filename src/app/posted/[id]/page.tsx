@@ -98,7 +98,11 @@ function PostedInner() {
   return (
     <div className="mx-auto max-w-xl">
       <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Post published</h2>
-      <p className="mt-3 text-stone-600">
+      <p className="mt-4 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-stone-800">
+        Thank you for contributing to this property's issue history. Your
+        report will help future tenants make a more informed decision.
+      </p>
+      <p className="mt-4 text-stone-600">
         Save this secret code. You need it to edit or delete the post, or mark
         it as resolved. We will not show it again.
       </p>
