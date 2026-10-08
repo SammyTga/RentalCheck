@@ -22,7 +22,12 @@ export async function POST(req: Request) {
     return Response.json({ error: "Database not configured" }, { status: 503 });
   }
   const body = (await req.json()) as Partial<Issue>;
-  if (!body.title || !body.description || !body.streetNumber || !body.streetName || !body.city) {
+  if (!body.description?.trim()) {
+    return Response.json({ error: "Missing required fields." }, { status: 400 });
+  }
+  body.title = body.description.trim().split("\n")[0].slice(0, 70);
+  body.handle = "Anonymous";
+  if (!body.streetNumber || !body.streetName || !body.city) {
     return Response.json({ error: "Missing required fields." }, { status: 400 });
   }
   if (

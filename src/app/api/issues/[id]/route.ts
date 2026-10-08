@@ -82,6 +82,10 @@ export async function PATCH(
   }
 
   const fields = body.fields || {};
+  if (fields.description?.trim()) {
+    fields.title = fields.description.trim().split("\n")[0].slice(0, 70);
+  }
+  fields.handle = "Anonymous";
   if (
     tooLong(fields.title, LIMITS.title) ||
     tooLong(fields.description, LIMITS.description) ||

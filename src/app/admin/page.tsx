@@ -232,7 +232,7 @@ export default function AdminPage() {
                         : "bg-white text-stone-900"
                     }`}
                   >
-                    <p className="break-long font-medium">{issue.title}</p>
+                    <p className="break-long font-medium">{issue.description}</p>
                     <p className="mt-1 text-sm">
                       Posted {formatPosted(issue.postedAt)} · {issue.status}
                       {issue.hidden ? " · hidden" : ""}

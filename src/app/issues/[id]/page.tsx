@@ -67,10 +67,7 @@ export default function IssuePage() {
         </Link>
       </p>
       <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-4 sm:p-6">
-      <p className="text-sm text-stone-800">
-        Posted {formatDate(issue.postedAt)} by {issue.handle || "Anonymous"}
-      </p>
-      <div className="mt-2 flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <span className="rounded-full bg-stone-300 px-2 py-0.5 text-sm font-medium text-stone-900">
           {displayCategory(issue.category)}
         </span>
@@ -94,9 +91,6 @@ export default function IssuePage() {
         ))}
       </div>
       <p className="mt-2 text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
-      <h2 className="mt-3 break-long text-2xl font-semibold tracking-tight text-stone-900">
-        {issue.title}
-      </h2>
       {(issue.roomArea || issue.roomDetail) && (
         <p className="mt-2 text-sm text-stone-800">
           Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}

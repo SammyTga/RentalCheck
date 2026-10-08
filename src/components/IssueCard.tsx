@@ -30,14 +30,11 @@ export function IssueCard({ issue }: { issue: Issue }) {
       <h2 className="mt-3 break-long text-lg font-semibold text-stone-900">
         <Link
           href={`/issues/${issue.id}`}
-          className="text-stone-900 underline decoration-stone-400 underline-offset-4 hover:text-teal-800 hover:decoration-teal-800 active:text-teal-800 active:decoration-teal-800"
+          className="line-clamp-1 text-stone-900 underline decoration-stone-400 underline-offset-4 hover:text-teal-800 hover:decoration-teal-800 active:text-teal-800 active:decoration-teal-800"
         >
-          {issue.title}
+          {issue.description}
         </Link>
       </h2>
-      <p className="mt-2 max-w-full line-clamp-1 break-long text-base leading-6 text-stone-800 sm:max-w-[50%]">
-        {issue.description}
-      </p>
       <PhotoGrid photos={issue.photoUrls ?? []} size="card" />
     </article>
   );

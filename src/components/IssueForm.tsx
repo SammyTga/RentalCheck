@@ -192,8 +192,8 @@ export function IssueForm({
     setError("");
     const form = new FormData(e.currentTarget);
 
-    const title = String(form.get("title") || "").trim();
     const description = String(form.get("description") || "").trim();
+    const title = description.split("\n")[0].trim().slice(0, 70);
     const category = String(form.get("category") || "") as (typeof CATEGORIES)[number];
     const roomAreaRaw = String(form.get("roomArea") || "");
     const roomDetail = String(form.get("roomDetail") || "").trim();
@@ -204,7 +204,6 @@ export function IssueForm({
     const area = String(form.get("area") || "").trim();
     const postcode = String(form.get("postcode") || "").trim();
     const reportedToLandlordOn = String(form.get("reportedToLandlordOn") || "");
-    const handle = String(form.get("handle") || "").trim();
     const code = String(form.get("manageCode") || manageCode || "");
     const responses = form
       .getAll("responses")
@@ -254,7 +253,6 @@ export function IssueForm({
       area,
       city,
       postcode,
-      handle,
     });
     if (fieldError) {
       showError(fieldError);
@@ -284,7 +282,7 @@ export function IssueForm({
       area: area || undefined,
       postcode: postcode || undefined,
       reportedToLandlordOn,
-      handle: handle || "Anonymous",
+      handle: "Anonymous",
       posterEmail: String(form.get("posterEmail") || "").trim() || undefined,
       responses,
       photoUrls: photos,
@@ -364,18 +362,6 @@ export function IssueForm({
       {editing && (
         <input type="hidden" name="manageCode" defaultValue={manageCode} />
       )}
-
-      <label className="block">
-        <span className="text-sm font-medium text-stone-800">Title *</span>
-        <input
-          name="title"
-          required
-          maxLength={70}
-          placeholder="e.g. Leaking kitchen ceiling"
-          className={field}
-          defaultValue={draft?.title ?? existing?.title ?? ""}
-        />
-      </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
@@ -569,19 +555,6 @@ export function IssueForm({
           ))}
         </div>
       </fieldset>
-
-      <label className="block">
-        <span className="text-sm font-medium text-stone-800">
-          Display name (optional — leave blank for Anonymous)
-        </span>
-        <input
-          name="handle"
-          maxLength={40}
-          placeholder="Anonymous"
-          className={field}
-          defaultValue={draft?.handle ?? (existing?.handle === "Anonymous" ? "" : existing?.handle ?? "")}
-        />
-      </label>
 
       <label className="block">
         <span className="text-sm font-medium text-stone-800">
