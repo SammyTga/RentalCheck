@@ -48,7 +48,7 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <p className="rounded-xl p-4 text-stone-950" style={{ backgroundColor: "#3ff327" }}>
+      <p className="rounded-xl border border-stone-200 bg-white p-4 text-stone-700">
         Thanks. Your message has been sent.
       </p>
     );

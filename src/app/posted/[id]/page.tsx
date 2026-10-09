@@ -98,7 +98,7 @@ function PostedInner() {
   return (
     <div className="mx-auto max-w-xl">
       <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Post published</h2>
-      <p className="mt-4 rounded-xl px-4 py-3 text-base leading-relaxed text-stone-950" style={{ backgroundColor: "#3ff327" }}>
+      <p className="mt-4 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-base leading-relaxed text-stone-900">
         Thank you for contributing to this property's issue history. Your
         report will help future tenants make a more informed decision.
       </p>

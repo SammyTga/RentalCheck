@@ -152,7 +152,7 @@ export default function IssuePage() {
       )}
       <Timeline issue={issue} />
       {issue.status === "resolved" && issue.resolvedNote ? (
-        <div className="mt-4 rounded-lg px-3 py-2 text-sm text-stone-950" style={{ backgroundColor: "#3ff327" }}>
+        <div className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
           <p>This issue has been marked as resolved.</p>
           <p className="mt-1 break-long">{issue.resolvedNote}</p>
         </div>
