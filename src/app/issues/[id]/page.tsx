@@ -146,9 +146,9 @@ export default function IssuePage() {
           </span>
         ))}
       </div>
-      <p className="mt-2 text-base font-medium text-stone-800">{formatAddress(issue)}</p>
+      <p className="mt-2 text-base leading-7 text-stone-800">{formatAddress(issue)}</p>
       {(issue.roomArea || issue.roomDetail) && (
-        <p className="mt-2 text-base text-stone-800">
+        <p className="mt-2 text-base leading-7 text-stone-800">
           Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}
         </p>
       )}
