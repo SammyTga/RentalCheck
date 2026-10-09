@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import "./globals.css";
 
@@ -36,15 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Header />
         <main className="mx-auto w-full min-w-0 max-w-5xl flex-1 overflow-x-hidden px-4 py-8">{children}</main>
-        <footer className="mx-auto mt-auto w-full max-w-5xl px-4 py-8 text-center text-xs font-medium text-stone-600">
-          RentalCheck.co.nz{" "}
-          <a
-            href="/contact"
-            className="font-medium text-teal-800 underline hover:text-teal-950 active:text-teal-950"
-          >
-            Contact
-          </a>
-        </footer>
+        <Footer />
       </body>
     </html>
   );

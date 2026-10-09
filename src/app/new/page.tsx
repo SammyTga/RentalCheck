@@ -14,7 +14,7 @@ export default function NewIssuePage() {
         Log an issue
       </h2>
       <p className="mt-2 mb-6 text-stone-600">
-        No account needed. Posts are public and can be anonymous.
+        No account needed. Posts are public and anonymous.
       </p>
       <Suspense>
         <IssueForm />

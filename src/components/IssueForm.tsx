@@ -570,9 +570,8 @@ export function IssueForm({
           defaultValue={draft?.posterEmail ?? existing?.posterEmail ?? ""}
         />
         <p className="mt-1 text-xs text-stone-500">
-          If this issue is disputed, we may need to contact you for
-          verification. This makes your post more credible. Your email will
-          not be shared with anyone and will remain private.
+          If this issue is disputed, we may need to email you for verification.
+          Your email will not be shared with anyone and will remain private.
         </p>
       </label>
 
@@ -628,8 +627,9 @@ export function IssueForm({
           onChange={(e) => setConfirmed(e.target.checked)}
         />
         <span>
-          This is an issue at the above rental address that has already been
-          reported. The address and post will be public on RentalCheck.co.nz.
+          This is a current issue at the above rental address that has already
+          been reported. The address and post will be public on
+          RentalCheck.co.nz.
         </span>
       </label>
 
