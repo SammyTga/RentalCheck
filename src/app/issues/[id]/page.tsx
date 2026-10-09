@@ -38,13 +38,22 @@ function Timeline({ issue }: { issue: Issue }) {
     },
   ];
 
+  const dotLeft = [
+    "left-[calc(16.67%-0.5cm)] sm:left-2",
+    "left-1/2",
+    "left-[calc(83.33%+0.5cm)] sm:left-[calc(100%-0.5rem)]",
+  ];
+
   return (
-    <ol className="relative mx-auto mt-5 grid w-full grid-cols-3 sm:w-3/5 sm:min-w-[28rem]">
-      <span className="absolute left-0 right-0 top-[6px] h-0.5 bg-stone-300" />
-      {steps.map((step) => (
-        <li key={step.label} className="relative flex min-w-0 flex-col items-center">
+    <ol className="relative mx-auto mt-5 h-[4.6rem] w-full sm:h-[4.9rem] sm:w-3/5 sm:min-w-[28rem]">
+      <span className="absolute top-[7px] h-0.5 bg-stone-300 left-[calc(16.67%-0.5cm)] right-[calc(16.67%-0.5cm)] sm:left-2 sm:right-2" />
+      {steps.map((step, index) => (
+        <li
+          key={step.label}
+          className={`absolute flex -translate-x-1/2 flex-col items-center ${dotLeft[index]}`}
+        >
           <span
-            className={`z-10 h-3.5 w-3.5 shrink-0 rounded-full ${
+            className={`z-10 h-4 w-4 shrink-0 rounded-full ${
               step.tone === "resolved"
                 ? "bg-green-500"
                 : step.tone === "open"
@@ -52,10 +61,10 @@ function Timeline({ issue }: { issue: Issue }) {
                   : "bg-violet-700"
             }`}
           />
-          <div className="mt-2 flex h-12 w-[6.75rem] max-w-full flex-col items-center justify-center rounded-lg border border-stone-300 bg-white px-1 text-center sm:w-[8.5rem]">
-            <p className="text-xs font-semibold text-stone-900">{step.label}</p>
+          <div className="mt-2 flex h-11 w-[5.35rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-1 text-center sm:h-12 sm:w-[8.5rem] sm:rounded-lg">
+            <p className="text-[11px] font-semibold leading-4 text-stone-900 sm:text-xs">{step.label}</p>
             {step.date ? (
-              <p className="mt-0.5 whitespace-nowrap text-xs leading-4 text-stone-700">
+              <p className="mt-0.5 whitespace-nowrap text-[10px] leading-4 text-stone-700 sm:text-xs">
                 <span className="sm:hidden">{step.date.short}</span>
                 <span className="hidden sm:inline">{step.date.long}</span>
               </p>
