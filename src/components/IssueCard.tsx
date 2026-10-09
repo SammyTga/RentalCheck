@@ -8,7 +8,7 @@ export function IssueCard({ issue }: { issue: Issue }) {
   return (
     <article className="min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-5 transition hover:border-stone-600 hover:shadow-sm">
       <div className="flex flex-wrap items-center gap-2 text-sm text-stone-800">
-        <span className="rounded-full bg-[#ffe14a] px-2 py-0.5 font-medium text-stone-950">
+        <span className="rounded-full bg-[#fff15a] px-2 py-0.5 font-medium text-stone-950">
           {displayCategory(issue.category)}
         </span>
         {issue.status === "resolved" && (

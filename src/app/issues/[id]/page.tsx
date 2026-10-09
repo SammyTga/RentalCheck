@@ -140,7 +140,7 @@ export default function IssuePage() {
         {(issue.responses ?? []).map((r) => (
           <span
             key={r}
-            className="rounded-full bg-[#ff9a1f] px-2 py-0.5 text-sm font-medium text-stone-950"
+            className="rounded-full bg-[#ffb23a] px-2 py-0.5 text-sm font-medium text-stone-950"
           >
             {r}
           </span>
