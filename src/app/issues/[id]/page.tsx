@@ -39,14 +39,14 @@ function Timeline({ issue }: { issue: Issue }) {
   ];
 
   const dotLeft = [
-    "left-[calc(16.67%-0.5cm)] sm:left-2",
+    "left-[calc(16.67%-1cm)] sm:left-2",
     "left-1/2",
-    "left-[calc(83.33%+0.5cm)] sm:left-[calc(100%-0.5rem)]",
+    "left-[calc(83.33%+1cm)] sm:left-[calc(100%-0.5rem)]",
   ];
 
   return (
-    <ol className="relative mx-auto mt-5 h-[4.6rem] w-full sm:h-[4.9rem] sm:w-3/5 sm:min-w-[28rem]">
-      <span className="absolute top-[7px] h-0.5 bg-stone-300 left-[calc(16.67%-0.5cm)] right-[calc(16.67%-0.5cm)] sm:left-2 sm:right-2" />
+    <ol className="relative mx-auto mt-5 h-[4.7rem] w-full sm:h-[5.4rem] sm:w-3/5 sm:min-w-[28rem]">
+      <span className="absolute top-[7px] h-0.5 bg-stone-300 left-[calc(16.67%-1cm)] right-[calc(16.67%-1cm)] sm:left-2 sm:right-2" />
       {steps.map((step, index) => (
         <li
           key={step.label}
@@ -61,10 +61,10 @@ function Timeline({ issue }: { issue: Issue }) {
                   : "bg-violet-700"
             }`}
           />
-          <div className="mt-2 flex h-11 w-[5.35rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-1 text-center sm:h-12 sm:w-[8.5rem] sm:rounded-lg">
-            <p className="text-[11px] font-semibold leading-4 text-stone-900 sm:text-xs">{step.label}</p>
+          <div className="mt-2 flex h-11 w-[5.5rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-0.5 text-center sm:h-[3.35rem] sm:w-[9.25rem] sm:rounded-lg sm:px-1.5">
+            <p className="text-xs font-semibold leading-4 text-stone-900 sm:text-sm">{step.label}</p>
             {step.date ? (
-              <p className="mt-0.5 whitespace-nowrap text-[10px] leading-4 text-stone-700 sm:text-xs">
+              <p className="mt-0.5 whitespace-nowrap text-[11px] leading-4 text-stone-700 sm:text-sm">
                 <span className="sm:hidden">{step.date.short}</span>
                 <span className="hidden sm:inline">{step.date.long}</span>
               </p>
