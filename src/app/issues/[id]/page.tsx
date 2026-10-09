@@ -39,14 +39,14 @@ function Timeline({ issue }: { issue: Issue }) {
   ];
 
   const dotLeft = [
-    "left-[3.15rem] sm:left-2",
+    "left-[2rem] sm:left-2",
     "left-1/2",
-    "left-[calc(100%-3.15rem)] sm:left-[calc(100%-0.5rem)]",
+    "left-[calc(100%-2rem)] sm:left-[calc(100%-0.5rem)]",
   ];
 
   return (
     <ol className="relative mx-auto mt-5 h-[4.9rem] w-full sm:h-[5.4rem] sm:w-3/5 sm:min-w-[28rem]">
-      <span className="absolute top-[7px] h-0.5 bg-stone-300 left-[3.15rem] right-[3.15rem] sm:left-2 sm:right-2" />
+      <span className="absolute top-[7px] h-0.5 bg-stone-300 left-[2rem] right-[2rem] sm:left-2 sm:right-2" />
       {steps.map((step, index) => (
         <li
           key={step.label}
