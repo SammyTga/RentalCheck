@@ -124,7 +124,7 @@ export default function IssuePage() {
       </p>
       <div className="mt-4 min-w-0 overflow-hidden rounded-2xl border border-stone-400 bg-white p-4 sm:p-6">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-neutral-400 px-2 py-0.5 text-sm font-medium text-neutral-950">
+        <span className="rounded-full bg-[#ffe14a] px-2 py-0.5 text-sm font-medium text-stone-950">
           {displayCategory(issue.category)}
         </span>
         {issue.hidden && (
@@ -140,7 +140,7 @@ export default function IssuePage() {
         {(issue.responses ?? []).map((r) => (
           <span
             key={r}
-            className="rounded-full bg-orange-400 px-2 py-0.5 text-sm font-medium text-orange-950"
+            className="rounded-full bg-[#ff9a1f] px-2 py-0.5 text-sm font-medium text-stone-950"
           >
             {r}
           </span>
