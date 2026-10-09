@@ -38,27 +38,25 @@ function Timeline({ issue }: { issue: Issue }) {
   ];
 
   return (
-    <ol className="mt-5 grid grid-cols-3 gap-2">
-      {steps.map((step, index) => (
-        <li key={step.label} className="min-w-0">
-          <div className="flex items-center">
-            <span
-              className={`h-3.5 w-3.5 shrink-0 rounded-full ${
-                step.tone === "resolved"
-                  ? "bg-emerald-500 ring-4 ring-emerald-100"
-                  : step.tone === "open"
-                    ? "bg-red-600 ring-4 ring-red-100"
-                    : "bg-teal-800"
-              }`}
-            />
-            {index < steps.length - 1 && (
-              <span className="ml-2 h-0.5 flex-1 bg-stone-300" />
-            )}
+    <ol className="relative mx-auto mt-5 grid w-full grid-cols-3 gap-2">
+      <span className="absolute left-0 right-0 top-[6px] h-0.5 bg-stone-300" />
+      {steps.map((step) => (
+        <li key={step.label} className="relative flex min-w-0 flex-col items-center text-center">
+          <span
+            className={`z-10 h-3.5 w-3.5 shrink-0 rounded-full ${
+              step.tone === "resolved"
+                ? "bg-green-500"
+                : step.tone === "open"
+                  ? "bg-red-500"
+                  : "bg-violet-700"
+            }`}
+          />
+          <div className="mt-2 w-full rounded-lg border border-stone-300 bg-white px-1.5 py-1.5">
+            <p className="text-xs font-semibold text-stone-900">{step.label}</p>
+            {step.date ? (
+              <p className="mt-0.5 text-xs leading-4 text-stone-700">{step.date}</p>
+            ) : null}
           </div>
-          <p className="mt-2 text-xs font-semibold text-stone-900">{step.label}</p>
-          {step.date ? (
-            <p className="mt-0.5 text-xs leading-4 text-stone-700">{step.date}</p>
-          ) : null}
         </li>
       ))}
     </ol>
