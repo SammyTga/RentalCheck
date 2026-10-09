@@ -12,7 +12,7 @@ export function IssueCard({ issue }: { issue: Issue }) {
           {displayCategory(issue.category)}
         </span>
         {issue.status === "resolved" && (
-          <span className="rounded-full px-2 py-0.5 font-medium text-stone-950" style={{ backgroundColor: "#39ff14" }}>
+          <span className="rounded-full px-2 py-0.5 font-medium text-stone-950" style={{ backgroundColor: "#46e83a" }}>
             Resolved
           </span>
         )}

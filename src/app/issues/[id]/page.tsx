@@ -53,13 +53,11 @@ function Timeline({ issue }: { issue: Issue }) {
           className={`absolute flex -translate-x-1/2 flex-col items-center ${dotLeft[index]}`}
         >
           <span
-            className={`z-10 h-4 w-4 shrink-0 rounded-full ${
-              step.tone === "resolved"
-                ? "bg-green-500"
-                : step.tone === "open"
-                  ? "bg-red-500"
-                  : "bg-violet-700"
-            }`}
+            className="z-10 h-4 w-4 shrink-0 rounded-full"
+            style={{
+              backgroundColor:
+                step.tone === "resolved" ? "#46e83a" : step.tone === "open" ? "#ef4444" : "#6d28d9",
+            }}
           />
           <div className="mt-2 flex h-11 w-[5.4rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-0 text-center sm:h-[3.35rem] sm:w-[9.25rem] sm:rounded-lg sm:px-1.5">
             <p className="text-xs font-semibold leading-4 text-stone-900 sm:text-sm">{step.label}</p>
@@ -133,7 +131,7 @@ export default function IssuePage() {
           </span>
         )}
         {issue.status === "resolved" && (
-          <span className="rounded-full px-2 py-0.5 text-sm font-medium text-stone-950" style={{ backgroundColor: "#39ff14" }}>
+          <span className="rounded-full px-2 py-0.5 text-sm font-medium text-stone-950" style={{ backgroundColor: "#46e83a" }}>
             Resolved
           </span>
         )}
