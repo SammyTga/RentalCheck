@@ -234,7 +234,7 @@ export default function AdminPage() {
                   >
                     <p className="break-long font-medium">{issue.description}</p>
                     <p className="mt-1 text-sm">
-                      Posted {formatPosted(issue.postedAt)} · {issue.status}
+                      Posted {formatPosted(issue.postedAt)} · {issue.status === "open" ? "open issue" : issue.status}
                       {issue.hidden ? " · hidden" : ""}
                       {" · "}
                       {issue.posterEmail || "No email"}
