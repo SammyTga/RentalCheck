@@ -61,7 +61,7 @@ function Timeline({ issue }: { issue: Issue }) {
                   : "bg-violet-700"
             }`}
           />
-          <div className="mt-2 flex h-11 w-[5.7rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-0.5 text-center sm:h-[3.35rem] sm:w-[9.25rem] sm:rounded-lg sm:px-1.5">
+          <div className="mt-2 flex h-11 w-[5.4rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-0 text-center sm:h-[3.35rem] sm:w-[9.25rem] sm:rounded-lg sm:px-1.5">
             <p className="text-xs font-semibold leading-4 text-stone-900 sm:text-sm">{step.label}</p>
             {step.date ? (
               <p className="mt-0.5 whitespace-nowrap text-[11px] leading-4 text-stone-700 sm:text-sm">
