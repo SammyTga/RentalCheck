@@ -570,10 +570,9 @@ export function IssueForm({
           defaultValue={draft?.posterEmail ?? existing?.posterEmail ?? ""}
         />
         <p className="mt-1 text-xs text-stone-500">
-          If this post is disputed, we will need your email to contact you for
-          verification. Without it, the post may be hidden until validated.
-          This makes your post more credible. Your email will not be shared
-          with anyone and will remain private.
+          If this issue is disputed, we may need to contact you for
+          verification. This makes your post more credible. Your email will
+          not be shared with anyone and will remain private.
         </p>
       </label>
 
