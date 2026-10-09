@@ -133,7 +133,7 @@ export default function IssuePage() {
           </span>
         )}
         {issue.status === "resolved" && (
-          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-sm font-medium text-emerald-800">
+          <span className="rounded-full px-2 py-0.5 text-sm font-medium text-stone-950" style={{ backgroundColor: "#39ff14" }}>
             Resolved
           </span>
         )}
