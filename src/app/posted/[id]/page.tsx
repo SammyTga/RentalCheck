@@ -109,7 +109,7 @@ function PostedInner() {
       <p className="mt-4 rounded-lg bg-stone-900 px-4 py-3 font-mono text-lg tracking-widest text-white">
         {code}
       </p>
-      <p className="mt-2 text-sm text-stone-600">The code is case sensitive.</p>
+      <p className="mt-2 text-base text-stone-600">The code is case sensitive.</p>
       <p className="mt-6 flex gap-4 text-sm">
         <Link href={`/issues/${id}`} className="underline hover:text-teal-800 active:text-teal-800">
           View post
