@@ -56,7 +56,7 @@ function Timeline({ issue }: { issue: Issue }) {
             className="z-10 h-4 w-4 shrink-0 rounded-full"
             style={{
               backgroundColor:
-                step.tone === "resolved" ? "#46e83a" : step.tone === "open" ? "#ef4444" : "#6d28d9",
+                step.tone === "resolved" ? "#3ff327" : step.tone === "open" ? "#ef4444" : "#6d28d9",
             }}
           />
           <div className="mt-2 flex h-11 w-[5.4rem] flex-col items-center justify-center rounded-md border border-stone-300 bg-white px-0 text-center sm:h-[3.35rem] sm:w-[9.25rem] sm:rounded-lg sm:px-1.5">
@@ -131,7 +131,7 @@ export default function IssuePage() {
           </span>
         )}
         {issue.status === "resolved" && (
-          <span className="rounded-full px-2 py-0.5 text-sm font-medium text-stone-950" style={{ backgroundColor: "#46e83a" }}>
+          <span className="rounded-full px-2 py-0.5 text-sm font-medium text-stone-950" style={{ backgroundColor: "#3ff327" }}>
             Resolved
           </span>
         )}
@@ -152,7 +152,7 @@ export default function IssuePage() {
       )}
       <Timeline issue={issue} />
       {issue.status === "resolved" && issue.resolvedNote ? (
-        <div className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
+        <div className="mt-4 rounded-lg px-3 py-2 text-sm text-stone-950" style={{ backgroundColor: "#3ff327" }}>
           <p>This issue has been marked as resolved.</p>
           <p className="mt-1 break-long">{issue.resolvedNote}</p>
         </div>
