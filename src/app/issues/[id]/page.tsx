@@ -130,16 +130,17 @@ export default function IssuePage() {
           </span>
         ))}
       </div>
-      <p className="mt-2 text-sm font-medium text-stone-800">{formatAddress(issue)}</p>
+      <p className="mt-2 text-base font-medium text-stone-800">{formatAddress(issue)}</p>
       {(issue.roomArea || issue.roomDetail) && (
-        <p className="mt-2 text-sm text-stone-800">
+        <p className="mt-2 text-base text-stone-800">
           Where: {[issue.roomArea, issue.roomDetail].filter(Boolean).join(" · ")}
         </p>
       )}
       <Timeline issue={issue} />
       {issue.status === "resolved" && issue.resolvedNote ? (
         <div className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-          <p className="break-long">{issue.resolvedNote}</p>
+          <p>This issue has been marked as resolved.</p>
+          <p className="mt-1 break-long">{issue.resolvedNote}</p>
         </div>
       ) : null}
       <div className="mt-6 break-long whitespace-pre-wrap text-base leading-7 text-stone-800">
