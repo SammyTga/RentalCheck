@@ -9,6 +9,7 @@ import { getIssue } from "@/lib/store";
 import { displayCategory, formatAddress, type Issue } from "@/lib/types";
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 function ordinal(day: number) {
   const teen = day % 100;
@@ -32,14 +33,14 @@ function Timeline({ issue }: { issue: Issue }) {
     { label: "Posted", date: formatDate(issue.postedAt), tone: "done" as const },
     {
       label: resolved ? "Resolved" : "Unresolved",
-      date: resolved && issue.resolvedAt ? formatDate(issue.resolvedAt) : "",
+      date: resolved && issue.resolvedAt ? formatDate(issue.resolvedAt) : null,
       tone: resolved ? "resolved" as const : "open" as const,
     },
   ];
 
   return (
-    <ol className="relative mx-auto mt-5 grid w-full max-w-lg grid-cols-3">
-      <span className="absolute left-[16.67%] right-[16.67%] top-[6px] h-0.5 bg-stone-300" />
+    <ol className="relative mx-auto mt-5 grid w-full grid-cols-3 sm:w-3/5 sm:min-w-[28rem]">
+      <span className="absolute left-0 right-0 top-[6px] h-0.5 bg-stone-300" />
       {steps.map((step) => (
         <li key={step.label} className="relative flex min-w-0 flex-col items-center">
           <span
@@ -51,11 +52,14 @@ function Timeline({ issue }: { issue: Issue }) {
                   : "bg-violet-700"
             }`}
           />
-          <div className="mt-2 flex h-12 w-[8.25rem] max-w-full flex-col items-center justify-center rounded-lg border border-stone-300 bg-white px-1.5 text-center">
+          <div className="mt-2 flex h-12 w-[6.75rem] max-w-full flex-col items-center justify-center rounded-lg border border-stone-300 bg-white px-1 text-center sm:w-[8.5rem]">
             <p className="text-xs font-semibold text-stone-900">{step.label}</p>
-            <p className="mt-0.5 text-xs leading-4 text-stone-700">
-              {step.date || "\u00a0"}
-            </p>
+            {step.date ? (
+              <p className="mt-0.5 whitespace-nowrap text-xs leading-4 text-stone-700">
+                <span className="sm:hidden">{step.date.short}</span>
+                <span className="hidden sm:inline">{step.date.long}</span>
+              </p>
+            ) : null}
           </div>
         </li>
       ))}
@@ -66,8 +70,13 @@ function Timeline({ issue }: { issue: Issue }) {
 function formatDate(iso: string) {
   const raw = iso.includes("T") ? iso : `${iso}T00:00:00`;
   const date = new Date(raw);
-  if (Number.isNaN(date.getTime())) return iso;
-  return `${ordinal(date.getDate())} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  if (Number.isNaN(date.getTime())) return { short: iso, long: iso };
+  const day = ordinal(date.getDate());
+  const year = date.getFullYear();
+  return {
+    short: `${day} ${MONTHS_SHORT[date.getMonth()]} ${year}`,
+    long: `${day} ${MONTHS[date.getMonth()]} ${year}`,
+  };
 }
 
 export default function IssuePage() {
