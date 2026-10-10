@@ -627,7 +627,7 @@ export function IssueForm({
         />
         <span>
           I confirm this is a current issue at the above rental address, and the
-          details are truthful.
+          details submitted are truthful.
         </span>
       </label>
 
