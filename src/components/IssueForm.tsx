@@ -558,7 +558,7 @@ export function IssueForm({
 
       <label className="block">
         <span className="text-sm font-medium text-stone-800">
-          Email (optional)
+          Email (optional, stays private)
         </span>
         <input
           name="posterEmail"
@@ -571,7 +571,7 @@ export function IssueForm({
         />
         <p className="mt-1 text-xs text-stone-500">
           If this issue is disputed, we may need to email you for verification.
-          Your email will not be shared with anyone and will remain private.
+          Your email will not be shared with any person or organisation.
         </p>
       </label>
 
@@ -580,8 +580,7 @@ export function IssueForm({
           Photos (optional, up to 4)
         </p>
         <p className="mt-1 text-xs text-stone-500">
-          Pictures of the issue only. No children or personal documents. Photos
-          are stored securely.
+          Pictures of the issue only. Photos are stored securely.
         </p>
         {photos.length < 4 && (
           <input
@@ -627,9 +626,8 @@ export function IssueForm({
           onChange={(e) => setConfirmed(e.target.checked)}
         />
         <span>
-          This is a current issue at the above rental address that has already
-          been reported. The address and post will be public on
-          RentalCheck.co.nz.
+          I confirm this is a current issue at the above rental address, and that
+          the details submitted are truthful.
         </span>
       </label>
 
@@ -644,7 +642,7 @@ export function IssueForm({
             : "Publishing…"
           : editing
             ? "Save changes"
-            : "Publish issue"}
+            : "Publish"}
       </button>
     </form>
   );
