@@ -626,8 +626,8 @@ export function IssueForm({
           onChange={(e) => setConfirmed(e.target.checked)}
         />
         <span>
-          I confirm this is a current issue at the above rental address, and that
-          the details submitted are truthful.
+          I confirm this is a current issue at the above rental address, and the
+          details submitted are truthful.
         </span>
       </label>
 
