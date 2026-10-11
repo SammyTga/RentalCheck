@@ -87,12 +87,13 @@ export default function AdminPage() {
   }
 
   useEffect(() => {
-    void load();
+    setAuthed(false);
+
     function refresh() {
-      void load();
+      if (authed) void load();
     }
     function onVisible() {
-      if (document.visibilityState === "visible") refresh();
+      if (document.visibilityState === "visible" && authed) void load();
     }
     window.addEventListener("pageshow", refresh);
     window.addEventListener("popstate", refresh);
@@ -102,7 +103,7 @@ export default function AdminPage() {
       window.removeEventListener("popstate", refresh);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, []);
+  }, [authed]);
 
   async function onLogin(e: FormEvent) {
     e.preventDefault();
