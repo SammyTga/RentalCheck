@@ -8,9 +8,11 @@ import { codeLooksValid, manageIssue } from "@/lib/store";
 export function ManagePost({
   issueId,
   resolved,
+  hidden,
 }: {
   issueId: string;
   resolved?: boolean;
+  hidden?: boolean;
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -68,7 +70,7 @@ export function ManagePost({
     if (pending === "resolve") window.location.reload();
   }
 
-  if (resolved) return null;
+  if (resolved || hidden) return null;
 
   if (!open) {
     return (
