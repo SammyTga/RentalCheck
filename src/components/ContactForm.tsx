@@ -99,7 +99,7 @@ export function ContactForm() {
         <span className="text-sm font-medium text-stone-800">
           Email (optional — so we can reply)
         </span>
-        <input id="contact-email" type="email" name="email" maxLength={120} className={field} />
+        <input id="contact-email" type="email" name="email" autoComplete="email" maxLength={120} className={field} />
       </label>
       <button
         type="submit"

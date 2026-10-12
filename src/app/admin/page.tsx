@@ -161,6 +161,8 @@ export default function AdminPage() {
         </p>
         <form onSubmit={onLogin} className="mt-4 space-y-3">
           <input
+            id="admin-password"
+            name="password"
             type="password"
             autoComplete="off"
             value={password}
