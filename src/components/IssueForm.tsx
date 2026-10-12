@@ -441,6 +441,7 @@ export function IssueForm({
           <span className="text-sm font-medium text-stone-800">More detail (optional)</span>
           <input
             id="issue-room-detail" name="roomDetail"
+            autoComplete="off"
             maxLength={50}
             placeholder="e.g. downstairs shower, back yard fence"
             className={field}

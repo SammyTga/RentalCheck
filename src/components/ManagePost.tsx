@@ -162,6 +162,7 @@ export function ManagePost({
               <textarea
                 id="resolved-note"
                 name="resolvedNote"
+                autoComplete="off"
                 maxLength={500}
                 value={resolvedNote}
                 onChange={(e) => {

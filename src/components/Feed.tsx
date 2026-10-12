@@ -86,6 +86,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
         <input
           id="feed-search"
           name="q"
+          autoComplete="off"
           value={q}
           maxLength={120}
           onChange={(e) => setQ(e.target.value)}
@@ -95,6 +96,7 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
         <select
           id="feed-category"
           name="category"
+          autoComplete="off"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm outline-none focus:border-stone-500"
