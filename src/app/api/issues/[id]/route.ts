@@ -11,6 +11,15 @@ import {
 import { LIMITS, tooLong, validateIssueFields, validateResolvedNote } from "@/lib/limits";
 import type { Issue } from "@/lib/types";
 
+const codeAttempts = new Map<string, { fails: number; lockedUntil: number }>();
+const MAX_CODE_FAILS = 5;
+const CODE_LOCK_MS = 15 * 60 * 1000;
+
+function clientKey(req: Request) {
+  const forwarded = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  return forwarded || req.headers.get("x-real-ip") || "unknown";
+}
+
 function codesMatch(stored: string, given: string) {
   const a = stored.trim();
   const b = given.trim();
@@ -54,10 +63,31 @@ export async function PATCH(
     fields?: Partial<Issue>;
   };
 
+  const key = clientKey(req) + ":" + id;
+  const now = Date.now();
+  const current = codeAttempts.get(key);
+  if (current && current.lockedUntil > now) {
+    const minutes = Math.ceil((current.lockedUntil - now) / 60000);
+    return Response.json(
+      { error: `Too many attempts. Try again in ${minutes} minute${minutes === 1 ? "" : "s"}.` },
+      { status: 429 },
+    );
+  }
+
   const match = codesMatch(row.manage_code, String(body.code || ""));
   if (!match.ok) {
+    const fails = (current && current.lockedUntil <= now ? current.fails : current?.fails || 0) + 1;
+    const lockedUntil = fails >= MAX_CODE_FAILS ? now + CODE_LOCK_MS : 0;
+    codeAttempts.set(key, { fails: lockedUntil ? 0 : fails, lockedUntil });
+    if (lockedUntil) {
+      return Response.json(
+        { error: "Too many attempts. Try again in 15 minutes." },
+        { status: 429 },
+      );
+    }
     return Response.json({ error: match.message }, { status: 403 });
   }
+  codeAttempts.delete(key);
 
   if (body.action === "check") {
     return Response.json({ ok: true, posterEmail: row.poster_email || "" });
