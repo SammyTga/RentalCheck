@@ -63,6 +63,7 @@ export function ContactForm() {
       <label className="block">
         <span className="text-sm font-medium text-stone-800">Topic</span>
         <select
+          id="contact-topic"
           name="topic"
           required
           value={topic}
@@ -85,6 +86,7 @@ export function ContactForm() {
       <label className="block">
         <span className="text-sm font-medium text-stone-800">Message *</span>
         <textarea
+          id="contact-message"
           name="message"
           required
           rows={6}
@@ -97,7 +99,7 @@ export function ContactForm() {
         <span className="text-sm font-medium text-stone-800">
           Email (optional — so we can reply)
         </span>
-        <input type="email" name="email" maxLength={120} className={field} />
+        <input id="contact-email" type="email" name="email" maxLength={120} className={field} />
       </label>
       <button
         type="submit"

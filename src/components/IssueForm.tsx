@@ -367,7 +367,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Category *</span>
           <select
-            name="category"
+            id="issue-category" name="category"
             required
             value={category}
             className={field}
@@ -392,7 +392,7 @@ export function IssueForm({
           </span>
           <input
             type="date"
-            name="reportedToLandlordOn"
+            id="issue-reported-date" name="reportedToLandlordOn"
             required
             max={todayNz}
             value={reportedDate}
@@ -418,7 +418,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Where in the home *</span>
           <select
-            name="roomArea"
+            id="issue-room-area" name="roomArea"
             required
             value={roomArea}
             className={field}
@@ -440,7 +440,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">More detail (optional)</span>
           <input
-            name="roomDetail"
+            id="issue-room-detail" name="roomDetail"
             maxLength={50}
             placeholder="e.g. downstairs shower, back yard fence"
             className={field}
@@ -452,7 +452,7 @@ export function IssueForm({
       <label className="block">
         <span className="text-sm font-medium text-stone-800">What is the issue? *</span>
         <textarea
-          name="description"
+          id="issue-description" name="description"
           required
           rows={7}
           maxLength={2000}
@@ -466,7 +466,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Unit / flat</span>
           <input
-            name="unit"
+            id="issue-unit" name="unit"
             maxLength={5}
             placeholder="e.g. 2a"
             className={field}
@@ -476,7 +476,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Street number *</span>
           <input
-            name="streetNumber"
+            id="issue-street-number" name="streetNumber"
             required
             maxLength={6}
             placeholder="e.g. 44"
@@ -487,7 +487,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Street name *</span>
           <input
-            name="streetName"
+            id="issue-street-name" name="streetName"
             required
             maxLength={40}
             placeholder="e.g. Chadwick Road"
@@ -501,7 +501,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Suburb</span>
           <input
-            name="area"
+            id="issue-area" name="area"
             maxLength={30}
             placeholder="e.g. Greerton"
             className={field}
@@ -511,7 +511,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">City *</span>
           <input
-            name="city"
+            id="issue-city" name="city"
             required
             maxLength={30}
             placeholder="e.g. Tauranga"
@@ -522,7 +522,7 @@ export function IssueForm({
         <label className="block">
           <span className="text-sm font-medium text-stone-800">Postcode</span>
           <input
-            name="postcode"
+            id="issue-postcode" name="postcode"
             maxLength={4}
             inputMode="numeric"
             placeholder="e.g. 3112"
@@ -541,7 +541,7 @@ export function IssueForm({
             <label key={r} className="flex items-start gap-2 text-sm text-stone-700">
               <input
                 type="checkbox"
-                name="responses"
+                id={`issue-response-${r}`} name="responses"
                 value={r}
                 className="mt-1"
                 defaultChecked={
@@ -561,7 +561,7 @@ export function IssueForm({
           Email (optional, stays private)
         </span>
         <input
-          name="posterEmail"
+          id="issue-email" name="posterEmail"
           type="email"
           maxLength={120}
           autoComplete="email"
@@ -584,6 +584,8 @@ export function IssueForm({
         </p>
         {photos.length < 4 && (
           <input
+            id="issue-photos"
+            name="photos"
             type="file"
             accept="image/*"
             multiple
@@ -619,7 +621,7 @@ export function IssueForm({
       <label className="flex items-start gap-2 text-sm text-stone-700">
         <input
           type="checkbox"
-          name="confirmed"
+          id="issue-confirmed" name="confirmed"
           className="mt-1"
           required
           checked={confirmed}

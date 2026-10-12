@@ -84,6 +84,8 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
     <div>
       <div className="mb-6 flex flex-col gap-3 sm:flex-row">
         <input
+          id="feed-search"
+          name="q"
           value={q}
           maxLength={120}
           onChange={(e) => setQ(e.target.value)}
@@ -91,6 +93,8 @@ export function Feed({ initialIssues }: { initialIssues?: Issue[] }) {
           className="flex-1 rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm outline-none focus:border-stone-500"
         />
         <select
+          id="feed-category"
+          name="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm outline-none focus:border-stone-500"

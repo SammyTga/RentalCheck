@@ -93,6 +93,7 @@ export function ManagePost({
       </p>
       <form className="mt-4 space-y-3" onSubmit={onSubmit} noValidate autoComplete="off">
         <input
+          id="manage-code"
           name="manageToken"
           type="text"
           inputMode="text"
@@ -159,6 +160,8 @@ export function ManagePost({
             </p>
             {pending === "resolve" && (
               <textarea
+                id="resolved-note"
+                name="resolvedNote"
                 maxLength={500}
                 value={resolvedNote}
                 onChange={(e) => {
