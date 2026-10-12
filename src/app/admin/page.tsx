@@ -131,11 +131,15 @@ export default function AdminPage() {
     action: "hide" | "unhide" | "delete" | "read" | "unread",
     type: "issue" | "message" = "issue",
   ) {
-    await fetch("/api/admin/issues", {
+    const res = await fetch("/api/admin/issues", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, action, type }),
     });
+    if (res.status === 401) {
+      setAuthed(false);
+      return;
+    }
     await load();
   }
 
