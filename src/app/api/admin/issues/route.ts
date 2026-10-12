@@ -11,7 +11,7 @@ import {
 
 export async function GET() {
   if (!(await isAdmin())) {
-    return Response.json({ error: "Unauthorized" }, { status: 401 });
+    return Response.json({ authed: false, issues: [], messages: [] });
   }
   if (!dbConfigured()) {
     return Response.json({ error: "Database not configured" }, { status: 503 });

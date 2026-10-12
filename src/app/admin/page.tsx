@@ -72,15 +72,20 @@ export default function AdminPage() {
 
   async function load() {
     const res = await fetch("/api/admin/issues", { cache: "no-store" });
-    if (res.status === 401) {
+    if (!res.ok) {
+      setError("Could not load admin data. Is the database connected?");
       setAuthed(false);
       return;
     }
-    if (!res.ok) {
-      setError("Could not load admin data. Is the database connected?");
+    const data = (await res.json()) as {
+      authed?: boolean;
+      issues: Issue[];
+      messages: Message[];
+    };
+    if (data.authed === false) {
+      setAuthed(false);
       return;
     }
-    const data = (await res.json()) as { issues: Issue[]; messages: Message[] };
     setIssues(data.issues || []);
     setMessages(data.messages || []);
     setAuthed(true);
@@ -88,12 +93,11 @@ export default function AdminPage() {
 
   useEffect(() => {
     void load();
-
     function refresh() {
       void load();
     }
     function onVisible() {
-      if (document.visibilityState === "visible") void load();
+      if (document.visibilityState === "visible") refresh();
     }
     window.addEventListener("pageshow", refresh);
     window.addEventListener("popstate", refresh);
@@ -153,8 +157,6 @@ export default function AdminPage() {
         </p>
         <form onSubmit={onLogin} className="mt-4 space-y-3">
           <input
-            id="admin-password"
-            name="password"
             type="password"
             autoComplete="off"
             value={password}
@@ -190,9 +192,6 @@ export default function AdminPage() {
       <section>
         <h3 className="font-medium">Posts</h3>
         <input
-          id="admin-search"
-          name="postQuery"
-          autoComplete="off"
           value={postQuery}
           onChange={(e) => setPostQuery(e.target.value)}
           placeholder="Search address or title"
