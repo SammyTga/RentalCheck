@@ -58,6 +58,11 @@ export function ContactForm() {
     "mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-900 outline-none focus:border-stone-500";
 
   return (
+    <>
+      <p>
+        Use this form to report a post, say you lost your secret code, or
+        something else.
+      </p>
     <form onSubmit={onSubmit} className="space-y-4">
       {error && <p className="text-sm text-red-700">{error}</p>}
       <label className="block">
@@ -108,5 +113,6 @@ export function ContactForm() {
         Send message
       </button>
     </form>
+    </>
   );
 }
