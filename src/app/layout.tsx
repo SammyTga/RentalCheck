@@ -18,8 +18,7 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: "RentalCheck.co.nz",
-  description:
-    "Check a rental property in New Zealand. Search an address for issues tenants have logged.",
+  description: "Search an address for issues tenants have logged.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
