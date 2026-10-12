@@ -192,6 +192,7 @@ export default function AdminPage() {
         <input
           id="admin-search"
           name="postQuery"
+          autoComplete="off"
           value={postQuery}
           onChange={(e) => setPostQuery(e.target.value)}
           placeholder="Search address or title"
