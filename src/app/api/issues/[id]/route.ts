@@ -135,7 +135,13 @@ export async function PATCH(
     return Response.json({ error: fieldError }, { status: 400 });
   }
 
-  const photoUrls = await uploadPhotos(fields.photoUrls || []);
+  let photoUrls: string[] = [];
+  try {
+    photoUrls = await uploadPhotos(fields.photoUrls || []);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Could not upload photos.";
+    return Response.json({ error: msg }, { status: 400 });
+  }
   const updated = await dbUpdate(id, {
     ...fromFields({ ...body.fields, photoUrls }),
     poster_email: fields.posterEmail?.trim() || null,

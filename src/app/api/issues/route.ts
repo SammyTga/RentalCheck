@@ -55,7 +55,13 @@ export async function POST(req: Request) {
   if (fieldError) {
     return Response.json({ error: fieldError }, { status: 400 });
   }
-  const photoUrls = await uploadPhotos(body.photoUrls || []);
+  let photoUrls: string[] = [];
+  try {
+    photoUrls = await uploadPhotos(body.photoUrls || []);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Could not upload photos.";
+    return Response.json({ error: msg }, { status: 400 });
+  }
   const issue = await dbInsert({ ...body, posterEmail: email || undefined, photoUrls });
   const { posterEmail: _private, ...publicIssue } = issue;
   return Response.json({ issue: publicIssue });

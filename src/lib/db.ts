@@ -213,6 +213,9 @@ export async function uploadPhotos(photos: string[]) {
     if (!match) continue;
     const mime = match[1];
     const bin = Buffer.from(match[2], "base64");
+    if (bin.length > 2 * 1024 * 1024) {
+      throw new Error("One of the photos is too large. Please use a smaller image.");
+    }
     const ext = mime.includes("png") ? "png" : "jpg";
     const name = `${crypto.randomUUID()}.${ext}`;
     const res = await fetch(`${url()}/storage/v1/object/issue-photos/${name}`, {
