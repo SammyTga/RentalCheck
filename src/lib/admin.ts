@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { createHmac, randomBytes, timingSafeEqual } from "crypto";
 
-const COOKIE = "pc_admin";
+const COOKIE = "rc_admin";
 
 export function adminPassword() {
   return process.env.ADMIN_PASSWORD || "";
