@@ -581,7 +581,7 @@ export function IssueForm({
           Photos (optional, up to 4)
         </p>
         <p className="mt-1 text-xs text-stone-500">
-          Pictures of the issue only. Photos are stored securely.
+          Pictures of the issue only.
         </p>
         {photos.length < 4 && (
           <input
