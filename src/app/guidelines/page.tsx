@@ -11,8 +11,7 @@ export default function GuidelinesPage() {
       <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Guidelines</h2>
       <ul className="list-disc space-y-2 pl-5">
         <li>
-          Only log an issue on this site if it has first been reported and gone
-          unresolved.
+          Only log an issue on this site if it has first been reported and is still currently unresolved.
         </li>
         <li>Use the exact rental address so others can look up the property.</li>
         <li>
