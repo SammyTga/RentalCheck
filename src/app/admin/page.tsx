@@ -198,6 +198,9 @@ export default function AdminPage() {
       <section>
         <h3 className="font-medium">Posts</h3>
         <input
+          id="admin-post-search"
+          name="admin-post-search"
+          autoComplete="off"
           value={postQuery}
           onChange={(e) => setPostQuery(e.target.value)}
           placeholder="Search address or title"
