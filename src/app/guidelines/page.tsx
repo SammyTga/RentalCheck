@@ -28,7 +28,7 @@ export default function GuidelinesPage() {
           it.
         </li>
         <li>
-          Do not post the names or contact details of landlords / property managers. No abuse, threats or name-calling.
+          Do not post the names or contact details of landlords / property managers. No abuse or personal attacks.
         </li>
       </ul>
     </div>
