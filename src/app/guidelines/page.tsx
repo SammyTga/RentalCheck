@@ -21,7 +21,7 @@ export default function GuidelinesPage() {
         <li>Stick to the facts: what is wrong and what happened next.</li>
         <li>Response tags describe how the landlord / property manager responded.</li>
         <li>
-          You may add up to four photos of the issue. Do not upload photos that show children or personal documents.
+          You can add up to four photos of the issue. Do not upload photos that show children or personal documents.
         </li>
         <li>
           Save your secret code to edit a post, mark it as resolved, or delete
