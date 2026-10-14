@@ -3,9 +3,9 @@ import Link from "next/link";
 const POINTS = [
   "RentalCheck is a public record of property defects or safety issues affecting tenants at their homes.",
   "It helps create evidence value that may assist with validation and resolution of issues.",
-  "Posting issues here encourages landlords to play by the rules and keep their properties up to standard.",
-  "Creating a post gives you a shareable link of your rental's issues.",
-  "Future renters can check this site to help make informed decisions about a property and its suitability. Posting here helps others.",
+  "Posting issues encourages landlords to play by the rules and keep their properties up to standard. A poor public maintenance history can affect a rental’s desirability and the owner’s profit margins.",
+  "Posting gives you a shareable link of your rental's issues.",
+  "Future renters can view RentalCheck to help make informed decisions about a property and its suitability. Publicly listing a rental's unresolved issues helps others and pays it forward.",
   "This is not a place for abuse or accusations against landlords / property managers.",
 ];
 
