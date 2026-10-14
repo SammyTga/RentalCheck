@@ -4,7 +4,7 @@ const POINTS = [
   "RentalCheck is a public record of unresolved property defects or safety issues affecting tenants at their homes.",
   "It helps provide evidence value that can assist with validation and resolution of issues.",
   "Posting encourages landlords to keep their properties up to standard. A poor public maintenance history can affect a rental’s desirability.",
-  "Posting creates a shareable link of your rental's issues.",
+  "Posting creates a shareable link of the rental's issues.",
   "Renters can view RentalCheck to help make informed decisions about a property and its suitability. Posting helps others.",
   "Resolved issues stay on RentalCheck with a clear ‘Resolved’ label and note. This shows the property’s history.",
   "This is not a place for abuse or personal attacks against landlords / property managers.",
