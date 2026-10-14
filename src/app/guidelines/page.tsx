@@ -11,7 +11,7 @@ export default function GuidelinesPage() {
       <h2 className="font-display text-2xl font-semibold tracking-tight text-stone-900">Guidelines</h2>
       <ul className="list-disc space-y-2 pl-5">
         <li>
-          Only log an issue on this site if it has first been reported and is still unresolved.
+          Only log an issue on RentalCheck if it has already been reported and is still unresolved.
         </li>
         <li>Use the exact rental address so others can look up the property.</li>
         <li>
@@ -29,7 +29,7 @@ export default function GuidelinesPage() {
           it.
         </li>
         <li>
-          Do not post the names or contact details of landlords / property managers.
+          Do not post the names or contact details of landlords / property managers. No abuse, threats or name-calling.
         </li>
       </ul>
     </div>
