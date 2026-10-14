@@ -6,7 +6,7 @@ const POINTS = [
   "Posting issues encourages landlords to play by the rules and keep their properties up to standard. A poor public maintenance history can affect a rental’s desirability and the owner’s profit margins.",
   "Posting gives you a shareable link of your rental's issues.",
   "Future renters can view RentalCheck to help make informed decisions about a property and its suitability. Publicly listing a rental's unresolved issues helps others and pays it forward.",
-  "This is not a place for abuse or accusations against landlords / property managers.",
+  "This is not a place for abuse or personal attacks against landlords / property managers.",
 ];
 
 export default function AboutPage() {
